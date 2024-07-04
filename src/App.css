@@ -1,10 +1,16 @@
 * {
   --font-family: 'Inter';
   --color: #1E1E1E;
-  --color: #000000;
-  --color: #FFFFFF;
-  --color: #2E42A5;
+  --primary-color: #000000;
+  --tertiary-color: #FFFFFF;
+  --sec-background-color: #FFFFFF;
+  --secondary-color: #2E42A5;
   --color: #908E8E;
+  --background: #F3F4FF;
+  --background: #2F3676;
+  --background: #F7F9FF;
+  --background: #E9E9EC;
+  --hero-background: linear-gradient(180deg, #FCFCFF 0%, #EEF1FF 100%);
 }
 
 root {
