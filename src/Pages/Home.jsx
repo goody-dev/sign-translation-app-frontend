@@ -1,5 +1,4 @@
 import React from 'react'
-import HomeDesign from '../assets/designs/Landing Page.png'
 import Hero from '../Components/Hero'
 import CTASection from '../Components/CTASection'
 import OurMission from '../Components/OurMission'
