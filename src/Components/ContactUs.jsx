@@ -3,7 +3,7 @@ import EnvelopeIcon from '../assets/icons/closed-blue-envelope.png'
 
 const ContactUs = () => {
   return (
-    <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] max-w-[100vw] p-[var(--custom-padding)] bg-[#F3F4FF] sm:flex-row sm:flex-wrap sm:gap-0 '>
+    <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)] bg-[#F3F4FF] sm:flex-row sm:flex-wrap sm:gap-0 '>
       <div className='w-[100%] sm:w-[50%]'>
         <h1 className='text-[var(--primary-color)] text-[4rem] leading-[4.8rem] font-bold'>Contact <br/><span className='text-[var(--secondary-color)]'>Us</span></h1>
         <p className='text-[var(--sub-headline-color)] text-[1.25rem] leading-[1.5rem]'>Get in touch with us. Feel free to help us with suggestions on how to improve this product.</p>
