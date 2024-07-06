@@ -17,7 +17,7 @@ const ContactUs = () => {
           <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Description</label>
           <textarea id='email' type='email' tabIndex={0} placeholder='' className='bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] p-[var(--button-padding)] h-[7rem] text-[1rem] leading-[2.4rem] '></textarea>
         </div>
-        <button tabIndex={0} className='bg-[var(--blue-background)] py-[0.25rem] px-[0.75rem] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]'>Submit</button>
+        <button tabIndex={0} className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]'>Submit</button>
       </form>
       
     </div>

@@ -6,7 +6,7 @@ import InstagramIcon from '../assets/icons/instagram-icon.png'
 
 const Footer = () => {
   return (
-    <div className='flex flex-col w-[100%] max-w-[100vw] p-[3rem 1.5rem] sm:p-[var(--custom-padding)] justify-between gap-[var(--custom-gap)] sm:flex-row sm:items-center sm:gap-0'>
+    <div className='flex flex-row flex-wrap items-center justify-center w-[100%] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)] gap-[var(--custom-gap)] sm:flex-row sm:items-center sm:gap-0 sm:justify-between'>
       <div className='flex flex-col gap-[1rem]'>
         <img src={Logo} alt='App Logo' className='w-[4rem]'/>
         <div className='flex flex-row gap-[0.25rem] w-[4rem]'>
