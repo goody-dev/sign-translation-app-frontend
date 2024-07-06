@@ -1,29 +1,32 @@
 import React from 'react'
 import Logo from '../assets/icons/LOGO.png'
+import FacebookIcon from '../assets/icons/facebook-icon.svg'
+import XIcon from '../assets/icons/x-icon.svg'
+import InstagramIcon from '../assets/icons/instagram-icon.png'
 
 const Footer = () => {
   return (
-    <div className='flex flex-col w-[100%] max-w-[100vw] p-[var(--custom-padding)] justify-between sm:flex-row sm:items-center'>
-      <div className='flex flex-col'>
-        <img src={Logo} alt='Logo' className='w-[3rem]'/>
-        <div className='flex flex-row'>
-            <a href='#' aria-label='Follow us on Facebook'><img src="#" alt=''/></a>
-            <a href='#' aria-label='Follow us on X, Formerly Twitter'><img src="#" alt=''/></a>
-            <a href='#' aria-label='Follow us on Instagram'><img src="#" alt=''/></a>
+    <div className='flex flex-col w-[100%] max-w-[100vw] p-[var(--custom-padding)] justify-between gap-[var(--custom-gap)] sm:flex-row sm:items-center sm:gap-0'>
+      <div className='flex flex-col gap-[1rem]'>
+        <img src={Logo} alt='App Logo' className='w-[4rem]'/>
+        <div className='flex flex-row gap-[0.25rem] w-[4rem]'>
+            <a href='#' aria-label='Follow us on Facebook'><img src={FacebookIcon} alt='Facebook logo'/></a>
+            <a href='#' aria-label='Follow us on X, Formerly Twitter'><img src={XIcon} alt='X logo'/></a>
+            <a href='#' aria-label='Follow us on Instagram'><img src={InstagramIcon} alt='Instagram Logo'/></a>
         </div>
       </div>
-      <p className='hidden sm:block'>Copyright reserved 2024.</p>
+      <p className='hidden sm:block text-[1rem]'>Copyright reserved 2024.</p>
       <div className='flex flex-row gap-[var(--custom-gap)] text-right text-nowrap'>
         <div className='flex flex-col gap-[calc(var(--custom-gap)/2)] '>
-          <a className=''>About</a>
-          <a className=''>Cookies</a>
+          <a href='#' className='text-[1rem]'>About</a>
+          <a href='#' className='text-[1rem]'>Cookies</a>
         </div>
         <div className='flex flex-col gap-[calc(var(--custom-gap)/2)] '>
-          <a className=''>Privacy Policy</a>
-          <a className=''>Terms & Condition</a>
+          <a href='#' className='text-[1rem]'>Privacy Policy</a>
+          <a href='#' className='text-[1rem]'>Terms & Condition</a>
         </div>
       </div>
-      <p className='sm:hidden'>Copyright reserved 2024.</p>
+      <p className='sm:hidden text-[1rem]'>Copyright reserved 2024.</p>
     </div>
   )
 }
