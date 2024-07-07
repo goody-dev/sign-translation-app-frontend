@@ -7,8 +7,8 @@ import UKLogo from '../assets/icons/united-kingdom-icon.svg'
 
 const Header = () => {
   return (
-    <header className='flex flex-row max-w-[100vw] justify-between p-[1.5rem] items-center bg-[var(--white-background)] sm:p-[var(--custom-padding)]'>
-      <Link to="/" className='block sm:self-start' aria-label='Go to Home Page'>
+    <header className='flex flex-row max-w-[100vw] justify-between p-[1.5rem] items-center bg-[var(--white-background)] sm:p-[var(--custom-padding)] sm:py-[1.5rem] sm:gap-[var(--custom-gap)]'>
+      <Link to="/" className='block' aria-label='Go to Home Page'>
         <img src={Logo} alt="Logo" />
       </Link>
       <div className='flex items-center sm:flex-row sm:gap-[1.5rem]'>

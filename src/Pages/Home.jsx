@@ -8,10 +8,10 @@ import Footer from '../Components/Footer'
 const Home = () => {
   return (
     <div className=''>
-      <span className='landing'>
+      <div className='landing'>
         <Hero />
         <CTASection/>
-      </span>
+      </div>
       <OurMission />
       <ContactUs />
       <Footer />
