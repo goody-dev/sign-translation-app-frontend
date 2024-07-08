@@ -60,9 +60,9 @@ const SignUp = () => {
         </clipPath>
         </defs>
       </svg>
-      <div className='flex flex-row items-center justify-center w-[50vw]'>
-        <form name='Sign Up Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--card-padding)] rounded-[var(--custom-radius)] w-[30vw] min-w-[300px]'>
-          <h1 className='w-[100%] text-center font-bold text-[2rem]' >Log In</h1>
+      <div className='flex flex-row items-center justify-center w-[50vw] px-[5rem]'>
+        <form name='Sign Up Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--custom-padding)] rounded-[var(--custom-radius)] w-[100%] min-w-[300px]'>
+          <h1 className='w-[100%] text-center font-bold text-[2rem]' >Let's get started</h1>
           <div className='flex flex-col w-[100%]'>
             <label for='fullname' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Fullname</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem]'>
