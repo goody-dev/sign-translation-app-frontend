@@ -1,9 +1,11 @@
 import React from 'react'
+import EmailIcon from '../assets/icons/closed-blue-envelope.png'
+import HashIcon from '../assets/icons/hidden-characters-icon.png'
 
 const SignIn = () => {
   return (
-    <div className='flex flex-row items-center h-[100%] bg-[#F1F1F1]'>
-      <svg className='w-[50vw] self-start' viewBox="0 0 696 926" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div className='flex flex-row items-center w-100% max-w-[100vw] gap-[var(--custom-gap)] bg-[#F1F1F1]'>
+      <svg className='w-[50vw] h-[calc(100vh-97.19px)]' viewBox="0 0 696 926" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_36_108)">
         <rect width="696" height="926" fill="#F1F1F1"/>
         <path fill-rule="evenodd" clip-rule="evenodd" d="M606.308 538.415C612.601 531.825 617.286 523.561 617.727 514.003C618.996 486.464 582.644 490.286 574.156 503.699C565.668 517.113 562.566 552.279 571.259 555.309C574.725 556.517 582.615 554.572 590.93 550.05L581.941 586.604L610.684 588.385L606.308 538.415Z" fill="#B28B67"/>
@@ -59,18 +61,25 @@ const SignIn = () => {
         </defs>
       </svg>
       <div className='flex flex-row items-center justify-center w-[50vw]'>
-      <form name='Login Form' className='flex flex-col w-[70vw] gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--card-padding)] rounded-[var(--custom-radius)] sm:w-[50%]'>
-        <h1 className='w-[100%] text-center font-bold text-[2rem]' >Log In</h1>
-        <div className='flex flex-col w-[100%]'>
-          <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
-          <input id='email' type='email' tabIndex={0} placeholder='Enter your email address' className='w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] p-[var(--button-padding)] text-[#908E8E]'></input>
-        </div>
-        <div className='flex flex-col w-[100%]'>
-          <label for='password' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Password</label>
-          <input id='password' type='password' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] p-[var(--button-padding)] text-[#908E8E]'></input>
-        </div>
-        <button tabIndex={0} className='w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]'>Log In</button>
-      </form>
+        <form name='Login Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--card-padding)] rounded-[var(--custom-radius)] w-[30vw] min-w-[300px]'>
+          <h1 className='w-[100%] text-center font-bold text-[2rem]' >Log In</h1>
+          <div className='flex flex-col w-[100%]'>
+            <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
+            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem]'>
+              <img src={EmailIcon}/>
+              <input id='email' type='email' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+            </div>
+          </div>
+          <div className='flex flex-col w-[100%]'>
+            <label for='password' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Password</label>
+            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem]'>
+              <img src={HashIcon}/>
+              <input id='password' type='password' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+            </div>
+            
+          </div>
+          <button tabIndex={0} className='w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]'>Log In</button>
+        </form>
       </div>
     </div>
   )

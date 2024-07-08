@@ -2,7 +2,7 @@
   --font-family: 'Inter';
   
   --custom-gap: 1.5rem;
-  --custom-padding: 2rem 3rem;
+  --custom-padding: 2rem 5rem;
   --card-padding: 2rem;
   --button-padding: 0.6rem 1.1rem;
   --custom-radius: 0.5rem;
@@ -81,5 +81,5 @@ button {
 #contact-section {
   background-image: url('./assets/illustrations/light-blue-tree.svg');
   background-repeat: no-repeat;
-  background-position: 0% 100%;
+  background-position: -1% 100%;
 }
