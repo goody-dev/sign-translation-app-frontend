@@ -66,7 +66,7 @@ const SignUp = () => {
           <h1 className='w-[100%] text-center font-bold text-[2rem]' >Let's get started</h1>
           <div className='flex flex-col w-[100%]'>
             <label for='fullname' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Fullname</label>
-            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem]'>
+            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={PersonIcon}/>
               <input id='fullname' type='text' tabIndex={0} placeholder='Enter your fullname' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
@@ -74,14 +74,14 @@ const SignUp = () => {
           </div>
           <div className='flex flex-col w-[100%]'>
             <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
-            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem]'>
+            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={EmailIcon}/>
               <input id='email' type='email' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
           </div>
           <div className='flex flex-col w-[100%]'>
             <label for='password' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Password</label>
-            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem]'>
+            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={HashIcon}/>
               <input id='password' type='password' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
