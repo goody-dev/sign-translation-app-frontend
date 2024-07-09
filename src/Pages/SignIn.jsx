@@ -61,7 +61,7 @@ const SignIn = () => {
         </defs>
       </svg>
       <div className='flex flex-row items-center justify-center w-[50vw] px-[5rem]'>
-        <form name='Login Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--card-padding)] rounded-[var(--custom-radius)] w-[100%] min-w-[300px]'>
+        <form name='Login Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--card-padding)] px-[4.75rem] rounded-[var(--custom-radius)] w-[100%] min-w-[300px]'>
           <h1 className='w-[100%] text-center font-bold text-[2rem]' >Log In</h1>
           <div className='flex flex-col w-[100%]'>
             <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
