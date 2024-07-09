@@ -1,6 +1,7 @@
 import React from 'react'
 import HashIcon from '../assets/icons/hidden-characters-icon.png'
 import EmailIcon from '../assets/icons/closed-blue-envelope.png'
+import PersonIcon from '../assets/icons/person-icon.svg'
 
 const SignUp = () => {
   return (
@@ -66,7 +67,7 @@ const SignUp = () => {
           <div className='flex flex-col w-[100%]'>
             <label for='fullname' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Fullname</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem]'>
-              <img src={HashIcon}/>
+              <img src={PersonIcon}/>
               <input id='fullname' type='text' tabIndex={0} placeholder='Enter your fullname' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
             
