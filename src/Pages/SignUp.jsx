@@ -76,7 +76,7 @@ const SignUp = () => {
             <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={EmailIcon}/>
-              <input id='email' type='email' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input id='email' type='email' tabIndex={0} placeholder='Enter  your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
           </div>
           <div className='flex flex-col w-[100%]'>
