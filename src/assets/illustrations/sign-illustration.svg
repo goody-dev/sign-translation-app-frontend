@@ -1,15 +1,4 @@
-import React from 'react'
-
-const Hero = () => {
-  return (
-    <div className='flex flex-col items-start p-[1.5rem] bg-transparent gap-[var(--custom-gap)] sm:flex-row sm:items-center sm:p-[var(--custom-padding)] sm:pt-0'>
-      <div className='flex flex-col gap-[2rem] sm:w-[50vw] '>
-        <h1 className='text-[2.5rem] font-bold leading-[3rem]'>Unlock the World of <br/>Communication</h1>
-        <p className='text-[28px] font-semibold'>Record | Watch | Translate</p>
-        <p className='text-[var(--sub-headline-color)] font-normal text-[1.25rem]'>Discover our innovative platform that transforms sign language into text and text into sign language, fostering seamless communication for everyone. Join us in making interactions more inclusive and accessible.</p>
-        <button tabIndex={0} className='text-[1.25rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[var(--button-radius)] text-[var(--tertiary-color)] font-medium sm:w-[max-content] shadow-[var(--button-shadow)]'>Get Started</button>
-      </div>
-      <svg className='w-[100%] sm:w-[50%]' viewBox="0 0 624 532" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="624" height="532" viewBox="0 0 624 532" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_111_378)">
 <path d="M535.369 455.601C535.369 455.601 616.97 337.433 596.879 200.05C576.788 62.6681 459.481 71.0441 380.453 47.4749C301.424 23.9056 260.451 -17.851 167.636 8.34117C74.8222 34.5334 39.3137 82.8968 29.3238 157.811C19.334 232.726 25.4664 304.485 38.2504 372.323C51.0345 440.16 74.6862 490.07 142.81 497.023C210.934 503.977 234.202 483.995 272.814 504.694C311.426 525.393 463.166 551.808 535.369 455.601Z" fill="#F2F2F2"/>
 <path opacity="0.22" d="M311.179 532C452.101 532 566.34 523.182 566.34 512.303C566.34 501.425 452.101 492.607 311.179 492.607C170.257 492.607 56.0168 501.425 56.0168 512.303C56.0168 523.182 170.257 532 311.179 532Z" fill="#2F2E41"/>
@@ -136,8 +125,3 @@ const Hero = () => {
 </clipPath>
 </defs>
 </svg>
-    </div>
-  )
-}
-
-export default Hero
