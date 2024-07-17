@@ -2,6 +2,7 @@
   --font-family: 'Inter';
   
   --custom-gap: 1.5rem;
+  --inline-gap: 0.5rem;
   --custom-padding: 2rem 5rem;
   --card-padding: 2rem;
   --button-padding: 0.6rem 1.1rem;
@@ -19,6 +20,7 @@
   --white-background: #FFFFFF;
   --tertiary-background: #E9E9EC;
   --faint-blue-background: #F3F4FF;
+  --black-background: #000000;
   
   --darkblue-background: #2F3676;
   --blue-background: #2E42A5;
