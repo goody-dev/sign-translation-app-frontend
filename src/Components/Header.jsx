@@ -18,7 +18,7 @@ const Header = () => {
               <Link to="/about">About</Link>
             </li>
             <li>
-              <button className='flex flex-row items-center gap-[0.25rem]'>Contribute<img src={ArrowDown} alt='arrow down icon'/></button>
+              <button className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] leading-[1rem]'>Contribute<img src={ArrowDown} className='self-end w-[var(--vh-icon)]' alt='arrow down icon'/></button>
             </li>
             <li>
               <Link to="/signin">Login</Link>
@@ -28,9 +28,9 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        <button aria-label='Select language' className='hidden flex-row items-center gap-[0.25rem] md:flex md:justify-self-end'>
+        <button aria-label='Select language' className='hidden flex-row items-center gap-[calc(var(--inline-gap)/2)] md:flex md:justify-self-end'>
           <img src={UKLogo} alt="language-icon" />
-          <img src={ArrowDown} alt='arrow down icon'/>
+          <img src={ArrowDown} className='w-[var(--vh-icon)]' alt='arrow down icon'/>
         </button>
         <button className='md:hidden'>Menu</button>
       </div>

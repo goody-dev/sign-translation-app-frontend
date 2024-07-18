@@ -24,8 +24,8 @@ const TranslateText = () => {
             </div>
           </div>
           <div className='flex flex-row justify-between'>
-            <button className='bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'><img className='rotate-180' src={ArrowIcon}/>Previous</button>
-            <button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Next <img src={ArrowIcon} /></button>
+            <button className='text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
+            <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Next <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
           </div>
         </div>
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] sm:w-[50%]'>
@@ -33,7 +33,7 @@ const TranslateText = () => {
             <textarea className='text-center align-middle text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto'>Enter text here...</textarea>
           </div>
           <div className='flex flex-row justify-end'>
-            <button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit <img src={ArrowIcon} /></button>
+            <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit<img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
           </div>
         </div>
       </div>
