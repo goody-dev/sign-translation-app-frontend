@@ -2,6 +2,7 @@ import React from 'react'
 import HashIcon from '../assets/icons/hidden-characters-icon.png'
 import EmailIcon from '../assets/icons/closed-blue-envelope.png'
 import PersonIcon from '../assets/icons/person-icon.svg'
+import { Link } from 'react-router-dom'
 
 const SignUp = () => {
   return (
@@ -68,7 +69,7 @@ const SignUp = () => {
             <label for='fullname' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Fullname</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={PersonIcon}/>
-              <input id='fullname' type='text' tabIndex={0} placeholder='Enter your fullname' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input required id='fullname' type='text' tabIndex={0} placeholder='Enter your fullname' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
             
           </div>
@@ -76,18 +77,17 @@ const SignUp = () => {
             <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={EmailIcon}/>
-              <input id='email' type='email' tabIndex={0} placeholder='Enter  your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input required id='email' type='email' tabIndex={0} placeholder='Enter  your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
           </div>
           <div className='flex flex-col w-[100%]'>
             <label for='password' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Password</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={HashIcon}/>
-              <input id='password' type='password' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input required id='password' type='password' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
-            
           </div>
-          <button tabIndex={0} className='w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]'>Log In</button>
+          <Link to='/record-video'><button tabIndex={0} className='w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]'>Sign Up</button></Link>
         </form>
       </div>
     </div>
