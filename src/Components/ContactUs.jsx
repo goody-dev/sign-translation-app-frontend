@@ -22,7 +22,6 @@ const ContactUs = () => {
         </div>
         <button tabIndex={0} className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)]'>Submit</button>
       </form>
-      
     </div>
   )
 }

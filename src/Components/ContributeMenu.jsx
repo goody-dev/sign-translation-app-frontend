@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const ContributeMenu = () => {
   return (
     <div className='block absolute p-[var(--card-padding)] bg-[var(--white-background)] shadow-[var(--action-card-shadow)] rounded-[var(--custom-radius)]'>
-      <ul className='gap-[var(--custom-gap)]'>
+      <ul className='gap-[1.5rem]'>
         <li>
           <Link to='/record-video'>Record Video</Link>
         </li>
