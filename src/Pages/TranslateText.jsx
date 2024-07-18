@@ -13,12 +13,14 @@ const TranslateText = () => {
       </div>
       <div className='flex flex-row gap-[2.5rem] w-[100%]'>
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] sm:w-[50%]'>
-          <div className='flex flex-row items-end justify-center h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-            {/* <div className='flex flex-row items-center absolute bg-[var(--white-background)] p-[var(--button-padding)] mt-0'>
-              <p>ASL</p>
-              <img src={ArrowDown}/>
+          <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
+            {/* <div className='block absolute mb-[50vh] mr-[4.5%]'>
+              <div className='flex flex-row absolute items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)] mt-0'>
+                <p>ASL</p>
+                <img src={ArrowDown}/>
+              </div>
             </div> */}
-            <div className='flex flex-row gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
+            <div className='flex flex-row self-center gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
               <img src={PlayIcon} className='cursor-pointer'/>
               <img src={StopIcon} className='cursor-pointer'/>
             </div>

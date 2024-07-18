@@ -1,11 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import Logo from '../assets/icons/LOGO.png'
 import ArrowDown from '../assets/icons/arrow-down.png'
 import UKLogo from '../assets/icons/united-kingdom-icon.svg'
+import ContributeMenu from './ContributeMenu.jsx'
 
 
 const Header = () => {
+  const [showContrMenu, setShowContrMenu] = useState(false);
+  const handleContrClick = () => {
+    setShowContrMenu(!showContrMenu);
+  }
+  const url = useLocation();
+  const currentPath = url.pathname;
+
+  useEffect(()=>{
+    setShowContrMenu(false);
+  }, [currentPath])
+
   return (
     <header className='flex flex-row max-w-[100vw] justify-between p-[1.5rem] items-center bg-[var(--white-background)] sm:p-[var(--custom-padding)] sm:py-[1.5rem] sm:gap-[var(--custom-gap)]'>
       <Link to="/" className='block' aria-label='Go to Home Page'>
@@ -18,7 +30,8 @@ const Header = () => {
               <Link to="/about">About</Link>
             </li>
             <li>
-              <button className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] leading-[1rem]'>Contribute<img src={ArrowDown} className='self-end w-[var(--vh-icon)]' alt='arrow down icon'/></button>
+              <button onClick={handleContrClick} className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] leading-[1rem]'>Contribute<img src={ArrowDown} className={'self-end w-[var(--vh-icon)] ' + (showContrMenu && 'rotate-[180deg]')} alt='arrow down icon'/></button>
+              {showContrMenu && <ContributeMenu />}
             </li>
             <li>
               <Link to="/signin">Login</Link>
