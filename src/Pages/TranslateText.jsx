@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PlayIcon from '../assets/icons/play-circle.svg'
 import StopIcon from '../assets/icons/stop-circle.svg'
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import ArrowDown from '../assets/icons/filled-arrow-down.png'
 
 const TranslateText = () => {
+  const videoRef = useRef();
+
+  const handlePlay = () => {
+
+  }
+  const handlePause = () => {
+
+  }
+
+
   return (
     <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] sm:h-[calc(100vh-97.19px)] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)]'>
       <div className='flex flex-col'>
@@ -20,9 +30,16 @@ const TranslateText = () => {
                 <img src={ArrowDown}/>
               </div>
             </div> */}
-            <div className='flex flex-row self-center gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
-              <img src={PlayIcon} className='cursor-pointer'/>
-              <img src={StopIcon} className='cursor-pointer'/>
+            <video ref={videoRef} controls className='h-[100%] w-[100%]'>
+              <source src="" />
+            </video>
+            <div className='absolute flex flex-row self-center gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
+              <button onClick={handlePlay}>
+                <img src={PlayIcon} className='cursor-pointer'/>
+              </button>
+              <button onClick={handlePause}>
+                <img src={StopIcon} className='cursor-pointer'/>
+              </button>
             </div>
           </div>
           <div className='flex flex-row justify-between'>
