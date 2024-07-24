@@ -23,19 +23,19 @@ const VideoRecorder = () => {
   }
 
   return (
-    <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] sm:w-[50%]'>
+    <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
       <div className='flex flex-row items-end justify-center h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-      <div className='absolute flex flex-row gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
-        <button onClick={playRecord}>
-          <img className='cursor-pointer' src={PlayIcon}/>
-        </button>
-        <button onClick={startRecording}>
-          <img className='cursor-pointer' src={RecordIcon}/>
-        </button>
-        <button onClick={stopRecording}>
-          <img className='cursor-pointer' src={StopIcon}/>
-        </button>
-      </div>
+        <div className='absolute flex flex-row gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
+          <button onClick={playRecord}>
+            <img className='cursor-pointer' src={PlayIcon}/>
+          </button>
+          <button onClick={startRecording}>
+            <img className='cursor-pointer' src={RecordIcon}/>
+          </button>
+          <button onClick={stopRecording}>
+            <img className='cursor-pointer' src={StopIcon}/>
+          </button>
+        </div>
       </div>
       <div className='flex flex-row justify-between'>
       <select tabIndex={0} className='p-[var(--button-padding)] rounded-[0.5rem] text-[var(--input-color)] sm:w-[50%]'>

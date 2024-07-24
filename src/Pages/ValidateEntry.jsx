@@ -18,19 +18,19 @@ const ValidateEntry = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] sm:h-[calc(100vh-97.19px)] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)]'>
+    <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] md:h-[calc(100vh-97.19px)] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)]'>
       <div className='flex flex-col'>
         <h1 className='font-bold text-[1.5rem]'>Validate Translation</h1>
         <p className='text-[1rem] text-[var(--input-color)]'>Confirm if the text translation corresponds with the given video</p>
       </div>
-      <div className='flex flex-row gap-[2.5rem] w-[100%]'>
+      <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
         <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-          {/* <div className='block absolute mb-[50vh] mr-[4.5%]'>
-            <div className='flex flex-row absolute items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)] mt-0'>
-              <p>ASL</p>
-              <img src={ArrowDown}/>
+          <div className='absolute z-50 self-end mb-[50vh] mr-[60px]'>
+            <div className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
+            <p>ASL</p>
+            <img src={ArrowDown}/>
             </div>
-          </div> */}
+          </div>
           <video ref={videoRef} controls className='h-[100%] w-[100%]'>
               <source src="" />
           </video>
@@ -49,7 +49,7 @@ const ValidateEntry = () => {
       </div>
       <div className='flex flex-row justify-between items-center'>
         <button className='text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-bold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
-        <div className='flex flex-row font-semibold items-center gap-[calc(var(--inline-gap)/2)]'>
+        <div className='flex flex-row flex-wrap font-semibold items-center gap-[calc(var(--inline-gap)/2)]'>
             <button className='cursor-pointer h-[1.5rem] w-[1.5rem] text-[1rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>1</button>
             <button className='cursor-pointer h-[1.5rem] w-[1.5rem] text-[1rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>2</button>
             <button className='cursor-pointer h-[1.5rem] w-[1.5rem] text-[1rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>3</button>

@@ -1,10 +1,94 @@
-import React from 'react'
+import React, { useState } from 'react'
 import HashIcon from '../assets/icons/hidden-characters-icon.png'
 import EmailIcon from '../assets/icons/closed-blue-envelope.png'
 import PersonIcon from '../assets/icons/person-icon.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
+  const [fullname, setFullname] = useState('');
+  const [emptyFullname, setEmptyFullname] = useState(null);
+
+  const [email, setEmail] = useState('');
+  const [emptyEmail, setEmptyEmail] = useState(null);
+  const [invalidEmail, setInvalidEmail] = useState(null);
+  const [usedEmail, setUsedEmail] = useState(null)
+
+  const [password, setPassword] = useState('');
+  const [emptyPassword, setEmptyPassword] = useState(null);
+  const [invalidPassword, setInvalidPassword] = useState(null);
+
+  const handleFullnameChange = (event) => {
+    setFullname(event.target.value);
+    console.log(event.target.value);
+  }
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  }
+
+  const validateEntry = () => {
+
+    var validity = true;
+    var testForNonDigits = /[^0-9]/.test(password);
+
+    if (fullname.length >= 1) {
+      validity *= true;
+      setEmptyFullname(false);
+      console.log(fullname);
+    } else {
+      validity *= false; 
+      setEmptyFullname(true);
+    }
+
+    if (email != '') {
+      validity *= true;
+      setEmptyEmail(false);
+    } else {
+      validity *= false;
+      setEmptyEmail(true);
+    }
+    
+    if (password.length >= 8 && testForNonDigits == false) {
+      validity *= true;
+      setInvalidPassword(false);
+    } else {
+      validity *= false;
+      setInvalidPassword(true);
+    }
+
+    return validity;
+  }
+
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+    const data = {
+      "fullname": fullname,
+      "email": email,
+      "password": password,
+      "role": "user"
+    }
+    const validity = validateEntry();
+    if(validity === 1) {
+      alert("off to create your account");
+
+      const response = await fetch ('https://signs-5no9.onrender.com/auth/signup', {
+        method:"POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        }
+      })
+      .then(response.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+    }
+  }
   return (
     <div className='flex flex-row items-center w-100% max-w-[100vw] gap-[var(--custom-gap)] bg-[#F1F1F1]'>
       <svg className='w-[50vw] h-[calc(100vh-97.19px)]' viewBox="0 0 696 926" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,31 +147,35 @@ const SignUp = () => {
         </defs>
       </svg>
       <div className='flex flex-row items-center justify-center w-[50vw] px-[4.75rem]'>
-        <form name='Sign Up Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--custom-padding)] rounded-[var(--custom-radius)] w-[100%] min-w-[300px]'>
+        <form onSubmit={(event)=>handleSubmit(event)} name='Sign Up Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--custom-padding)] rounded-[var(--custom-radius)] w-[100%] min-w-[300px]'>
           <h1 className='w-[100%] text-center font-bold text-[2rem]' >Let's get started</h1>
           <div className='flex flex-col w-[100%]'>
             <label for='fullname' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Fullname</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={PersonIcon}/>
-              <input required id='fullname' type='text' tabIndex={0} placeholder='Enter your fullname' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input onChange={(event)=>handleFullnameChange(event)} id='fullname' type='text' tabIndex={0} placeholder='Enter your fullname' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
-            
+            {emptyFullname === true && <sub className='leading-[1.2rem] text-red-400'>This field is required</sub>}
           </div>
           <div className='flex flex-col w-[100%]'>
             <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={EmailIcon}/>
-              <input required id='email' type='email' tabIndex={0} placeholder='Enter  your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input onChange={(event)=>handleEmailChange(event)} id='email' type='email' tabIndex={0} placeholder='Enter  your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
+            {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>This field is required</sub>}
+            {usedEmail && <sub className='leading-[1.2rem] text-red-400'>Email already used</sub>}
           </div>
           <div className='flex flex-col w-[100%]'>
             <label for='password' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Password</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={HashIcon}/>
-              <input required id='password' type='password' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input onChange={(event)=>handlePasswordChange(event)} id='password' type='password' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
+              {emptyPassword && <sub className='leading-[1.2rem] text-red-400'>This field is required</sub>}
+              {invalidPassword && <sub className='leading-[1.2rem] text-red-400'>password should contain not less than least 8 digits and only digits</sub>}
           </div>
-          <Link to='/record-video'><input type='submit' tabIndex={0} className='w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value='Sign Up'/></Link>
+          <input type='submit' tabIndex={0} className='cursor-pointer w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value='Sign Up'/>
         </form>
       </div>
     </div>

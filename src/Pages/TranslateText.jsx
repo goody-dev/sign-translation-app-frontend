@@ -16,20 +16,20 @@ const TranslateText = () => {
 
 
   return (
-    <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] sm:h-[calc(100vh-97.19px)] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)]'>
+    <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)] md:h-[calc(100vh-97.19px)]'>
       <div className='flex flex-col'>
         <h1 className='font-bold text-[2rem]'>Translate Video</h1>
         <p className='text-[1rem] text-[var(--input-color)]'>Type in the text translation for the given video</p>
       </div>
-      <div className='flex flex-row gap-[2.5rem] w-[100%]'>
-        <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] sm:w-[50%]'>
+      <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
+        <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
           <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-            {/* <div className='block absolute mb-[50vh] mr-[4.5%]'>
-              <div className='flex flex-row absolute items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)] mt-0'>
-                <p>ASL</p>
-                <img src={ArrowDown}/>
+            <div className='absolute z-50 self-end mb-[50vh] mr-[60px]'>
+              <div className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
+              <p>ASL</p>
+              <img src={ArrowDown}/>
               </div>
-            </div> */}
+            </div>
             <video ref={videoRef} controls className='h-[100%] w-[100%]'>
               <source src="" />
             </video>
@@ -47,7 +47,7 @@ const TranslateText = () => {
             <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Next <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
           </div>
         </div>
-        <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] sm:w-[50%]'>
+        <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
           <div className='flex flex-col items-center justify-center p-[var(--button-padding)] bg-[var(--white-background)] h-[50vh] w-[100%] sm:w-[100%]'>
             <textarea className='text-center align-middle text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto'>Enter text here...</textarea>
           </div>
