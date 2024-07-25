@@ -84,7 +84,7 @@ const SignUp = () => {
           "Content-Type": "application/json; charset=utf-8"
         }
       })
-      .then(response.json())
+      .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => console.log(err))
     }

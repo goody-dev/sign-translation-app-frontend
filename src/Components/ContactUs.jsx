@@ -58,14 +58,15 @@ const ContactUs = () => {
 
     const validity = validateForm();
 
-    validity == 1 && await fetch ('https://signs-5no9.onrender.com/contact-us', {
+    validity == 1 && await fetch ('https://signs-5no9.onrender.com/contact', {
+      mode:"cors",
       method:"POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       }
     })
-    .then(response.json())
+    .then(res => res.json())
     .then(data => console.log(data))
     .catch(err => console.log(err))
   }
