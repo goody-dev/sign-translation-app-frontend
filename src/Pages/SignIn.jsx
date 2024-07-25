@@ -45,7 +45,7 @@ const SignIn = () => {
       setInvalidEmail(true);
     }
     
-    if (password.length >= 8 && testForNonDigits == false) {
+    if (password.length >= 8) {
       validity *= true;
       setInvalidPassword(false);
     } else {
@@ -144,18 +144,18 @@ const SignIn = () => {
               <img src={EmailIcon}/>
               <input onChange={(event)=>handleEmailChange(event)} required id='email' type='email' tabIndex={0} placeholder='Enter your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
-            {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>This field is required</sub>}
+            {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide your email</sub>}
             {invalidEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide a valid email</sub>}
-            {usedEmail && <sub className='leading-[1.2rem] text-red-400'>Email already used</sub>}
+            {usedEmail && <sub className='leading-[1.2rem] text-red-400'>Email already used, please provide another email</sub>}
           </div>
           <div className='flex flex-col w-[100%]'>
             <label for='password' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Password</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={HashIcon}/>
-              <input onChange={(event)=>handlePasswordChange(event)} required id='password' min={8} type='password' tabIndex={0} placeholder='Not less than 8 digits' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input onChange={(event)=>handlePasswordChange(event)} required id='password' min={8} type='password' tabIndex={0} placeholder='Not less than 8 characters' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
-            {emptyPassword && <sub className='leading-[1.2rem] text-red-400'>This field is required</sub>}
-            {invalidPassword && <sub className='leading-[1.2rem] text-red-400'>password should contain not less than least 8 digits and only digits</sub>}
+            {emptyPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide your password</sub>}
+            {invalidPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide password not less than least 8 characters</sub>}
           </div>
           <input type="submit" tabIndex={0} className='w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value="Log In" />
         </form>

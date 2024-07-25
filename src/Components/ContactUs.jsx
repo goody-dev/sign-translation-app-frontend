@@ -83,13 +83,13 @@ const ContactUs = () => {
               <img src={EnvelopeIcon}/>
               <input id='email' type='email' onChange={(event)=>handleEmailChange(event)} required tabIndex={0} placeholder='Enter your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
-            {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>This field is required</sub>}
-            {invalidEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide a valid email</sub>}
+            {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide your email</sub>}
+            {invalidEmail && <sub className='leading-[1.2rem] text-red-400'>Email is invalid, pls provide a valid email</sub>}
           </div>
         <div className='flex flex-col'>
           <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Description</label>
           <textarea id='email' type='text' onChange={(event) => handleDescriptionChange(event)} required tabIndex={0} placeholder='' className='bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] p-[var(--button-padding)] h-[7rem] text-[1rem] leading-[2.4rem] text-[#908E8E]'></textarea>
-          {emptyDescription && <sub className='leading-[1.2rem] text-red-400'>This field is required</sub>}
+          {emptyDescription && <sub className='leading-[1.2rem] text-red-400'>Pls provide a description</sub>}
         </div>
         <button type='submit' tabIndex={0} className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)]'>Submit</button>
       </form>
