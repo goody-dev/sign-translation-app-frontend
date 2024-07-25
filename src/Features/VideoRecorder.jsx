@@ -38,7 +38,7 @@ const VideoRecorder = () => {
       mediaRecorder.addEventListener('stop', () => {
         playerRef.current.src = URL.createObjectURL(new Blob(recordedChunks));
         uploadRef.current.href = URL.createObjectURL(new Blob(recordedChunks));
-        uploadRef.current.download = URL.createObjectURL(new Blob(recordedChunks));
+        uploadRef.current.download = 'record.webm';
       });
 
       mediaRecorder.start();
