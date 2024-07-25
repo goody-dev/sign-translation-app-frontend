@@ -27,6 +27,7 @@ const SignIn = () => {
 
     var validity = true;
     var testForNonDigits = /[^0-9]/.test(password);
+    const testForValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/.test(email);
 
     if (email != '') {
       validity *= true;
@@ -34,6 +35,14 @@ const SignIn = () => {
     } else {
       validity *= false;
       setEmptyEmail(true);
+    }
+
+    if (testForValidEmail === true) {
+      validity *= true;
+      setInvalidEmail(false);
+    } else {
+      validity *= false;
+      setInvalidEmail(true);
     }
     
     if (password.length >= 8 && testForNonDigits == false) {
@@ -55,6 +64,7 @@ const SignIn = () => {
       "role": "user"
     }
     const validity = validateEntry();
+
     validity == 1 && await fetch ('https://signs-5no9.onrender.com/auth/signin', {
       method:"POST",
       body: JSON.stringify(data),
@@ -135,6 +145,7 @@ const SignIn = () => {
               <input onChange={(event)=>handleEmailChange(event)} required id='email' type='email' tabIndex={0} placeholder='Enter your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
             {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>This field is required</sub>}
+            {invalidEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide a valid email</sub>}
             {usedEmail && <sub className='leading-[1.2rem] text-red-400'>Email already used</sub>}
           </div>
           <div className='flex flex-col w-[100%]'>
