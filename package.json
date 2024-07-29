@@ -26,5 +26,6 @@
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4",
     "vite": "^5.3.1"
-  }
+  },
+  "proxy": "https://signs-5no9.onrender.com"
 }
