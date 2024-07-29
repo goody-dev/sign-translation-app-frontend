@@ -59,7 +59,6 @@ const ContactUs = () => {
     const validity = validateForm();
 
     validity == 1 && await fetch ('https://signs-5no9.onrender.com/contact', {
-      mode:"cors",
       method:"POST",
       body: JSON.stringify(data),
       headers: {
@@ -80,10 +79,10 @@ const ContactUs = () => {
       <form noValidate name='Contact Form' onSubmit={(event)=>handleSubmit(event)} className='flex flex-col gap-[var(--custom-gap)] w-[100%] bg-[var(--white-background)] p-[var(--card-padding)] px-[4.75rem] rounded-[var(--custom-radius)] sm:w-[50%]'>
         <div className='flex flex-col w-[100%]'>
           <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
-            <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
-              <img src={EnvelopeIcon}/>
-              <input id='email' type='email' onChange={(event)=>handleEmailChange(event)} required tabIndex={0} placeholder='Enter your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
-            </div>
+            {/* <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
+              <img src={EnvelopeIcon}/> */}
+            <input autoComplete='off' id='email' type='email' onChange={(event)=>handleEmailChange(event)} required tabIndex={0} placeholder='Enter your email address' className='email-input w-[100%] p-[var(--button-padding)] pl-[3.2rem] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+            {/* </div> */}
             {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide your email</sub>}
             {invalidEmail && <sub className='leading-[1.2rem] text-red-400'>Email is invalid, pls provide a valid email</sub>}
           </div>

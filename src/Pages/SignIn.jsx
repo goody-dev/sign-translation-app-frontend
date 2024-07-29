@@ -142,7 +142,7 @@ const SignIn = () => {
             <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={EmailIcon}/>
-              <input onChange={(event)=>handleEmailChange(event)} required id='email' type='email' tabIndex={0} placeholder='Enter your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input autoComplete='off' onChange={(event)=>handleEmailChange(event)} required id='email' type='email' tabIndex={0} placeholder='Enter your email address' className='focus:outline-none w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
             {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide your email</sub>}
             {invalidEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide a valid email</sub>}
@@ -152,7 +152,7 @@ const SignIn = () => {
             <label for='password' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Password</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={HashIcon}/>
-              <input onChange={(event)=>handlePasswordChange(event)} required id='password' min={8} type='password' tabIndex={0} placeholder='Not less than 8 characters' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input autoComplete='off' onChange={(event)=>handlePasswordChange(event)} required id='password' min={8} type='password' tabIndex={0} placeholder='Not less than 8 characters' className='focus:outline-none w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
             {emptyPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide your password</sub>}
             {invalidPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide password not less than least 8 characters</sub>}

@@ -44,6 +44,12 @@
   background-repeat: no-repeat;
 }
 
+.email-input {
+  background-image: url('./assets/icons/closed-blue-envelope.png');
+  background-repeat: no-repeat;
+  background-position: 1.1rem;
+}
+
 root {
   max-width: 1280px;
   margin: 0;

@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import './App.css'
+
+import AuthProvider, { useAuth } from './provider/authProvider.jsx'
 
 import Header from './Components/Header.jsx'
 import Home from './Pages/Home.jsx'
@@ -12,9 +14,8 @@ import TranslateText from './Pages/TranslateText.jsx'
 import ValidateEntry from './Pages/ValidateEntry.jsx'
 
 function App() {
-
   return (
-    <>
+    <AuthProvider>
       <Header/>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -25,7 +26,7 @@ function App() {
         <Route path='/translate-text' element={<TranslateText/>} />
         <Route path='/validate-entry' element={<ValidateEntry/>} />
       </Routes>
-    </>
+    </AuthProvider>
   )
 }
 

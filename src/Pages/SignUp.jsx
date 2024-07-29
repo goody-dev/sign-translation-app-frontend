@@ -153,7 +153,7 @@ const SignUp = () => {
             <label for='fullname' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Fullname</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={PersonIcon}/>
-              <input onChange={(event)=>handleFullnameChange(event)} id='fullname' type='text' tabIndex={0} placeholder='Enter your fullname' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input onChange={(event)=>handleFullnameChange(event)} id='fullname' type='text' tabIndex={0} placeholder='Enter your fullname' className='focus:outline-none w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
             {emptyFullname === true && <sub className='leading-[1.2rem] text-red-400'>Pls provide your fullname</sub>}
           </div>
@@ -161,7 +161,7 @@ const SignUp = () => {
             <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={EmailIcon}/>
-              <input onChange={(event)=>handleEmailChange(event)} id='email' type='email' tabIndex={0} placeholder='Enter  your email address' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input onChange={(event)=>handleEmailChange(event)} id='email' type='email' tabIndex={0} placeholder='Enter  your email address' className='focus:outline-none w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
             {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide your email</sub>}
             {usedEmail && <sub className='leading-[1.2rem] text-red-400'>Email already used, please provide another email</sub>}
@@ -170,7 +170,7 @@ const SignUp = () => {
             <label for='password' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Password</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={HashIcon}/>
-              <input onChange={(event)=>handlePasswordChange(event)} id='password' type='password' tabIndex={0} placeholder='Not less than 8 characters' className='w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+              <input onChange={(event)=>handlePasswordChange(event)} id='password' type='password' tabIndex={0} placeholder='Not less than 8 characters' className='focus:outline-none w-[100%] p-[var(--button-padding)] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             </div>
               {emptyPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide your password</sub>}
               {invalidPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide password not less than 8 characters</sub>}
