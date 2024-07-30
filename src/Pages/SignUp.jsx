@@ -96,6 +96,7 @@ const SignUp = () => {
           setMessage(res.data.message);
           // handleToken(res.data.data.token);
           alert(res.data.message);
+          navigate("/record-video");
         } else if(res.data.status === false) {
           setStatus("failed");
           setMessage(res.data.message);

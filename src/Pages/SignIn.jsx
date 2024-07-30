@@ -82,7 +82,9 @@ const SignIn = () => {
         if(res.data.status === true) {
           setStatus("success");
           setMessage(res.data.message);
+          handleToken(res.data.data.token);
           alert(res.data.message);
+          navigate("/record-video");
         } else if(res.data.status === false) {
           setStatus("failed");
           setMessage(res.data.message);
@@ -176,7 +178,7 @@ const SignIn = () => {
             {emptyPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide your password</sub>}
             {invalidPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide password not less than least 8 characters</sub>}
           </div>
-          <input type="submit" tabIndex={0} className='w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value="Log In" />
+          <input type="submit" tabIndex={0} className='w-[100%] cursor-pointer bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value="Log In" />
         </form>
       </div>
     </div>
