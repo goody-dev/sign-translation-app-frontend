@@ -3,9 +3,15 @@ import HashIcon from '../assets/icons/hidden-characters-icon.png'
 import EmailIcon from '../assets/icons/closed-blue-envelope.png'
 import PersonIcon from '../assets/icons/person-icon.svg'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../provider/authProvider'
+import axios from 'axios'
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { handleToken } = useAuth();
+
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(null);
 
   const [fullname, setFullname] = useState('');
   const [emptyFullname, setEmptyFullname] = useState(null);
@@ -71,22 +77,36 @@ const SignUp = () => {
       "fullname": fullname,
       "email": email,
       "password": password,
-      "role": "user"
+      "role": "USER"
     }
     const validity = validateEntry();
     if(validity === 1) {
       alert("off to create your account");
 
-      const response = await fetch ('https://signs-5no9.onrender.com/auth/signup', {
-        method:"POST",
-        body: JSON.stringify(data),
+      await axios.post('https://signs-5n09.onrender.com/auth/signup',
+        data, {
         headers: {
           "Content-Type": "application/json; charset=utf-8"
         }
       })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
+      .then(res => {
+        //console.log(res.data);
+        if(res.data.status === true) {
+          setStatus("success");
+          setMessage(res.data.message);
+          // handleToken(res.data.data.token);
+          alert(res.data.message);
+        } else if(res.data.status === false) {
+          setStatus("failed");
+          setMessage(res.data.message);
+          alert(res.data.message);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        setMessage("Something went wrong, pls try again");
+        alert("Something went wrong, pls try again");
+      })
     }
   }
   return (
