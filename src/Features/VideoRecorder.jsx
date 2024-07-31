@@ -27,13 +27,14 @@ const VideoRecorder = () => {
       playerRef.current.play();
       setRecording(true);
 
-      const options = {mimeType: 'video/mp4'};
+      const options = {mimeType: 'video/webm'};
       const recordedChunks = [];
       const mediaRecorder = new MediaRecorder(stream, options);
 
-      mediaRecorder.addEventListener('dataavailable', (event)=> {
-        if (event.data.size > 0) {
-          recordedChunks.push(event.data);
+      mediaRecorder.addEventListener('dataavailable', ({data})=> {
+        if (data.size > 0) {
+          recordedChunks.push(data);
+          console.log("recordedChunk:", data);
         }
 
         if (promptedStopRecording && !recording) {
@@ -42,16 +43,15 @@ const VideoRecorder = () => {
       });
 
       mediaRecorder.addEventListener('stop', () => {
-        const videoBlob = new Blob(recordedChunks, {type:"video/webm"});
+        const videoBlob = new Blob(recordedChunks, { type:"video/webm" });
         const url = URL.createObjectURL(videoBlob);
         playerRef.current.src = url;
-        const videoFile = new File([videoBlob], 'record.mp4', {type:"video/webm"});
         // const a = document.createElement("a");
         // a.style = "display: none"
         // a.href =  url;
         // a.download = "record.webm";
         // a.click();
-        console.log(videoBlob);
+        //console.log(videoBlob);
         setVideo(videoBlob);
       });
 
@@ -96,18 +96,15 @@ const VideoRecorder = () => {
 
   const uploadRecord = async () => {
     if(!recording && video) {
+      console.log(video);
 
-      let data = new FormData();
-      data.append('text', 'goodnessokanlawon12@gmail.com');
+      const data = new FormData();
+      data.append('text', 'Increased popularity has given rise to promblems of congestion and erosion');
       data.append('video', video, 'record.webm');
 
       console.log(data);
 
-      await axios.post('https://signs-5n09.onrender.com/sign', data, {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8"
-        }
-      })
+      await axios.post('https://signs-5n09.onrender.com/sign', data)
         .then(res => {
           if(res.data.status === true) {
             setStatus("success");
