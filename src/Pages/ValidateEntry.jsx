@@ -1,20 +1,43 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PlayIcon from '../assets/icons/play-circle.svg'
 import StopIcon from '../assets/icons/stop-circle.svg'
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import ArrowDown from '../assets/icons/filled-arrow-down.png'
 import ThumbsUp from '../assets/icons/like-icon.png'
 import ThumbsDown from '../assets/icons/dislike-icon.svg'
+import axios from 'axios'
 
 const ValidateEntry = () => {
 
-  const videoRef = useRef();
+  const [signVideos, setSignVideos] = useState([]);
+  const [playing, setPlaying] = useState([false]);
+  const playerRef = useRef();
+
+  const fetchVideos = async()=> {
+    await axios.get('https://signs-5n09.onrender.com/sign/all')
+    .then(res => {
+      console.log(res.data);
+      setSignVideos(res.data.data);
+    });
+  }
+
+  useEffect(()=> {
+    fetchVideos();
+  }, [])
+
+  useEffect(() => {
+    if(signVideos.length) {
+      playerRef.current.src = signVideos[1].videoUrl;
+    }
+  }, [signVideos])
 
   const handlePlay = () => {
-
+    playerRef.current.play();
+    setPlaying(true);
   }
   const handlePause = () => {
-
+    playerRef.current.pause();
+    setPlaying(false);
   }
 
   return (
@@ -31,8 +54,7 @@ const ValidateEntry = () => {
             <img src={ArrowDown}/>
             </div>
           </div>
-          <video ref={videoRef} controls className='h-[100%] w-[100%]'>
-              <source src="" />
+          <video ref={playerRef} className='h-[100%] w-[100%]'>
           </video>
           <div className='absolute flex flex-row self-center gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
             <button onClick={handlePlay}>
