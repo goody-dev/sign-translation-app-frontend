@@ -47,16 +47,19 @@ const ValidateEntry = () => {
           <p className='text-center text-[20px] font-semibold text-wrap'>Increased popularity has given rise to problems of congestion and erosion</p>
         </div>
       </div>
-      <div className='flex flex-row justify-between items-center'>
-        <button className='text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-bold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
-        <div className='flex flex-row flex-wrap font-semibold items-center gap-[calc(var(--inline-gap)/2)]'>
-            <button className='cursor-pointer h-[1.5rem] w-[1.5rem] text-[1rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>1</button>
-            <button className='cursor-pointer h-[1.5rem] w-[1.5rem] text-[1rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>2</button>
-            <button className='cursor-pointer h-[1.5rem] w-[1.5rem] text-[1rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>3</button>
-            <button className='cursor-pointer h-[1.5rem] w-[1.5rem] text-[1rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>4</button>
-            <button className='cursor-pointer h-[1.5rem] w-[1.5rem] text-[1rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>5</button>
+      <div className='flex flex-col items-center w-[100%] gap-[calc(var(custom-gap)/2)]'>
+        <div className='flex flex-row justify-between items-center w-[100%]'>
+          <button className='text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-bold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
+          <div className='flex flex-row flex-wrap font-semibold items-center gap-[calc(var(--inline-gap)/2)]'>
+              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>1</button>
+              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>2</button>
+              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>3</button>
+              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>4</button>
+              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>5</button>
+          </div>
+          <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit <img className='h-[var(vh-icon)]' src={ArrowIcon}/></button>
         </div>
-        <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit <img className='h-[var(vh-icon)]' src={ArrowIcon}/></button>
+        <p className='text-[var(--feedback-text)] text-[19px] font-normal self-center'>Send us a feedback by selecting a rating above</p>
       </div>
     </div>
   )
