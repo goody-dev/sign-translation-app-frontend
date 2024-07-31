@@ -8,6 +8,8 @@ import axios from 'axios'
 const VideoRecorder = () => {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
+  
+  const [video, setVideo] = useState(null);
 
   const playerRef = useRef();
   const uploadRef = useRef();
@@ -25,7 +27,7 @@ const VideoRecorder = () => {
       playerRef.current.play();
       setRecording(true);
 
-      const options = {mimeType: 'video/webm'};
+      const options = {mimeType: 'video/mp4'};
       const recordedChunks = [];
       const mediaRecorder = new MediaRecorder(stream, options);
 
@@ -40,9 +42,17 @@ const VideoRecorder = () => {
       });
 
       mediaRecorder.addEventListener('stop', () => {
-        playerRef.current.src = URL.createObjectURL(new Blob(recordedChunks));
-        // uploadRef.current.href = URL.createObjectURL(new Blob(recordedChunks));
-        playerRef.current.download = 'record.webm';
+        const videoBlob = new Blob(recordedChunks, {type:"video/webm"});
+        const url = URL.createObjectURL(videoBlob);
+        playerRef.current.src = url;
+        const videoFile = new File([videoBlob], 'record.mp4', {type:"video/webm"});
+        // const a = document.createElement("a");
+        // a.style = "display: none"
+        // a.href =  url;
+        // a.download = "record.webm";
+        // a.click();
+        console.log(videoBlob);
+        setVideo(videoBlob);
       });
 
       mediaRecorder.start();
@@ -51,7 +61,11 @@ const VideoRecorder = () => {
     navigator.mediaDevices.getUserMedia({
       audio: false,
       video: true
-    }).then(handleSuccess);
+    }).then(handleSuccess)
+    .catch(err => {
+      alert("Unable to access camera, pls try again!");
+      console.log(err);
+    })
   }
 
   const playRecord = () => {
@@ -81,12 +95,19 @@ const VideoRecorder = () => {
   }
 
   const uploadRecord = async () => {
-    if(!recording) {
-      const data = {
-        text: "goodnessokamlawon12@gmail.com",
-        video: playerRef.current.download
-      }
-      await axios.post('https://signs-5n09.onrender.com/sign', data)
+    if(!recording && video) {
+
+      let data = new FormData();
+      data.append('text', 'goodnessokanlawon12@gmail.com');
+      data.append('video', video, 'record.webm');
+
+      console.log(data);
+
+      await axios.post('https://signs-5n09.onrender.com/sign', data, {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        }
+      })
         .then(res => {
           if(res.data.status === true) {
             setStatus("success");
