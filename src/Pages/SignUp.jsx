@@ -94,7 +94,7 @@ const SignUp = () => {
         if(res.data.status === true) {
           setStatus("success");
           setMessage(res.data.message);
-          // handleToken(res.data.data.token);
+          handleToken(res.data.data.token);
           alert(res.data.message);
           navigate("/record-video");
         } else if(res.data.status === false) {
@@ -111,8 +111,8 @@ const SignUp = () => {
     }
   }
   return (
-    <div className='flex flex-row items-center w-100% max-w-[100vw] gap-[var(--custom-gap)] bg-[#F1F1F1]'>
-      <svg className='w-[50vw] h-[calc(100vh-97.19px)]' viewBox="0 0 696 926" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div className='flex flex-row items-center justify-center w-100% max-w-[100vw] gap-[var(--custom-gap)] bg-[#F1F1F1] px-[1.5rem] sm:px-[none]'>
+      <svg className='hidden md:w-[50vw] md:block md:h-[calc(100vh-97.19px)] ' viewBox="0 0 696 926" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_36_108)">
         <rect width="696" height="926" fill="#F1F1F1"/>
         <path fill-rule="evenodd" clip-rule="evenodd" d="M606.308 538.415C612.601 531.825 617.286 523.561 617.727 514.003C618.996 486.464 582.644 490.286 574.156 503.699C565.668 517.113 562.566 552.279 571.259 555.309C574.725 556.517 582.615 554.572 590.93 550.05L581.941 586.604L610.684 588.385L606.308 538.415Z" fill="#B28B67"/>
@@ -167,8 +167,8 @@ const SignUp = () => {
         </clipPath>
         </defs>
       </svg>
-      <div className='flex flex-row items-center justify-center w-[50vw] px-[4.75rem]'>
-        <form onSubmit={(event)=>handleSubmit(event)} name='Sign Up Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--custom-padding)] rounded-[var(--custom-radius)] w-[100%] min-w-[300px]'>
+      <div className='sign-up-bg flex flex-row items-center h-[calc(100vh-72px)] sm:h-[calc(100vh-91.19px)] md:h-[calc(100vh-97.19px)] justify-center w-[100vw] md:w-[50vw] px-[4.75rem]'>
+        <form onSubmit={(event)=>handleSubmit(event)} name='Sign Up Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--card-padding)] px-[1.5rem] rounded-[var(--custom-radius)] w-[100%] min-w-[300px] sm:px-[4.75rem]'>
           <h1 className='w-[100%] text-center font-bold text-[2rem]' >Let's get started</h1>
           <div className='flex flex-col w-[100%]'>
             <label for='fullname' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Fullname</label>

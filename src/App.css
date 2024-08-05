@@ -66,10 +66,6 @@ button {
   align-items: center;
 }
 
-.CTM {
-  box-shadow: 0px 0px 25px rgba(46, 66, 165, 0.25);
-}
-
 #TAT {
   background-color: var(--faint-blue-background);
   background-image: url('./assets/illustrations/camera-image-end.svg'), url('./assets/illustrations/text-image-start.svg');
@@ -98,4 +94,21 @@ button {
   background-image: url('./assets/illustrations/light-blue-tree.svg');
   background-repeat: no-repeat;
   background-position: -1% 100%;
+}
+
+.sign-up-bg {
+  background-image: url("./assets/illustrations/sign-up-illustration.svg");
+  background-position: center;
+  background-repeat: norepeat;
+  background-size: cover;
+}
+
+@media screen and (min-width: 768px) {
+  .CTM {
+    box-shadow: 0px 0px 25px rgba(46, 66, 165, 0.25);
+  }
+
+  .sign-up-bg {
+    background-image: none;
+  }
 }

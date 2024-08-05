@@ -101,7 +101,7 @@ const ContactUs = () => {
         <h1 className='text-[var(--primary-color)] text-[4rem] leading-[4.8rem] font-bold'>Contact <br/><span className='text-[var(--secondary-color)]'>Us</span></h1>
         <p className='text-[var(--sub-headline-color)] text-[1.25rem] leading-[1.5rem]'>Get in touch with us. Feel free to help us with suggestions on how to improve this product.</p>
       </div>
-      <form noValidate name='Contact Form' onSubmit={(event)=>handleSubmit(event)} className='flex flex-col gap-[var(--custom-gap)] w-[100%] bg-[var(--white-background)] p-[var(--card-padding)] px-[4.75rem] rounded-[var(--custom-radius)] sm:w-[50%]'>
+      <form noValidate name='Contact Form' onSubmit={(event)=>handleSubmit(event)} className='flex flex-col gap-[var(--custom-gap)] w-[100%] bg-[var(--white-background)] p-[var(--card-padding)] px-[1.5rem] rounded-[var(--custom-radius)] sm:w-[50%] sm:px-[4.75rem]'>
         <div className='flex flex-col w-[100%]'>
           <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
             {/* <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>

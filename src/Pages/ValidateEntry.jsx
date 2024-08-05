@@ -11,6 +11,7 @@ const ValidateEntry = () => {
 
   const [signVideos, setSignVideos] = useState([]);
   const [playing, setPlaying] = useState([false]);
+
   const playerRef = useRef();
 
   const fetchVideos = async()=> {

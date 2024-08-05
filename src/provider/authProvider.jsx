@@ -3,7 +3,7 @@ import { Children, createContext, useContext, useEffect, useMemo, useState} from
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [token, setToken] = useState(localStorage.getItem('token') || "initial");
     const handleToken = (newToken) => {
         setToken(newToken);
     }
@@ -11,8 +11,11 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
         if (token) {
             localStorage.setItem('token', token);
+        } else if (token === "initial") {
+            pass;
         } else {
-            localStorage.removeItem('token')
+            localStorage.removeItem('token');
+            alert("Logged out!");
         }
     }, [token]);
 

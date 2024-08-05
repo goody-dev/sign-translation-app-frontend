@@ -5,7 +5,10 @@ import StopIcon from '../assets/icons/stop-circle.svg'
 import RecordIcon from '../assets/icons/record-circle.svg'
 import axios from 'axios'
 
+import { useAuth } from '../provider/authProvider'
+
 const VideoRecorder = () => {
+  const { token } = useAuth();
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
   
@@ -95,32 +98,38 @@ const VideoRecorder = () => {
   }
 
   const uploadRecord = async () => {
-    if(!recording && video) {
-      console.log(video);
-
-      const data = new FormData();
-      data.append('text', 'Increased popularity has given rise to promblems of congestion and erosion');
-      data.append('video', video, 'record.webm');
-
-      console.log(data);
-
-      await axios.post('https://signs-5n09.onrender.com/sign', data)
-        .then(res => {
-          if(res.data.status === true) {
-            setStatus("success");
-            setMessage(res.data.message);
-            alert(res.data.message);
-          } else if(res.data.status === false) {
-            setStatus("failed");
-            setMessage(res.data.message);
-            alert(res.data.message);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          setMessage("Something went wrong, pls try again");
-          alert("Something went wrong, pls try again");
-        })
+    if(token && token !== "initial") {
+      if(!recording && video) {
+        console.log(video);
+  
+        const data = new FormData();
+        data.append('text', 'Increased popularity has given rise to promblems of congestion and erosion');
+        data.append('video', video, 'record.webm');
+  
+        console.log(data);
+  
+        await axios.post('https://signs-5n09.onrender.com/sign', data)
+          .then(res => {
+            if(res.data.status === true) {
+              setStatus("success");
+              setMessage(res.data.message);
+              alert(res.data.message);
+            } else if(res.data.status === false) {
+              setStatus("failed");
+              setMessage(res.data.message);
+              alert(res.data.message);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            setMessage("Something went wrong, pls try again");
+            alert("Something went wrong, pls try again");
+          })
+      } else {
+        alert("Record video for the given text")
+      }
+    } else {
+      alert("Login to contribute!")
     }
   }
 

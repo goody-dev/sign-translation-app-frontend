@@ -10,6 +10,24 @@ const TranslateText = () => {
   const [playing, setPlaying] = useState([false]);
   const playerRef = useRef();
 
+  const maxVideoIndex = signVideos.length-1;
+  const [videoIndex, setVideoIndex] = useState(0);
+  const [onLastVideo, setOnLastVideo] = useState(false);
+  const [onFirstVideo, setOnFirstVideo] = useState(true);
+
+  useEffect(()=> {
+    videoIndex === 0? setOnFirstVideo(true): setOnFirstVideo(false);
+    videoIndex === maxVideoIndex? setOnLastVideo(true): setOnLastVideo(false);
+  }, [videoIndex])
+
+  const showNextVideo = () => {
+    !onLastVideo && setVideoIndex(videoIndex + 1);
+  }
+
+  const showPrevVideo = () => {
+    !onFirstVideo && setVideoIndex(videoIndex - 1);
+  }
+
   const fetchVideos = async()=> {
     await axios.get('https://signs-5n09.onrender.com/sign/all')
     .then(res => {
@@ -24,9 +42,10 @@ const TranslateText = () => {
 
   useEffect(() => {
     if(signVideos.length) {
-      playerRef.current.src = signVideos[4].videoUrl;
+      playerRef.current.src = signVideos[videoIndex].videoUrl;
+      playing && playerRef.current.pause();
     }
-  }, [signVideos])
+  }, [signVideos, videoIndex])
 
   const handlePlay = () => {
     playerRef.current.play();
@@ -65,13 +84,13 @@ const TranslateText = () => {
             </div>
           </div>
           <div className='flex flex-row justify-between'>
-            <button className='text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
-            <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Next <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
+            <button onClick={showPrevVideo} className={(onFirstVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
+            <button onClick={showNextVideo} className={(onLastVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Next <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
           </div>
         </div>
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
           <div className='flex flex-col items-center justify-center p-[var(--button-padding)] bg-[var(--white-background)] h-[50vh] w-[100%] sm:w-[100%]'>
-            <textarea className='text-center align-middle text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto'>Enter text here...</textarea>
+            <textarea className='text-center align-middle outline-none text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto' placeholder='Enter text here...'></textarea>
           </div>
           <div className='flex flex-row justify-end'>
             <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit<img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
