@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const ContributeMenu = () => {
   return (
-    <div className='block mt-[calc(var(--custom-gap)/2)] md:p-[var(--card-padding)] md:bg-[var(--white-background)] md:rounded-[var(--custom-radius)] CTM  md:absolute'>
+    <div className='block z-50 mt-[calc(var(--custom-gap)/2)] md:p-[var(--card-padding)] md:bg-[var(--white-background)] md:rounded-[var(--custom-radius)] CTM  md:absolute'>
       <ul className='flex flex-col items-end md:gap-[calc(var(--custom-gap)/2)] md:items-center'>
         <li>
           <Link to='/record-video'>Record Video</Link>

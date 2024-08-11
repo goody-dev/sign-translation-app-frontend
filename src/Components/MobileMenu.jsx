@@ -26,7 +26,7 @@ const MobileMenu = () => {
   }
 
   return (
-    <div className='block absolute w-[100%] max-w-[100vw] left-0 top-[72px] right-0 p-[1.5rem] bg-[var(--white-background)] sm:top-[91.19px] sm:p-[var(--custom-padding)] sm:py-[1.5rem]  md:hidden'>
+    <div className='block absolute z-50 w-[100%] max-w-[100vw] left-0 top-[72px] right-0 p-[1.5rem] bg-[var(--white-background)] sm:top-[91.19px] sm:p-[var(--custom-padding)] sm:py-[1.5rem]  md:hidden'>
       <nav className='flex flex-row justify-center w-[100%]'>
           <ul className='flex flex-col text-[1.25rem] items-end w-[100%] gap-[calc(var(--custom-gap)/2)]'>
             <li>

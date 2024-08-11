@@ -11,6 +11,7 @@ const ValidateEntry = () => {
 
   const [signVideos, setSignVideos] = useState([]);
   const [playing, setPlaying] = useState([false]);
+  const [rating, setRating] = useState(null);
 
   const playerRef = useRef();
 
@@ -28,7 +29,7 @@ const ValidateEntry = () => {
 
   useEffect(() => {
     if(signVideos.length) {
-      playerRef.current.src = signVideos[1].videoUrl;
+      playerRef.current.src = signVideos[1].videoUrls[0].videoUrl;
     }
   }, [signVideos])
 
@@ -40,6 +41,9 @@ const ValidateEntry = () => {
     playerRef.current.pause();
     setPlaying(false);
   }
+  const handleRating = (rate) => {
+    setRating(rate);
+  }
 
   return (
     <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] md:h-[calc(100vh-97.19px)] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)]'>
@@ -49,7 +53,7 @@ const ValidateEntry = () => {
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
         <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-          <div className='absolute z-50 self-end mb-[50vh] mr-[60px]'>
+          <div className='absolute self-end mb-[50vh] mr-[60px]'>
             <div className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
             <p>ASL</p>
             <img src={ArrowDown}/>
@@ -74,11 +78,11 @@ const ValidateEntry = () => {
         <div className='flex flex-row justify-between items-center w-[100%]'>
           <button className='text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-bold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
           <div className='flex flex-row flex-wrap font-semibold items-center gap-[calc(var(--inline-gap)/2)]'>
-              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>1</button>
-              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>2</button>
-              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>3</button>
-              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>4</button>
-              <button className='cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] bg-[var(--white-background)] rounded-[50%] text-center leading-[1.5rem]'>5</button>
+              <button onClick={()=>handleRating(1)} className={(rating === 1? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>1</button>
+              <button onClick={()=>handleRating(2)} className={(rating === 2? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>2</button>
+              <button onClick={()=>handleRating(3)} className={(rating === 3? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>3</button>
+              <button onClick={()=>handleRating(4)} className={(rating === 4? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>4</button>
+              <button onClick={()=>handleRating(5)} className={(rating === 5? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>5</button>
           </div>
           <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit <img className='h-[var(vh-icon)]' src={ArrowIcon}/></button>
         </div>

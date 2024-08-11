@@ -33,7 +33,7 @@ const TranslateText = () => {
     .then(res => {
       console.log(res.data);
       setSignVideos(res.data.data);
-    });
+    }).catch(err => console.log(err));
   }
 
   useEffect(()=> {
@@ -42,7 +42,8 @@ const TranslateText = () => {
 
   useEffect(() => {
     if(signVideos.length) {
-      playerRef.current.src = signVideos[videoIndex].videoUrl;
+      console.log(signVideos[videoIndex].videoUrls[0].videoUrl);
+      playerRef.current.src = signVideos[videoIndex].videoUrls[0].videoUrl;
       playing && playerRef.current.pause();
     }
   }, [signVideos, videoIndex])
@@ -66,7 +67,7 @@ const TranslateText = () => {
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
           <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-            <div className='absolute z-50 self-end mb-[50vh] mr-[60px]'>
+            <div className='absolute self-end mb-[50vh] mr-[60px]'>
               <div className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
               <p>ASL</p>
               <img src={ArrowDown}/>
