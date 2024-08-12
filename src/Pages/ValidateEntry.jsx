@@ -45,7 +45,7 @@ const ValidateEntry = () => {
 
   const [rating, setRating] = useState(null);
   const textId = signTranslations.length? signTranslations[translationIndex].id: null;
-  const videoId = signTranslations.length? signTranslations[translationIndex].videoUrls[0].id: null;
+  const videoId = signTranslations.length? signTranslations[translationIndex].videoUrls[videoIndex].id: null;
 
   const playerRef = useRef();
 
@@ -90,10 +90,11 @@ const ValidateEntry = () => {
   }
   const handleSubmit = async() => {
     const data = {
-      "textId":textId,
-      "videoId": videoId,
+      "textId": textId.toString(),
+      "videoId": videoId.toString(),
       "ratingNo": rating,
     }
+    console.log(data);
     if(rating && textId && videoId) {
       await axios.post('https://signs-5n09.onrender.com/rate', data)
       .then(res => {

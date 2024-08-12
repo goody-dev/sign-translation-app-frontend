@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Logo from '../assets/icons/LOGO.png'
 import ArrowDown from '../assets/icons/arrow-down.png'
-import UKLogo from '../assets/icons/united-kingdom-icon.svg'
+import NaijaLogo from '../assets/icons/nigeria-icon.svg'
 import ContributeMenu from './ContributeMenu.jsx'
 import { useAuth } from '../provider/authProvider.jsx'
 import MobileMenu from './MobileMenu.jsx'
@@ -59,7 +59,7 @@ const Header = () => {
           </ul>
         </nav>
         <button aria-label='Select language' className='hidden flex-row items-center gap-[calc(var(--inline-gap)/2)] sm:flex sm:justify-self-end'>
-          <img src={UKLogo} alt="language-icon" />
+          <img src={NaijaLogo} alt="language-icon" />
           <img src={ArrowDown} className='w-[var(--vh-icon)]' alt='arrow down icon'/>
         </button>
         <Link className='hidden sm:block  md:hidden' to="/signup"><button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)]'>Register</button></Link>
