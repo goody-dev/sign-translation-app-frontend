@@ -7,7 +7,7 @@ import axios from 'axios'
 
 import { useAuth } from '../provider/authProvider'
 
-const VideoRecorder = () => {
+const VideoRecorder = ({textId, currentText}) => {
   const { token } = useAuth();
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
@@ -37,7 +37,7 @@ const VideoRecorder = () => {
       mediaRecorder.addEventListener('dataavailable', ({data})=> {
         if (data.size > 0) {
           recordedChunks.push(data);
-          console.log("recordedChunk:", data);
+          // console.log("recordedChunk:", data);
         }
 
         if (promptedStopRecording && !recording) {
@@ -98,17 +98,17 @@ const VideoRecorder = () => {
   }
 
   const uploadRecord = async () => {
-    if(token && token !== "initial") {
+    // if(token && token !== "initial") {
       if(!recording && video) {
-        console.log(video);
+        console.log(currentText);
   
         const data = new FormData();
-        data.append('text', 'Increased popularity has given rise to promblems of congestion and erosion');
+        data.append('textId', textId);
         data.append('video', video, 'record.webm');
+        
+        //console.log(data);
   
-        console.log(data);
-  
-        await axios.post('https://signs-5n09.onrender.com/sign', data)
+        await axios.post('https://signs-5n09.onrender.com/video', data)
           .then(res => {
             if(res.data.status === true) {
               setStatus("success");
@@ -126,11 +126,11 @@ const VideoRecorder = () => {
             alert("Something went wrong, pls try again");
           })
       } else {
-        alert("Record video for the given text")
+        alert("Record video for the given text");
       }
-    } else {
-      alert("Login to contribute!")
-    }
+    // } else {
+    //   alert("Login to contribute!")
+    // }
   }
 
   return (

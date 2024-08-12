@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
@@ -6,11 +7,24 @@ import VideoRecorder from '../Features/VideoRecorder'
 
 
 const RecordVideo = () => {
-  const [givenTexts, setGivenTexts] = useState(["Increased popularity has given rise to problems of congestion and erosion", "Increased popularity has given rise to problems of social vices", "Technology has given rise to problems of social vices"]);
+  const [givenTexts, setGivenTexts] = useState([]);
   const maxTextIndex = givenTexts.length-1;
   const [textIndex, setTextIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
   const [onLastText, setOnLastText] = useState(false);
   const [onFirstText, setOnFirstText] = useState(true);
+
+  const fetchTexts = async()=> {
+    await axios.get('https://signs-5n09.onrender.com/text/all')
+    .then(res => {
+      console.log(res.data);
+      setGivenTexts(res.data.data);
+    }).catch(err => console.log(err));
+  }
+
+  useEffect(()=> {
+    fetchTexts();
+  }, [])
 
   useEffect(()=> {
     textIndex === 0? setOnFirstText(true): setOnFirstText(false);
@@ -32,10 +46,10 @@ const RecordVideo = () => {
         <p className='text-[1rem] text-[var(--input-color)]'>Capture your sign language translation for a given text</p>
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
-        <VideoRecorder/>
+        <VideoRecorder textId={givenTexts.length && givenTexts[textIndex].id} currentText={givenTexts.length && givenTexts[textIndex].text} />
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
           <div className='flex flex-col items-center justify-center p-[var(--button-padding)] bg-[var(--white-background)] h-[50vh] w-[100%] sm:w-[100%]'>
-            <p className='text-center text-[20px] font-semibold text-wrap'>{givenTexts[textIndex]}</p>
+            <p className='text-center text-[20px] font-semibold text-wrap'>{givenTexts.length? givenTexts[textIndex].text: "Loading..."}</p>
           </div>
           <div className='flex flex-row justify-between'>
             <button onClick={showPrevText} className={'bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]' + (onFirstText && " opacity-[0.3]")}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>

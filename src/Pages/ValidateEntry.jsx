@@ -3,35 +3,79 @@ import PlayIcon from '../assets/icons/play-circle.svg'
 import StopIcon from '../assets/icons/stop-circle.svg'
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import ArrowDown from '../assets/icons/filled-arrow-down.png'
-import ThumbsUp from '../assets/icons/like-icon.png'
-import ThumbsDown from '../assets/icons/dislike-icon.svg'
 import axios from 'axios'
+import { useAuth } from '../provider/authProvider'
 
 const ValidateEntry = () => {
-
-  const [signVideos, setSignVideos] = useState([]);
-  const [playing, setPlaying] = useState([false]);
-  const [rating, setRating] = useState(null);
-
-  const playerRef = useRef();
-
   const fetchVideos = async()=> {
     await axios.get('https://signs-5n09.onrender.com/sign/all')
     .then(res => {
-      console.log(res.data);
-      setSignVideos(res.data.data);
-    });
+      console.log(res.data.data);
+      setSignTranslations(res.data.data);
+      setTranslationIndex(0);
+      setVideoIndex(0);
+    }).catch(err => {
+      console.log(err);
+    })
   }
+
 
   useEffect(()=> {
     fetchVideos();
   }, [])
 
+  const { token } = useAuth();
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(null);
+
+  const [signTranslations, setSignTranslations] = useState([]);
+
+  const maxTranslationIndex = signTranslations.length - 1;
+  const [translationIndex, setTranslationIndex] = useState(null);
+  const [onLastTranslation, setOnLastTranslation] = useState(false);
+  const [onFirstTranslation, setOnFirstTranslation] = useState(true);
+
+  const signVideos = signTranslations.length && signTranslations[translationIndex].videoUrls;
+  const [playing, setPlaying] = useState([false]);
+
+  const maxVideoIndex = signVideos.length? signVideos.length - 1: null;
+  const [videoIndex, setVideoIndex] = useState(null);
+  const [onLastVideo, setOnLastVideo] = useState(false);
+  const [onFirstVideo, setOnFirstVideo] = useState(true);
+
+  const [rating, setRating] = useState(null);
+  const textId = signTranslations.length? signTranslations[translationIndex].id: null;
+  const videoId = signTranslations.length? signTranslations[translationIndex].videoUrls[0].id: null;
+
+  const playerRef = useRef();
+
+  useEffect(()=> {
+    videoIndex === 0? setOnFirstVideo(true): setOnFirstVideo(false);
+    videoIndex === maxVideoIndex? setOnLastVideo(true): setOnLastVideo(false);
+  }, [videoIndex])
+
+  useEffect(()=> {
+    translationIndex === 0? setOnFirstTranslation(true): setOnFirstTranslation(false);
+    translationIndex === maxTranslationIndex? setOnLastTranslation(true): setOnLastTranslation(false);
+  }, [translationIndex])
+
+
+
+  const showNextTranslation = () => {
+    !onLastVideo && setVideoIndex(videoIndex + 1);
+    (onLastVideo && !onLastTranslation) && (setTranslationIndex(translationIndex + 1) && setVideoIndex(0));
+  }
+
+  const showPrevTranslation = () => {
+    !onFirstVideo && setVideoIndex(videoIndex - 1);
+    (onFirstVideo && !onFirstTranslation) && (setTranslationIndex(translationIndex - 1) && setVideoIndex(-1));
+  }
+
   useEffect(() => {
-    if(signVideos.length) {
-      playerRef.current.src = signVideos[1].videoUrls[0].videoUrl;
+    if(signTranslations.length && signVideos.length) {
+      playerRef.current.src = signVideos[videoIndex].videoUrl;
     }
-  }, [signVideos])
+  }, [videoIndex, translationIndex])
 
   const handlePlay = () => {
     playerRef.current.play();
@@ -43,6 +87,36 @@ const ValidateEntry = () => {
   }
   const handleRating = (rate) => {
     setRating(rate);
+  }
+  const handleSubmit = async() => {
+    const data = {
+      "textId":textId,
+      "videoId": videoId,
+      "ratingNo": rating,
+    }
+    if(rating && textId && videoId) {
+      await axios.post('https://signs-5n09.onrender.com/rate', data)
+      .then(res => {
+        if(res.data.status === true) {
+          setStatus("success");
+          setMessage(res.data.message);
+          alert(res.data.message);          
+          showNextTranslation();
+          setRating(null);
+        } else if(res.data.status === false) {
+          setStatus("failed");
+          setMessage(res.data.message);
+          alert(res.data.message);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        setMessage("Something went wrong, pls try again");
+        alert("Something went wrong, pls try again");
+      })
+    } else {
+      alert("Rate a translation");
+    }
   }
 
   return (
@@ -71,12 +145,12 @@ const ValidateEntry = () => {
           </div>
         </div>
         <div className='flex flex-col items-center justify-center p-[var(--button-padding)] bg-[var(--white-background)] h-[50vh] w-[100%] sm:w-[100%]'>
-          <p className='text-center text-[20px] font-semibold text-wrap'>Increased popularity has given rise to problems of congestion and erosion</p>
+          <p className='text-center text-[20px] font-semibold text-wrap'>{signTranslations.length? signTranslations[translationIndex].text: "Loading..."}</p>
         </div>
       </div>
       <div className='flex flex-col items-center w-[100%] gap-[calc(var(custom-gap)/2)]'>
         <div className='flex flex-row justify-between items-center w-[100%]'>
-          <button className='text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-bold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
+          <button onClick={showPrevTranslation} className={((onFirstTranslation && onFirstVideo) && 'opacity-[0.3]') + ' text-[1rem] bg-[var(--blue-background)]  p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-bold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
           <div className='flex flex-row flex-wrap font-semibold items-center gap-[calc(var(--inline-gap)/2)]'>
               <button onClick={()=>handleRating(1)} className={(rating === 1? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>1</button>
               <button onClick={()=>handleRating(2)} className={(rating === 2? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>2</button>
@@ -84,7 +158,7 @@ const ValidateEntry = () => {
               <button onClick={()=>handleRating(4)} className={(rating === 4? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>4</button>
               <button onClick={()=>handleRating(5)} className={(rating === 5? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>5</button>
           </div>
-          <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit <img className='h-[var(vh-icon)]' src={ArrowIcon}/></button>
+          <button onClick={handleSubmit} className={((onLastTranslation && onLastVideo) && 'opacity-[0.3]') + ' text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Submit <img className='h-[var(vh-icon)]' src={ArrowIcon}/></button>
         </div>
         <p className='text-[var(--feedback-text)] text-[19px] font-normal self-center'>Send us a feedback by selecting a rating above</p>
       </div>

@@ -4,8 +4,14 @@ import StopIcon from '../assets/icons/stop-circle.svg'
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import ArrowDown from '../assets/icons/filled-arrow-down.png'
 import axios from 'axios'
+import { useAuth } from '../provider/authProvider'
 
 const TranslateText = () => {
+  const { token } = useAuth();
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(null);
+
+  const [inputText, setInputText] = useState("");
   const [signVideos, setSignVideos] = useState([]);
   const [playing, setPlaying] = useState([false]);
   const playerRef = useRef();
@@ -29,7 +35,7 @@ const TranslateText = () => {
   }
 
   const fetchVideos = async()=> {
-    await axios.get('https://signs-5n09.onrender.com/sign/all')
+    await axios.get('https://signs-5n09.onrender.com/video/all')
     .then(res => {
       console.log(res.data);
       setSignVideos(res.data.data);
@@ -42,8 +48,8 @@ const TranslateText = () => {
 
   useEffect(() => {
     if(signVideos.length) {
-      console.log(signVideos[videoIndex].videoUrls[0].videoUrl);
-      playerRef.current.src = signVideos[videoIndex].videoUrls[0].videoUrl;
+      //console.log(signVideos[videoIndex].videoUrl);
+      playerRef.current.src = signVideos[videoIndex].videoUrl;
       playing && playerRef.current.pause();
     }
   }, [signVideos, videoIndex])
@@ -55,6 +61,35 @@ const TranslateText = () => {
   const handlePause = () => {
     playerRef.current.pause();
     setPlaying(false);
+  }
+
+  const handleInputText = (event) => {
+    setInputText(event.target.value);
+  }
+
+  const handleSubmit = async () => {
+    //alert(inputText);
+    await axios.post('https://signs-5n09.onrender.com/text', {
+      videoId: signVideos[videoIndex].id,
+      text: inputText
+    })
+    .then(res => {
+      if(res.data.status === true) {
+        setStatus("success");
+        setMessage(res.data.message);
+        alert(res.data.message);
+        setInputText("");
+      } else if(res.data.status === false) {
+        setStatus("failed");
+        setMessage(res.data.message);
+        alert(res.data.message);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      setMessage("Something went wrong, pls try again");
+      alert("Something went wrong, pls try again");
+    })
   }
 
 
@@ -85,16 +120,16 @@ const TranslateText = () => {
             </div>
           </div>
           <div className='flex flex-row justify-between'>
-            <button onClick={showPrevVideo} className={(onFirstVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] opacity-[0.3] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
+            <button onClick={showPrevVideo} className={(onFirstVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
             <button onClick={showNextVideo} className={(onLastVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Next <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
           </div>
         </div>
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
           <div className='flex flex-col items-center justify-center p-[var(--button-padding)] bg-[var(--white-background)] h-[50vh] w-[100%] sm:w-[100%]'>
-            <textarea className='text-center align-middle outline-none text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto' placeholder='Enter text here...'></textarea>
+            <textarea onChange={(event) => handleInputText(event)} value={inputText} className='text-center align-middle outline-none text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto' placeholder='Enter text here...'></textarea>
           </div>
           <div className='flex flex-row justify-end'>
-            <button className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit<img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
+            <button onClick={handleSubmit} className='text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>Submit<img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
           </div>
         </div>
       </div>
