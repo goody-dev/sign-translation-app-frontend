@@ -29,53 +29,64 @@ const ValidateEntry = () => {
   const [status, setStatus] = useState(null);
 
   const [signTranslations, setSignTranslations] = useState([]);
-
-  const maxTranslationIndex = signTranslations.length - 1;
-  const [translationIndex, setTranslationIndex] = useState(null);
+  const [translationIndex, setTranslationIndex] = useState(0);
   const [onLastTranslation, setOnLastTranslation] = useState(false);
   const [onFirstTranslation, setOnFirstTranslation] = useState(true);
 
-  const signVideos = signTranslations.length && signTranslations[translationIndex].videoUrls;
-  const [playing, setPlaying] = useState([false]);
+  const [playing, setPlaying] = useState(false);
 
-  const maxVideoIndex = signVideos.length? signVideos.length - 1: null;
-  const [videoIndex, setVideoIndex] = useState(null);
+  const [videoIndex, setVideoIndex] = useState(0);
   const [onLastVideo, setOnLastVideo] = useState(false);
   const [onFirstVideo, setOnFirstVideo] = useState(true);
-
+  
   const [rating, setRating] = useState(null);
-  const textId = signTranslations.length? signTranslations[translationIndex].id: null;
-  const videoId = signTranslations.length? signTranslations[translationIndex].videoUrls[videoIndex].id: null;
-
   const playerRef = useRef();
 
-  useEffect(()=> {
-    videoIndex === 0? setOnFirstVideo(true): setOnFirstVideo(false);
-    videoIndex === maxVideoIndex? setOnLastVideo(true): setOnLastVideo(false);
-  }, [videoIndex])
+  const signVideos = signTranslations.length? signTranslations[translationIndex]?.videoUrls: [];
+  const maxTranslationIndex = signTranslations.length - 1;
+  const maxVideoIndex = signVideos.length? signVideos.length - 1: null;
+  const textId = signTranslations.length? signTranslations[translationIndex]?.id: null;
+  const videoId = signVideos.length? signVideos[videoIndex]?.id: null;
 
   useEffect(()=> {
-    translationIndex === 0? setOnFirstTranslation(true): setOnFirstTranslation(false);
-    translationIndex === maxTranslationIndex? setOnLastTranslation(true): setOnLastTranslation(false);
-  }, [translationIndex])
+    console.log(textId, ",", videoId, translationIndex);
+  }, [textId, videoId])
 
+  useEffect(()=> {
+    console.log(signVideos);
+    setOnFirstVideo(videoIndex === 0);
+    setOnLastVideo(videoIndex === maxVideoIndex);
+  }, [videoIndex, maxVideoIndex])
 
+  useEffect(()=> {
+    setOnFirstTranslation(translationIndex === 0);
+    setOnLastTranslation(translationIndex === maxTranslationIndex);
+  }, [translationIndex, maxTranslationIndex])
 
   const showNextTranslation = () => {
-    !onLastVideo && setVideoIndex(videoIndex + 1);
-    (onLastVideo && !onLastTranslation) && (setTranslationIndex(translationIndex + 1) && setVideoIndex(0));
+    console.log(signVideos);
+    if(!onLastVideo) {
+      setVideoIndex(videoIndex + 1);
+    } else if (!onLastTranslation)  {
+      setTranslationIndex(translationIndex + 1);
+      setVideoIndex(0);
+    }
   }
 
   const showPrevTranslation = () => {
-    !onFirstVideo && setVideoIndex(videoIndex - 1);
-    (onFirstVideo && !onFirstTranslation) && (setTranslationIndex(translationIndex - 1) && setVideoIndex(-1));
+    if(!onFirstVideo) {
+      setVideoIndex(videoIndex - 1);
+    } else if(!onFirstTranslation && videoIndex === 0) {
+      setTranslationIndex(translationIndex - 1);
+      setVideoIndex(maxVideoIndex);
+    }
   }
 
   useEffect(() => {
     if(signTranslations.length && signVideos.length) {
-      playerRef.current.src = signVideos[videoIndex].videoUrl;
+      playerRef.current.src = signVideos[videoIndex]?.videoUrl;
     }
-  }, [videoIndex, translationIndex])
+  }, [videoIndex, translationIndex, signTranslations, signVideos])
 
   const handlePlay = () => {
     playerRef.current.play();
@@ -94,30 +105,36 @@ const ValidateEntry = () => {
       "videoId": videoId.toString(),
       "ratingNo": rating,
     }
-    console.log(data);
-    if(rating && textId && videoId) {
-      await axios.post('https://signs-5n09.onrender.com/rate', data)
-      .then(res => {
-        if(res.data.status === true) {
-          setStatus("success");
-          setMessage(res.data.message);
-          alert(res.data.message);          
-          showNextTranslation();
-          setRating(null);
-        } else if(res.data.status === false) {
-          setStatus("failed");
-          setMessage(res.data.message);
-          alert(res.data.message);
+    //console.log(data);
+    if(token && token !== "initial") {
+      if(rating && textId && videoId) {
+        try {
+          await axios.post('https://signs-5n09.onrender.com/rate', data)
+          .then(res => {
+            if(res.data.status === true) {
+              setStatus("success");
+              setMessage(res.data.message);
+              alert(res.data.message);          
+              showNextTranslation();
+              setRating(null);
+            } else if(res.data.status === false) {
+              setStatus("failed");
+              setMessage(res.data.message);
+              alert(res.data.message);
+            }
+          })
+        } catch (err) {
+          console.log(err);
+          setMessage("Something went wrong, pls try again");
+          alert("Something went wrong, pls try again");
         }
-      })
-      .catch(err => {
-        console.log(err);
-        setMessage("Something went wrong, pls try again");
-        alert("Something went wrong, pls try again");
-      })
+      } else {
+        alert("Rate a translation");
+      }
     } else {
-      alert("Rate a translation");
+      alert("Login to contribute!");
     }
+
   }
 
   return (

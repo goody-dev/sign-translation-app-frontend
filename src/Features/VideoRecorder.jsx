@@ -98,7 +98,7 @@ const VideoRecorder = ({textId, currentText}) => {
   }
 
   const uploadRecord = async () => {
-    // if(token && token !== "initial") {
+    if(token && token !== "initial") {
       if(!recording && video) {
         console.log(currentText);
   
@@ -128,9 +128,9 @@ const VideoRecorder = ({textId, currentText}) => {
       } else {
         alert("Record video for the given text");
       }
-    // } else {
-    //   alert("Login to contribute!")
-    // }
+    } else {
+      alert("Login to contribute!")
+    }
   }
 
   return (

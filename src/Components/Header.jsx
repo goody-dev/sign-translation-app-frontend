@@ -62,7 +62,7 @@ const Header = () => {
           <img src={NaijaLogo} alt="language-icon" />
           <img src={ArrowDown} className='w-[var(--vh-icon)]' alt='arrow down icon'/>
         </button>
-        <Link className='hidden sm:block  md:hidden' to="/signup"><button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)]'>Register</button></Link>
+        <Link className='hidden sm:block md:hidden' to="/signup"><button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)]'>Register</button></Link>
         <div>
         <button onClick={handleMenuClick} className='md:hidden'>Menu</button>
         {showMobileMenu && <MobileMenu/>}

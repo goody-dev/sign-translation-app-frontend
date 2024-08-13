@@ -69,27 +69,32 @@ const TranslateText = () => {
 
   const handleSubmit = async () => {
     //alert(inputText);
-    await axios.post('https://signs-5n09.onrender.com/text', {
-      videoId: signVideos[videoIndex].id,
-      text: inputText
-    })
-    .then(res => {
-      if(res.data.status === true) {
-        setStatus("success");
-        setMessage(res.data.message);
-        alert(res.data.message);
-        setInputText("");
-      } else if(res.data.status === false) {
-        setStatus("failed");
-        setMessage(res.data.message);
-        alert(res.data.message);
+    if(token && token !== "initial") {
+      try {
+        await axios.post('https://signs-5n09.onrender.com/text', {
+          videoId: signVideos[videoIndex].id,
+          text: inputText
+        })
+        .then(res => {
+          if(res.data.status === true) {
+            setStatus("success");
+            setMessage(res.data.message);
+            alert(res.data.message);
+            setInputText("");
+          } else if(res.data.status === false) {
+            setStatus("failed");
+            setMessage(res.data.message);
+            alert(res.data.message);
+          }
+        })
+      } catch (err) {
+        console.log(err);
+        setMessage("Something went wrong, pls try again");
+        alert("Something went wrong, pls try again");
       }
-    })
-    .catch(err => {
-      console.log(err);
-      setMessage("Something went wrong, pls try again");
-      alert("Something went wrong, pls try again");
-    })
+    } else {
+      alert("Login to contribute!");
+    }
   }
 
 
