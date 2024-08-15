@@ -16,6 +16,7 @@ const ContributeText = () => {
     //alert(inputText);
     if(token && token !== "initial") {
       if(inputText !== "") {
+        setStatus("pending");
         try {
           await axios.post('https://signs-5n09.onrender.com/text', {
             text: inputText
