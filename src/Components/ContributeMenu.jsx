@@ -16,6 +16,14 @@ const ContributeMenu = () => {
         <li>
           <Link to='/validate-entry'>Validate Entry</Link>
         </li>
+        <hr></hr>
+        <li>
+          <Link to='/contribute-video'>Contribute Video</Link>
+        </li>
+        <hr></hr>
+        <li>
+          <Link to='/contribute-text'>Contribute Text</Link>
+        </li>
       </ul>
     </div>
   )

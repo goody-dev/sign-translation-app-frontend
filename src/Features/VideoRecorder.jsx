@@ -103,7 +103,7 @@ const VideoRecorder = ({textId, currentText}) => {
         console.log(currentText);
   
         const data = new FormData();
-        data.append('textId', textId);
+        data.append('textId', textId?textId:"");
         data.append('video', video, 'record.webm');
         
         //console.log(data);
