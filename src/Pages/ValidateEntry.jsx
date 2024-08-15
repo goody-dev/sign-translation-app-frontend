@@ -108,6 +108,7 @@ const ValidateEntry = () => {
     //console.log(data);
     if(token && token !== "initial") {
       if(rating && textId && videoId) {
+        setStatus("pending");
         try {
           await axios.post('https://signs-5n09.onrender.com/rate', data)
           .then(res => {
@@ -176,7 +177,7 @@ const ValidateEntry = () => {
               <button onClick={()=>handleRating(4)} className={(rating === 4? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>4</button>
               <button onClick={()=>handleRating(5)} className={(rating === 5? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>5</button>
           </div>
-          <button onClick={handleSubmit} className={((onLastTranslation && onLastVideo) && 'opacity-[0.3]') + ' text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Submit <img className='h-[var(vh-icon)]' src={ArrowIcon}/></button>
+          <button onClick={handleSubmit} className={(status === 'pending'? 'opacity-[0.3]': 'bg-[var(--blue-background)]') + ((onLastTranslation && onLastVideo) && ' opacity-[0.3]') + ' text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Submit <img className='h-[var(vh-icon)]' src={ArrowIcon}/></button>
         </div>
         <p className='text-[var(--feedback-text)] text-[19px] font-normal self-center'>Send us a feedback by selecting a rating above</p>
       </div>
