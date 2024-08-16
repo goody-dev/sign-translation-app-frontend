@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import UploadIcon from '../assets/icons/send-square.svg'
 import { useAuth } from '../provider/authProvider';
+import axios from 'axios'
 
 const ContributeText = () => {
   const { token } = useAuth();
@@ -14,7 +15,7 @@ const ContributeText = () => {
 
   const handleSubmit = async () => {
     //alert(inputText);
-    if(token && token !== "initial") {
+    // if(token && token !== "initial") {
       if(inputText !== "") {
         setStatus("pending");
         try {
@@ -41,9 +42,9 @@ const ContributeText = () => {
       } else {
         alert("Enter text!")
       }
-    } else {
-      alert("Login to contribute!");
-    }
+    // } else {
+    //   alert("Login to contribute!");
+    // }
   }
 
   return (

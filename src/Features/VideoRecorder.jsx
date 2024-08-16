@@ -122,6 +122,7 @@ const VideoRecorder = ({textId, currentText}) => {
           })
           .catch(err => {
             console.log(err);
+            setStatus("failed");
             setMessage("Something went wrong, pls try again");
             alert("Something went wrong, pls try again");
           })
