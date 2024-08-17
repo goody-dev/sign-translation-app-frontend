@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+// import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import './App.css'
 
 import AuthProvider, { useAuth } from './provider/authProvider.jsx'
+import Routes from './router/routes.jsx'
 
 import Header from './Components/Header.jsx'
 import Home from './Pages/Home.jsx'
@@ -18,9 +19,8 @@ import TranslateVideo from './Pages/TranslateVideo.jsx';
 function App() {
   return (
     <AuthProvider>
-      <Header/>
       <Routes>
-        <Route path='/' element={<Home/>}/>
+        {/* <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/signin' element={<SignIn/>} />
@@ -28,7 +28,7 @@ function App() {
         <Route path='/translate-video' element={<TranslateVideo/>} />
         <Route path='/validate-entry' element={<ValidateEntry/>} />
         <Route path='/contribute-text' element={<ContributeText/>} />
-        <Route path='/contribute-video' element={<ContributeVideo/>} />
+        <Route path='/contribute-video' element={<ContributeVideo/>} /> */}
       </Routes>
     </AuthProvider>
   )

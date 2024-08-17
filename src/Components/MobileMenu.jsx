@@ -3,15 +3,48 @@ import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../provider/authProvider.jsx'
 import ArrowDown from '../assets/icons/arrow-down.png'
 import ContributeMenu from './ContributeMenu.jsx'
+import SubMenu from './SubMenu.jsx'
 
 
 const MobileMenu = () => {
+  const translateMenu = [
+    {
+      text: "Video",
+      link: "/user/translate-video"
+    },
+    {
+      text: "Text",
+      link: "/user/translate-text"
+    }
+  ];
+
+  const contributeMenu = [
+    {
+      text: "Video",
+      link: "/user/contribute-video"
+    },
+    {
+      text: "Text",
+      link: "/user/contribute-text"
+    },
+    // {
+    //   text: "Video and Text",
+    //   link: "/contribute-video-text"
+    // }
+  ]
+
   const { token, handleToken } = useAuth();
   const [showContrMenu, setShowContrMenu] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showTranslateMenu, setShowTranslateMenu] = useState(false);
 
   const handleContrClick = () => {
-      setShowContrMenu(!showContrMenu);
+    setShowContrMenu(!showContrMenu);
+    setShowTranslateMenu(false);
+  }
+
+  const handleTranslateClick = () => {
+    setShowTranslateMenu(!showTranslateMenu);
+    setShowContrMenu(false);
   }
 
   const url = useLocation();
@@ -34,14 +67,20 @@ const MobileMenu = () => {
             </li>
             <li>
               <button onClick={handleContrClick} className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] leading-[1rem]'>Contribute<img src={ArrowDown} className={'w-[var(--vh-icon)] ' + (showContrMenu && 'rotate-[180deg]')} alt='arrow down icon'/></button>
-              {showContrMenu && <ContributeMenu />}
+              {showContrMenu && <SubMenu menu={contributeMenu} />}
             </li>
             <li>
-              {token?<button onClick={logout}>Logout</button>:<Link to="/signin">Login</Link>}
+              <button onClick={handleTranslateClick} className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] leading-[1rem]'>Translate<img src={ArrowDown} className={'w-[var(--vh-icon)] ' + (showTranslateMenu && 'rotate-[180deg]')} alt='arrow down icon'/></button>
+              {showTranslateMenu && <SubMenu menu={translateMenu} />}
             </li>
-            <li className='sm:hidden'>
-              <Link to="/signup"><button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)]'>Register</button></Link>
-            </li>
+            {url !== "/user" && <>
+              <li>
+                {token && token!=="initial"?<button onClick={logout}>Logout</button>:<Link to="/signin">Login</Link>}
+              </li>
+              <li className='sm:hidden'>
+                <Link to="/signup"><button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)]'>Register</button></Link>
+              </li>
+            </>}
           </ul>
         </nav>
     </div>

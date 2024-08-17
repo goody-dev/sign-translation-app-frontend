@@ -13,22 +13,22 @@ const Header = () => {
   const translateMenu = [
     {
       text: "Video",
-      link: "/translate-video"
+      link: "/user/translate-video"
     },
     {
       text: "Text",
-      link: "/translate-text"
+      link: "/user/translate-text"
     }
   ];
 
   const contributeMenu = [
     {
       text: "Video",
-      link: "/contribute-video"
+      link: "/user/contribute-video"
     },
     {
       text: "Text",
-      link: "/contribute-text"
+      link: "/user/contribute-text"
     },
     // {
     //   text: "Video and Text",
@@ -89,12 +89,16 @@ const Header = () => {
               <button onClick={handleTranslateClick} className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] md:leading-[1rem]'>Translate<img src={ArrowDown} className={'w-[var(--vh-icon)] ' + (showTranslateMenu && 'rotate-[180deg]')} alt='arrow down icon'/></button>
               {showTranslateMenu && <SubMenu menu={translateMenu} />}
             </li>
-            <li>
-              {token && token !== "initial"?<button onClick={logout}>Logout</button>:<Link to="/signin">Login</Link>}
-            </li>
-            <li>
-              <Link to="/signup"><button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)]'>Register</button></Link>
-            </li>
+            {url !== "/user" && 
+              <>
+                <li>
+                  {token && token !== "initial"?<button onClick={logout}>Logout</button>:<Link to="/signin">Login</Link>}
+                </li>
+                <li>
+                  <Link to="/signup"><button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)]'>Register</button></Link>
+                </li>
+              </>
+            }
           </ul>
         </nav>
         <button aria-label='Select language' className='hidden flex-row items-center gap-[calc(var(--inline-gap)/2)] sm:flex sm:justify-self-end'>

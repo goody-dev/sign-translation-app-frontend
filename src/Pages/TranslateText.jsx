@@ -6,7 +6,7 @@ import VideoRecorder from '../Features/VideoRecorder'
 
 
 
-const RecordVideo = () => {
+const TranslateText = () => {
   const [givenTexts, setGivenTexts] = useState([]);
   const maxTextIndex = givenTexts.length-1;
   const [textIndex, setTextIndex] = useState(0);
@@ -62,4 +62,4 @@ const RecordVideo = () => {
   )
 }
 
-export default RecordVideo
+export default TranslateText
