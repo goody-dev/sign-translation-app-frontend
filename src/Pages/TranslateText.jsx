@@ -1,141 +1,60 @@
-import React, { useEffect, useRef, useState } from 'react'
-import PlayIcon from '../assets/icons/play-circle.svg'
-import StopIcon from '../assets/icons/stop-circle.svg'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
-import ArrowDown from '../assets/icons/filled-arrow-down.png'
-import axios from 'axios'
-import { useAuth } from '../provider/authProvider'
+import VideoRecorder from '../Features/VideoRecorder'
 
-const TranslateText = () => {
-  const { token } = useAuth();
-  const [message, setMessage] = useState('');
-  const [status, setStatus] = useState(null);
 
-  const [inputText, setInputText] = useState("");
-  const [signVideos, setSignVideos] = useState([]);
-  const [playing, setPlaying] = useState([false]);
-  const playerRef = useRef();
 
-  const maxVideoIndex = signVideos.length-1;
-  const [videoIndex, setVideoIndex] = useState(0);
-  const [onLastVideo, setOnLastVideo] = useState(false);
-  const [onFirstVideo, setOnFirstVideo] = useState(true);
+const RecordVideo = () => {
+  const [givenTexts, setGivenTexts] = useState([]);
+  const maxTextIndex = givenTexts.length-1;
+  const [textIndex, setTextIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [onLastText, setOnLastText] = useState(false);
+  const [onFirstText, setOnFirstText] = useState(true);
 
-  useEffect(()=> {
-    videoIndex === 0? setOnFirstVideo(true): setOnFirstVideo(false);
-    videoIndex === maxVideoIndex? setOnLastVideo(true): setOnLastVideo(false);
-  }, [videoIndex])
-
-  const showNextVideo = () => {
-    !onLastVideo && setVideoIndex(videoIndex + 1);
-  }
-
-  const showPrevVideo = () => {
-    !onFirstVideo && setVideoIndex(videoIndex - 1);
-  }
-
-  const fetchVideos = async()=> {
-    await axios.get('https://signs-5n09.onrender.com/video/all')
+  const fetchTexts = async()=> {
+    await axios.get('https://signs-5n09.onrender.com/text/all')
     .then(res => {
       console.log(res.data);
-      setSignVideos(res.data.data);
+      setGivenTexts(res.data.data);
     }).catch(err => console.log(err));
   }
 
   useEffect(()=> {
-    fetchVideos();
+    fetchTexts();
   }, [])
 
-  useEffect(() => {
-    if(signVideos.length) {
-      //console.log(signVideos[videoIndex].videoUrl);
-      playerRef.current.src = signVideos[videoIndex].videoUrl;
-      playing && playerRef.current.pause();
-    }
-  }, [signVideos, videoIndex])
+  useEffect(()=> {
+    textIndex === 0? setOnFirstText(true): setOnFirstText(false);
+    textIndex === maxTextIndex? setOnLastText(true): setOnLastText(false);
+  }, [textIndex])
 
-  const handlePlay = () => {
-    playerRef.current.play();
-    setPlaying(true);
-  }
-  const handlePause = () => {
-    playerRef.current.pause();
-    setPlaying(false);
+  const showNextText = () => {
+    !onLastText && setTextIndex(textIndex + 1);
   }
 
-  const handleInputText = (event) => {
-    setInputText(event.target.value);
+  const showPrevText = () => {
+    !onFirstText && setTextIndex(textIndex - 1);
   }
-
-  const handleSubmit = async () => {
-    //alert(inputText);
-    if(token && token !== "initial") {
-      setStatus("pending");
-      try {
-        await axios.post('https://signs-5n09.onrender.com/text', {
-          videoId: signVideos[videoIndex].id,
-          text: inputText
-        })
-        .then(res => {
-          if(res.data.status === true) {
-            setStatus("success");
-            setMessage(res.data.message);
-            alert(res.data.message);
-            setInputText("");
-          } else if(res.data.status === false) {
-            setStatus("failed");
-            setMessage(res.data.message);
-            alert(res.data.message);
-          }
-        })
-      } catch (err) {
-        console.log(err);
-        setMessage("Something went wrong, pls try again");
-        alert("Something went wrong, pls try again");
-      }
-    } else {
-      alert("Login to contribute!");
-    }
-  }
-
 
   return (
-    <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)] md:h-[calc(100vh-97.19px)]'>
+    <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] md:h-[calc(100vh-97.19px)] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)]'>
       <div className='flex flex-col'>
-        <h1 className='font-bold text-[2rem]'>Translate Video</h1>
-        <p className='text-[1rem] text-[var(--input-color)]'>Type in the text translation for the given video</p>
+        <h1 className='font-bold text-[2rem]'>Record Translation</h1>
+        <p className='text-[1rem] text-[var(--input-color)]'>Capture your sign language translation for a given text</p>
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
-        <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
-          <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-            <div className='absolute self-end mb-[50vh] mr-[60px]'>
-              <div className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
-              <p>ASL</p>
-              <img src={ArrowDown}/>
-              </div>
-            </div>
-            <video ref={playerRef} className='h-[100%] w-[100%]'>
-            </video>
-            <div className='absolute flex flex-row self-center gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
-              <button onClick={handlePlay}>
-                <img src={PlayIcon} className='cursor-pointer'/>
-              </button>
-              <button onClick={handlePause}>
-                <img src={StopIcon} className='cursor-pointer'/>
-              </button>
-            </div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <button onClick={showPrevVideo} className={(onFirstVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
-            <button onClick={showNextVideo} className={(onLastVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Next <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
-          </div>
-        </div>
+        <VideoRecorder textId={givenTexts.length && givenTexts[textIndex].id} currentText={givenTexts.length && givenTexts[textIndex].text} />
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
           <div className='flex flex-col items-center justify-center p-[var(--button-padding)] bg-[var(--white-background)] h-[50vh] w-[100%] sm:w-[100%]'>
-            <textarea onChange={(event) => handleInputText(event)} value={inputText} className='text-center align-middle outline-none text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto' placeholder='Enter text here...'></textarea>
+            <p className='text-center text-[20px] font-semibold text-wrap'>{givenTexts.length? givenTexts[textIndex].text: "Loading..."}</p>
           </div>
-          <div className='flex flex-row justify-end'>
-            <button onClick={handleSubmit} className={(status === 'pending'? 'opacity-[0.3]': 'bg-[var(--blue-background)]') + ' text-[1rem] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Submit<img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
+          <div className='flex flex-row justify-between'>
+            <button onClick={showPrevText} className={'bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]' + (onFirstText && " opacity-[0.3]")}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
+            <button onClick={showNextText} className={'underline' + (onLastText && ' opacity-[0.3]')}>Skip</button>
+            <button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>End <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
           </div>
         </div>
       </div>
@@ -143,4 +62,4 @@ const TranslateText = () => {
   )
 }
 
-export default TranslateText
+export default RecordVideo

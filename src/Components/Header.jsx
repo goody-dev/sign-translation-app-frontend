@@ -6,15 +6,49 @@ import NaijaLogo from '../assets/icons/nigeria-icon.svg'
 import ContributeMenu from './ContributeMenu.jsx'
 import { useAuth } from '../provider/authProvider.jsx'
 import MobileMenu from './MobileMenu.jsx'
+import SubMenu from './SubMenu.jsx'
 
 
 const Header = () => {
+  const translateMenu = [
+    {
+      text: "Video",
+      link: "/translate-video"
+    },
+    {
+      text: "Text",
+      link: "/translate-text"
+    }
+  ];
+
+  const contributeMenu = [
+    {
+      text: "Video",
+      link: "/contribute-video"
+    },
+    {
+      text: "Text",
+      link: "/contribute-text"
+    },
+    // {
+    //   text: "Video and Text",
+    //   link: "/contribute-video-text"
+    // }
+  ]
+
   const { token, handleToken } = useAuth();
   const [showContrMenu, setShowContrMenu] = useState(false);
+  const [showTranslateMenu, setShowTranslateMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   
   const handleContrClick = () => {
     setShowContrMenu(!showContrMenu);
+    setShowTranslateMenu(false);
+  }
+
+  const handleTranslateClick = () => {
+    setShowTranslateMenu(!showTranslateMenu);
+    setShowContrMenu(false);
   }
 
   const handleMenuClick = () => {
@@ -26,6 +60,7 @@ const Header = () => {
 
   useEffect(()=>{
     setShowContrMenu(false);
+    setShowTranslateMenu(false);
     setShowMobileMenu(false);
   }, [currentPath])
 
@@ -48,7 +83,11 @@ const Header = () => {
             </li>
             <li className='flex flex-col items-end md:block'>
               <button onClick={handleContrClick} className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] md:leading-[1rem]'>Contribute<img src={ArrowDown} className={'w-[var(--vh-icon)] ' + (showContrMenu && 'rotate-[180deg]')} alt='arrow down icon'/></button>
-              {showContrMenu && <ContributeMenu />}
+              {showContrMenu && <SubMenu menu={contributeMenu} />}
+            </li>
+            <li className='flex flex-col items-end md:block'>
+              <button onClick={handleTranslateClick} className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] md:leading-[1rem]'>Translate<img src={ArrowDown} className={'w-[var(--vh-icon)] ' + (showTranslateMenu && 'rotate-[180deg]')} alt='arrow down icon'/></button>
+              {showTranslateMenu && <SubMenu menu={translateMenu} />}
             </li>
             <li>
               {token && token !== "initial"?<button onClick={logout}>Logout</button>:<Link to="/signin">Login</Link>}

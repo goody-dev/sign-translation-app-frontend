@@ -49,11 +49,6 @@ const ValidateEntry = () => {
   const videoId = signVideos.length? signVideos[videoIndex]?.id: null;
 
   useEffect(()=> {
-    console.log(textId, ",", videoId, translationIndex);
-  }, [textId, videoId])
-
-  useEffect(()=> {
-    console.log(signVideos);
     setOnFirstVideo(videoIndex === 0);
     setOnLastVideo(videoIndex === maxVideoIndex);
   }, [videoIndex, maxVideoIndex])
@@ -64,7 +59,6 @@ const ValidateEntry = () => {
   }, [translationIndex, maxTranslationIndex])
 
   const showNextTranslation = () => {
-    console.log(signVideos);
     if(!onLastVideo) {
       setVideoIndex(videoIndex + 1);
     } else if (!onLastTranslation)  {
@@ -168,9 +162,9 @@ const ValidateEntry = () => {
         </div>
       </div>
       <div className='flex flex-col items-center w-[100%] gap-[calc(var(custom-gap)/2)]'>
-        <div className='flex flex-row justify-between items-center w-[100%]'>
+        <div className='flex flex-col gap-[calc(var(--inline-gap))] sm:flex-row justify-between items-center w-[100%]'>
           <button onClick={showPrevTranslation} className={((onFirstTranslation && onFirstVideo) && 'opacity-[0.3]') + ' text-[1rem] bg-[var(--blue-background)]  p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-bold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
-          <div className='flex flex-row flex-wrap font-semibold items-center gap-[calc(var(--inline-gap)/2)]'>
+          <div className='flex flex-row flex-wrap font-semibold justify-center items-center gap-[calc(var(--inline-gap)/2)]'>
               <button onClick={()=>handleRating(1)} className={(rating === 1? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>1</button>
               <button onClick={()=>handleRating(2)} className={(rating === 2? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>2</button>
               <button onClick={()=>handleRating(3)} className={(rating === 3? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>3</button>
@@ -179,7 +173,7 @@ const ValidateEntry = () => {
           </div>
           <button onClick={handleSubmit} className={(status === 'pending'? 'opacity-[0.3]': 'bg-[var(--blue-background)]') + ((onLastTranslation && onLastVideo) && ' opacity-[0.3]') + ' text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Submit <img className='h-[var(vh-icon)]' src={ArrowIcon}/></button>
         </div>
-        <p className='text-[var(--feedback-text)] text-[19px] font-normal self-center'>Send us a feedback by selecting a rating above</p>
+        <p className='text-[var(--feedback-text)] text-[19px] font-normal self-center text-center'>Send us a feedback by selecting a rating above</p>
       </div>
     </div>
   )
