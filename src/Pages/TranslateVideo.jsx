@@ -10,6 +10,22 @@ const TranslateVideo = () => {
   const { token } = useAuth();
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
+  const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
+
+  const handleSubmitStatusPopup = () => {
+    setSubmitStatusPopup(true);
+  }
+
+  useEffect(()=> {
+    if(status === "success" || "failed" || "info") { 
+      handleSubmitStatusPopup();
+      setTimeout(() => {
+        setSubmitStatusPopup(false);
+        setMessage('');
+        setStatus(null);
+      }, 4000);
+    }
+  }, [status])
 
   const [inputText, setInputText] = useState("");
   const [signVideos, setSignVideos] = useState([]);
@@ -27,11 +43,15 @@ const TranslateVideo = () => {
   }, [videoIndex])
 
   const showNextVideo = () => {
-    !onLastVideo && setVideoIndex(videoIndex + 1);
+    if(signVideos.length) {
+      !onLastVideo && setVideoIndex(videoIndex + 1);
+    }
   }
 
   const showPrevVideo = () => {
-    !onFirstVideo && setVideoIndex(videoIndex - 1);
+    if(signVideos.length) {
+      !onFirstVideo && setVideoIndex(videoIndex - 1);
+    }
   }
 
   const fetchVideos = async()=> {
@@ -68,33 +88,39 @@ const TranslateVideo = () => {
   }
 
   const handleSubmit = async () => {
-    //alert(inputText);
-    if(token && token !== "initial") {
-      setStatus("pending");
-      try {
-        await axios.post('https://signs-5n09.onrender.com/text', {
-          videoId: signVideos[videoIndex].id,
-          text: inputText
-        })
-        .then(res => {
-          if(res.data.status === true) {
-            setStatus("success");
-            setMessage(res.data.message);
-            alert(res.data.message);
-            setInputText("");
-          } else if(res.data.status === false) {
-            setStatus("failed");
-            setMessage(res.data.message);
-            alert(res.data.message);
-          }
-        })
-      } catch (err) {
-        console.log(err);
-        setMessage("Something went wrong, pls try again");
-        alert("Something went wrong, pls try again");
+    if(inputText.length) {
+      if(token && token !== "initial") {
+        setStatus("pending");
+        try {
+          await axios.post('https://signs-5n09.onrender.com/text', {
+            videoId: signVideos[videoIndex].id,
+            text: inputText
+          })
+          .then(res => {
+            if(res.data.status === true) {
+              setStatus("success");
+              setMessage(res.data.message);
+              //alert(res.data.message);
+              setInputText("");
+            } else if(res.data.status === false) {
+              setStatus("failed");
+              setMessage(res.data.message);
+              //alert(res.data.message);
+            }
+          })
+        } catch (err) {
+          console.log(err);
+          setStatus("failed");
+          setMessage("Something went wrong, pls try again");
+          //alert("Something went wrong, pls try again");
+        }
+      } else {
+        setStatus("failed");
+        setMessage("Login to contribute!");
       }
     } else {
-      alert("Login to contribute!");
+      setStatus("info");
+      setMessage("Enter translation");
     }
   }
 

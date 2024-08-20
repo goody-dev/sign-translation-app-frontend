@@ -11,12 +11,17 @@ import SignIn from "../Pages/SignIn"
 import About from "../Pages/About"
 import Header from "../Components/Header"
 import Layout from "./layout"
+import ValidateEntry from "../Pages/ValidateEntry"
 
 const routesForAuthenticatedUsers = [
     {
         element: <ProtectedRoute/>,
         path:"/user",
         children: [
+            {
+                element: <ValidateEntry />,
+                path: "/user/validate-entry"
+            },
             {
                 element: <ContributeText />,
                 path: "/user/contribute-text"

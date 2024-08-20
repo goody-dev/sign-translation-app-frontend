@@ -5,8 +5,29 @@ import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import ArrowDown from '../assets/icons/filled-arrow-down.png'
 import axios from 'axios'
 import { useAuth } from '../provider/authProvider'
+import StatusPopUp from '../Components/StatusPopUp'
 
 const ValidateEntry = () => {
+  const { token } = useAuth();
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(null);
+  const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
+
+  const handleSubmitStatusPopup = () => {
+    setSubmitStatusPopup(true);
+  }
+
+  useEffect(()=> {
+    if(status === "success" || "failed" || "info") { 
+      handleSubmitStatusPopup();
+      setTimeout(() => {
+        setSubmitStatusPopup(false);
+        setMessage('');
+        setStatus(null);
+      }, 4000);
+    }
+  }, [status])
+
   const fetchVideos = async()=> {
     await axios.get('https://signs-5n09.onrender.com/sign/all')
     .then(res => {
@@ -23,10 +44,6 @@ const ValidateEntry = () => {
   useEffect(()=> {
     fetchVideos();
   }, [])
-
-  const { token } = useAuth();
-  const [message, setMessage] = useState('');
-  const [status, setStatus] = useState(null);
 
   const [signTranslations, setSignTranslations] = useState([]);
   const [translationIndex, setTranslationIndex] = useState(0);
@@ -109,25 +126,28 @@ const ValidateEntry = () => {
             if(res.data.status === true) {
               setStatus("success");
               setMessage(res.data.message);
-              alert(res.data.message);          
+              //alert(res.data.message);          
               showNextTranslation();
               setRating(null);
             } else if(res.data.status === false) {
               setStatus("failed");
               setMessage(res.data.message);
-              alert(res.data.message);
+              //alert(res.data.message);
             }
           })
         } catch (err) {
           console.log(err);
+          setStatus("failed");
           setMessage("Something went wrong, pls try again");
-          alert("Something went wrong, pls try again");
+          //alert("Something went wrong, pls try again");
         }
       } else {
-        alert("Rate a translation");
+        setStatus("info");
+        setMessage("Rate a translation");
       }
     } else {
-      alert("Login to contribute!");
+      setStatus("info");
+      setMessage("Login to contribute!");
     }
 
   }
@@ -175,6 +195,7 @@ const ValidateEntry = () => {
         </div>
         <p className='text-[var(--feedback-text)] text-[19px] font-normal self-center text-center'>Send us a feedback by selecting a rating above</p>
       </div>
+      {submitStatusPopup && <StatusPopUp status={status} message={message} />}
     </div>
   )
 }

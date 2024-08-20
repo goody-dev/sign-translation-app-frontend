@@ -1,10 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EnvelopeIcon from '../assets/icons/closed-blue-envelope.png'
 import axios from 'axios'
+import StatusPopUp from './StatusPopUp';
 
 const ContactUs = () => {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
+  const [submitStatusPopup, setSubmitStatusPopup] = useState(null);
+
+  const handleSubmitStatusPopup = () => {
+    setSubmitStatusPopup(true);
+  }
+
+  useEffect(()=> {
+    if(status === "success" || "failed") {
+      handleSubmitStatusPopup();
+      setTimeout(() => {
+        setSubmitStatusPopup(null);
+        setMessage('');
+        setStatus(null);
+      }, 4000);
+    }
+  }, [status])
 
   const [email, setEmail] = useState('');
   const [invalidEmail, setInvalidEmail] = useState(null);
@@ -33,17 +50,16 @@ const ContactUs = () => {
     if (email != '') {
       validity *= true;
       setEmptyEmail(false);
+      if (testForValidEmail === true) {
+        validity *= true;
+        setInvalidEmail(false);
+      } else {
+        validity *= false;
+        setInvalidEmail(true);
+      }
     } else {
       validity *= false;
       setEmptyEmail(true);
-    }
-
-    if (testForValidEmail === true) {
-      validity *= true;
-      setInvalidEmail(false);
-    } else {
-      validity *= false;
-      email.length > 0? setInvalidEmail(true): null;
     }
 
     if (description.length >= 1) {
@@ -79,18 +95,19 @@ const ContactUs = () => {
           if(res.data.status === true) {
             setStatus("success");
             setMessage(res.data.message);
-            alert(res.data.message);
+            //alert(res.data.message);
             clearForm();
           } else if(res.data.status === false) {
             setStatus("failed");
             setMessage(res.data.message);
-            alert(res.data.message);
+            //alert(res.data.message);
           }
         })
         .catch(err => {
           console.log(err);
+          setStatus("failed");
           setMessage("Something went wrong, pls try again");
-          alert("Something went wrong, pls try again");
+          //alert("Something went wrong, pls try again");
         })
     }
   }
@@ -118,6 +135,7 @@ const ContactUs = () => {
         </div>
         <button type='submit' tabIndex={0} className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)]'>Submit</button>
       </form>
+      {submitStatusPopup && <StatusPopUp status={status} message={message} />}
     </div>
   )
 }

@@ -73,6 +73,9 @@ const MobileMenu = () => {
               <button onClick={handleTranslateClick} className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] leading-[1rem]'>Translate<img src={ArrowDown} className={'w-[var(--vh-icon)] ' + (showTranslateMenu && 'rotate-[180deg]')} alt='arrow down icon'/></button>
               {showTranslateMenu && <SubMenu menu={translateMenu} />}
             </li>
+            <li>
+              <Link to="/user/validate-entry">Validate Entry</Link>
+            </li>
             {url !== "/user" && <>
               <li>
                 {token && token!=="initial"?<button onClick={logout}>Logout</button>:<Link to="/signin">Login</Link>}

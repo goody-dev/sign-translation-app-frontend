@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HashIcon from '../assets/icons/hidden-characters-icon.png'
 import EmailIcon from '../assets/icons/closed-blue-envelope.png'
 import PersonIcon from '../assets/icons/person-icon.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../provider/authProvider'
 import axios from 'axios'
+import StatusPopUp from '../Components/StatusPopUp'
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -12,6 +13,22 @@ const SignUp = () => {
 
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
+  const [submitStatusPopup, setSubmitStatusPopup] = useState(null);
+
+  const handleSubmitStatusPopup = () => {
+    setSubmitStatusPopup(true);
+  }
+
+  useEffect(()=> {
+    if(status === "success" || "failed") {
+      handleSubmitStatusPopup();
+      setTimeout(() => {
+        setSubmitStatusPopup(null);
+        setMessage('');
+        setStatus(null);
+      }, 4000);
+    }
+  }, [status])
 
   const [fullname, setFullname] = useState('');
   const [emptyFullname, setEmptyFullname] = useState(null);
@@ -27,7 +44,6 @@ const SignUp = () => {
 
   const handleFullnameChange = (event) => {
     setFullname(event.target.value);
-    console.log(event.target.value);
   }
 
   const handleEmailChange = (event) => {
@@ -42,11 +58,11 @@ const SignUp = () => {
 
     var validity = true;
     var testForNonDigits = /[^0-9]/.test(password);
+    const testForValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/.test(email);
 
     if (fullname.length >= 1) {
       validity *= true;
       setEmptyFullname(false);
-      console.log(fullname);
     } else {
       validity *= false; 
       setEmptyFullname(true);
@@ -55,6 +71,13 @@ const SignUp = () => {
     if (email != '') {
       validity *= true;
       setEmptyEmail(false);
+      if (testForValidEmail === true) {
+        validity *= true;
+        setInvalidEmail(false);
+      } else {
+        validity *= false;
+        setInvalidEmail(true);
+      }
     } else {
       validity *= false;
       setEmptyEmail(true);
@@ -81,7 +104,7 @@ const SignUp = () => {
     }
     const validity = validateEntry();
     if(validity === 1) {
-      alert("off to create your account");
+      //alert("off to create your account");
 
       await axios.post('https://signs-5n09.onrender.com/auth/signup',
         data, {
@@ -95,18 +118,19 @@ const SignUp = () => {
           setStatus("success");
           setMessage(res.data.message);
           handleToken(res.data.data.token);
-          alert(res.data.message);
+          //alert(res.data.message);
           navigate("/user/translate-text");
         } else if(res.data.status === false) {
           setStatus("failed");
           setMessage(res.data.message);
-          alert(res.data.message);
+          //alert(res.data.message);
         }
       })
       .catch(err => {
         console.log(err);
+        setStatus("failed");
         setMessage("Something went wrong, pls try again");
-        alert("Something went wrong, pls try again");
+        //alert("Something went wrong, pls try again");
       })
     }
   }
@@ -199,6 +223,7 @@ const SignUp = () => {
           <input type='submit' tabIndex={0} className='cursor-pointer w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value='Sign Up'/>
         </form>
       </div>
+      {submitStatusPopup && <StatusPopUp status={status} message={message} />}
     </div>
   )
 }

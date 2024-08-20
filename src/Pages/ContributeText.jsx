@@ -1,12 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UploadIcon from '../assets/icons/send-square.svg'
 import { useAuth } from '../provider/authProvider';
 import axios from 'axios'
+import StatusPopUp from '../Components/StatusPopUp';
 
 const ContributeText = () => {
   const { token } = useAuth();
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
+  const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
+
+  const handleSubmitStatusPopup = () => {
+    setSubmitStatusPopup(true);
+  }
+
+  useEffect(()=> {
+    if(status === "success" || "failed" || "info") { 
+      handleSubmitStatusPopup();
+      setTimeout(() => {
+        setSubmitStatusPopup(false);
+        setMessage('');
+        setStatus(null);
+      }, 4000);
+    }
+  }, [status])
+
   const [inputText, setInputText] = useState("");
 
   const handleInputText = (event) => {
@@ -26,7 +44,7 @@ const ContributeText = () => {
             if(res.data.status === true) {
               setStatus("success");
               setMessage(res.data.message);
-              alert(res.data.message);
+              //alert(res.data.message);
               setInputText("");
             } else if(res.data.status === false) {
               setStatus("failed");
@@ -36,11 +54,13 @@ const ContributeText = () => {
           })
         } catch (err) {
           console.log(err);
+          setStatus("failed");
           setMessage("Something went wrong, pls try again");
-          alert("Something went wrong, pls try again");
+          //alert("Something went wrong, pls try again");
         }
       } else {
-        alert("Enter text!")
+        setStatus("info");
+        setMessage("Enter text!")
       }
     // } else {
     //   alert("Login to contribute!");
@@ -63,6 +83,7 @@ const ContributeText = () => {
           </div>
         </div>
       </div>
+      {submitStatusPopup && <StatusPopUp status={status} message={message}/>}
     </div>
   )
 }

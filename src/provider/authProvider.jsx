@@ -15,7 +15,7 @@ const AuthProvider = ({children}) => {
             pass;
         } else {
             localStorage.removeItem('token');
-            alert("Logged out!");
+            //alert("Logged out!");
         }
     }, [token]);
 

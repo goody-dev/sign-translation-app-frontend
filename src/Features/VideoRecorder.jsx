@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import UploadIcon from '../assets/icons/send-square.svg'
 import PlayIcon from '../assets/icons/play-circle.svg'
 import StopIcon from '../assets/icons/stop-circle.svg'
@@ -6,11 +6,28 @@ import RecordIcon from '../assets/icons/record-circle.svg'
 import axios from 'axios'
 
 import { useAuth } from '../provider/authProvider'
+import StatusPopUp from '../Components/StatusPopUp'
 
 const VideoRecorder = ({textId, currentText}) => {
   const { token } = useAuth();
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
+  const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
+
+  const handleSubmitStatusPopup = () => {
+    setSubmitStatusPopup(true);
+  }
+
+  useEffect(()=> {
+    if(status === "success" || "failed" || "info") { 
+      handleSubmitStatusPopup();
+      setTimeout(() => {
+        setSubmitStatusPopup(false);
+        setMessage('');
+        setStatus(null);
+      }, 4000);
+    }
+  }, [status])
   
   const [video, setVideo] = useState(null);
 
@@ -113,24 +130,26 @@ const VideoRecorder = ({textId, currentText}) => {
             if(res.data.status === true) {
               setStatus("success");
               setMessage(res.data.message);
-              alert(res.data.message);
+              //alert(res.data.message);
             } else if(res.data.status === false) {
               setStatus("failed");
               setMessage(res.data.message);
-              alert(res.data.message);
+              //alert(res.data.message);
             }
           })
           .catch(err => {
             console.log(err);
             setStatus("failed");
             setMessage("Something went wrong, pls try again");
-            alert("Something went wrong, pls try again");
+            //alert("Something went wrong, pls try again");
           })
       } else {
-        alert("Record video for the given text");
+        setStatus("info");
+        setMessage("Record video for the given text");
       }
     } else {
-      alert("Login to contribute!")
+      setStatus("failed");
+      setMessage("Login to contribute!")
     }
   }
 
@@ -153,11 +172,12 @@ const VideoRecorder = ({textId, currentText}) => {
         </div>
       </div>
       <div className='flex flex-row justify-between'>
-      <select tabIndex={0} className='p-[var(--button-padding)] rounded-[0.5rem] text-[var(--input-color)] sm:w-[50%]'>
-          <option value="" className='p-[var(--button-padding)] rounded-[0.5rem] text-[var(--input-color)] sm:w-[50%]'>Select Sign Language</option>
-      </select>
-      <button onClick={uploadRecord} tabIndex={0} className={(status === 'pending'? 'opacity-[0.3]': 'bg-[var(--blue-background)]') + ' p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)] gap-[var(--inline-gap)]'}>Upload <img className='h-[var(vh-icon)]' src={UploadIcon}></img></button>
+        <select tabIndex={0} className='p-[var(--button-padding)] rounded-[0.5rem] text-[var(--input-color)] sm:w-[50%]'>
+            <option value="" className='p-[var(--button-padding)] rounded-[0.5rem] text-[var(--input-color)] sm:w-[50%]'>Select Sign Language</option>
+        </select>
+        <button onClick={uploadRecord} tabIndex={0} className={(status === 'pending'? 'opacity-[0.3]': 'bg-[var(--blue-background)]') + ' p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)] gap-[var(--inline-gap)]'}>Upload <img className='h-[var(vh-icon)]' src={UploadIcon}></img></button>
       </div>
+      {submitStatusPopup && <StatusPopUp status={status} message={message} />}
     </div>
   )
 }

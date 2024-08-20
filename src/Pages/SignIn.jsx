@@ -1,16 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EmailIcon from '../assets/icons/closed-blue-envelope.png'
 import HashIcon from '../assets/icons/hidden-characters-icon.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../provider/authProvider'
 import axios from 'axios'
+import StatusPopUp from '../Components/StatusPopUp'
 
 const SignIn = () => {
-  const { handleToken } = useAuth();
-  const navigate = useNavigate();
-
+  const [submitStatusPopup, setSubmitStatusPopup] = useState(null);
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
+
+  const handleSubmitStatusPopup = () => {
+    setSubmitStatusPopup(true);
+  }
+
+  useEffect(()=> {
+    if(status === "success" || "failed") {
+      handleSubmitStatusPopup();
+      setTimeout(() => {
+        setSubmitStatusPopup(null);
+        setMessage('');
+        setStatus(null);
+      }, 4000);
+    }
+  }, [status])
+
+  const { handleToken } = useAuth();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [emptyEmail, setEmptyEmail] = useState(null);
@@ -38,17 +55,16 @@ const SignIn = () => {
     if (email != '') {
       validity *= true;
       setEmptyEmail(false);
+      if (testForValidEmail === true) {
+        validity *= true;
+        setInvalidEmail(false);
+      } else {
+        validity *= false;
+        setInvalidEmail(true);
+      }
     } else {
       validity *= false;
       setEmptyEmail(true);
-    }
-
-    if (testForValidEmail === true) {
-      validity *= true;
-      setInvalidEmail(false);
-    } else {
-      validity *= false;
-      setInvalidEmail(true);
     }
     
     if (password.length >= 8) {
@@ -83,18 +99,19 @@ const SignIn = () => {
           setStatus("success");
           setMessage(res.data.message);
           handleToken(res.data.data.token);
-          alert(res.data.message);
+          //alert(res.data.message);
           navigate("/user/translate-text");
         } else if(res.data.status === false) {
           setStatus("failed");
           setMessage(res.data.message);
-          alert(res.data.message);
+          //alert(res.data.message);
         }
       })
       .catch(err => {
+        setStatus("failed");
         console.log(err);
         setMessage("Something went wrong, pls try again");
-        alert("Something went wrong, pls try again");
+        //alert("Something went wrong, pls try again");
       })
     }
   }
@@ -181,6 +198,7 @@ const SignIn = () => {
           <input type="submit" tabIndex={0} className='w-[100%] cursor-pointer bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value="Log In" />
         </form>
       </div>
+      {submitStatusPopup? <StatusPopUp status={status} message={message} />: null}
     </div>
   )
 }
