@@ -5,6 +5,7 @@ import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import ArrowDown from '../assets/icons/filled-arrow-down.png'
 import axios from 'axios'
 import { useAuth } from '../provider/authProvider'
+import StatusPopUp from '../Components/StatusPopUp'
 
 const TranslateVideo = () => {
   const { token } = useAuth();
@@ -120,7 +121,7 @@ const TranslateVideo = () => {
       }
     } else {
       setStatus("info");
-      setMessage("Enter translation");
+      setMessage("Enter translation!");
     }
   }
 
@@ -165,6 +166,7 @@ const TranslateVideo = () => {
           </div>
         </div>
       </div>
+      {submitStatusPopup && <StatusPopUp status={status} message={message} />}
     </div>
   )
 }
