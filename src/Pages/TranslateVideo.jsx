@@ -24,7 +24,7 @@ const TranslateVideo = () => {
         setSubmitStatusPopup(false);
         setMessage('');
         setStatus(null);
-      }, 4000);
+      }, 5000);
     }
   }, [status])
 

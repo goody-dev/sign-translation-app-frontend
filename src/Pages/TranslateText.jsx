@@ -3,10 +3,35 @@ import React, { useEffect, useState } from 'react'
 
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import VideoRecorder from '../Features/VideoRecorder'
+import StatusPopUp from '../Components/StatusPopUp';
 
 
 
 const TranslateText = () => {
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(null);
+  const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
+
+  const handleSubmitStatusPopup = () => {
+    setSubmitStatusPopup(true);
+  }
+
+  useEffect(()=> {
+    if(status === "success" || "failed" || "info") { 
+      handleSubmitStatusPopup();
+      setTimeout(() => {
+        setSubmitStatusPopup(false);
+        setMessage('');
+        setStatus(null);
+      }, 5000);
+    }
+  }, [status])
+
+  const handlePopInfo = (status, message) => {
+    setMessage(message);
+    setStatus(status);
+  }
+
   const [givenTexts, setGivenTexts] = useState([]);
   const maxTextIndex = givenTexts.length-1;
   const [textIndex, setTextIndex] = useState(0);
@@ -46,7 +71,7 @@ const TranslateText = () => {
         <p className='text-[1rem] text-[var(--input-color)]'>Capture your sign language translation for a given text</p>
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
-        <VideoRecorder textId={givenTexts.length && givenTexts[textIndex].id} currentText={givenTexts.length && givenTexts[textIndex].text} />
+        <VideoRecorder textId={givenTexts.length && givenTexts[textIndex].id} currentText={givenTexts.length && givenTexts[textIndex].text} handlePopInfo={handlePopInfo} />
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
           <div className='flex flex-col items-center justify-center p-[var(--button-padding)] bg-[var(--white-background)] h-[50vh] w-[100%] sm:w-[100%]'>
             <p className='text-center text-[20px] font-semibold text-wrap'>{givenTexts.length? givenTexts[textIndex].text: "Loading..."}</p>
@@ -58,6 +83,7 @@ const TranslateText = () => {
           </div>
         </div>
       </div>
+      {submitStatusPopup && <StatusPopUp status={status} message={message} />}
     </div>
   )
 }

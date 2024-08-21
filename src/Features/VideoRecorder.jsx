@@ -8,26 +8,26 @@ import axios from 'axios'
 import { useAuth } from '../provider/authProvider'
 import StatusPopUp from '../Components/StatusPopUp'
 
-const VideoRecorder = ({textId, currentText}) => {
+const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
   const { token } = useAuth();
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
-  const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
+  // const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
 
-  const handleSubmitStatusPopup = () => {
-    setSubmitStatusPopup(true);
-  }
+  // const handleSubmitStatusPopup = () => {
+  //   setSubmitStatusPopup(true);
+  // }
 
-  useEffect(()=> {
-    if(status === "success" || "failed" || "info") { 
-      handleSubmitStatusPopup();
-      setTimeout(() => {
-        setSubmitStatusPopup(false);
-        setMessage('');
-        setStatus(null);
-      }, 4000);
-    }
-  }, [status])
+  // useEffect(()=> {
+  //   if(status === "success" || "failed" || "info") { 
+  //     handleSubmitStatusPopup();
+  //     setTimeout(() => {
+  //       setSubmitStatusPopup(false);
+  //       setMessage('');
+  //       setStatus(null);
+  //     }, 4000);
+  //   }
+  // }, [status])
   
   const [video, setVideo] = useState(null);
 
@@ -128,28 +128,27 @@ const VideoRecorder = ({textId, currentText}) => {
         await axios.post('https://signs-5n09.onrender.com/video', data)
           .then(res => {
             if(res.data.status === true) {
+              handlePopInfo("success", res.data.message);
               setStatus("success");
-              setMessage(res.data.message);
+              // setMessage(res.data.message);
               //alert(res.data.message);
             } else if(res.data.status === false) {
+              handlePopInfo("failed", res.data.message);
               setStatus("failed");
-              setMessage(res.data.message);
               //alert(res.data.message);
             }
           })
           .catch(err => {
             console.log(err);
+            handlePopInfo("failed", res.data.message);
             setStatus("failed");
-            setMessage("Something went wrong, pls try again");
             //alert("Something went wrong, pls try again");
           })
       } else {
-        setStatus("info");
-        setMessage("Record video for the given text");
+        handlePopInfo("info", "Record video for the given text");
       }
     } else {
-      setStatus("failed");
-      setMessage("Login to contribute!")
+      handlePopInfo("failed", "Login to contribute!")
     }
   }
 
@@ -177,7 +176,6 @@ const VideoRecorder = ({textId, currentText}) => {
         </select>
         <button onClick={uploadRecord} tabIndex={0} className={(status === 'pending'? 'opacity-[0.3]': 'bg-[var(--blue-background)]') + ' p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)] gap-[var(--inline-gap)]'}>Upload <img className='h-[var(vh-icon)]' src={UploadIcon}></img></button>
       </div>
-      {submitStatusPopup && <StatusPopUp status={status} message={message} />}
     </div>
   )
 }
