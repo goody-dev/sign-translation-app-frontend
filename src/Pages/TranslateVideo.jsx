@@ -163,7 +163,7 @@ const TranslateVideo = () => {
             <textarea onChange={(event) => handleInputText(event)} value={inputText} className='text-center align-middle outline-none text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto' placeholder='Enter text here...'></textarea>
           </div>
           <div className='flex flex-row justify-end'>
-            <button onClick={handleSubmit} className={'bg-[var(--blue-background)]' + ' text-[1rem] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>{status === 'pending'? <ProcessingLoader />: "Submit" + <img className='h-[var(vh-icon)]' src={ArrowIcon} />}</button>
+            <button onClick={handleSubmit} className={'bg-[var(--blue-background)]' + ' text-[1rem] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>{status === 'pending'? <ProcessingLoader />: <>Submit<img className='h-[var(vh-icon)]' src={ArrowIcon} /></>}</button>
           </div>
         </div>
       </div>
