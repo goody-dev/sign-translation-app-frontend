@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import EnvelopeIcon from '../assets/icons/closed-blue-envelope.png'
 import axios from 'axios'
 import StatusPopUp from './StatusPopUp';
+import ProcessingLoader from './ProcessingLoader';
 
 const ContactUs = () => {
   const [message, setMessage] = useState('');
@@ -84,7 +85,7 @@ const ContactUs = () => {
     const validity = validateForm();
 
     if(validity == 1) {
-      setStatus("submitting");
+      setStatus("pending");
       await axios.post('https://signs-5n09.onrender.com/contact',
         data, {
           headers: {
@@ -133,7 +134,7 @@ const ContactUs = () => {
           <textarea id='email' type='text' onChange={(event) => handleDescriptionChange(event)} required tabIndex={0} value={description} className='bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] p-[var(--button-padding)] h-[7rem] text-[1rem] leading-[2.4rem] text-[#908E8E]'></textarea>
           {emptyDescription && <sub className='leading-[1.2rem] text-red-400'>Pls provide a description</sub>}
         </div>
-        <button type='submit' tabIndex={0} className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)]'>Submit</button>
+        <button type='submit' tabIndex={0} className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)]'>{status==="pending"? <ProcessingLoader/>:"Submit"}</button>
       </form>
       {submitStatusPopup && <StatusPopUp status={status} message={message} />}
     </div>

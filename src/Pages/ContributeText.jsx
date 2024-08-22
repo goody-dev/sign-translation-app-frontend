@@ -3,6 +3,7 @@ import UploadIcon from '../assets/icons/send-square.svg'
 import { useAuth } from '../provider/authProvider';
 import axios from 'axios'
 import StatusPopUp from '../Components/StatusPopUp';
+import ProcessingLoader from '../Components/ProcessingLoader';
 
 const ContributeText = () => {
   const { token } = useAuth();
@@ -79,7 +80,7 @@ const ContributeText = () => {
             <textarea onChange={(event) => handleInputText(event)} value={inputText} className='text-center align-middle outline-none text-[2rem] text-[var(--input-color)] font-semibold text-wrap w-[100%] h-auto' placeholder='Enter text here...'></textarea>
           </div>
           <div className='flex flex-row justify-around'>
-            <button onClick={handleSubmit} className={(status === 'pending'? 'opacity-[0.3]': 'bg-[var(--blue-background)]') + ' text-[1rem] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Upload<img className='h-[var(vh-icon)]' src={UploadIcon} /></button>
+            <button onClick={handleSubmit} className={'bg-[var(--blue-background)]' + ' text-[1rem] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>{status==="pending"? <ProcessingLoader />: "Upload" + <img className='h-[var(vh-icon)]' src={UploadIcon} />}</button>
           </div>
         </div>
       </div>

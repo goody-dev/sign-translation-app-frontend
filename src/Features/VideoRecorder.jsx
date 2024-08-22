@@ -174,7 +174,7 @@ const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
         <select tabIndex={0} className='p-[var(--button-padding)] rounded-[0.5rem] text-[var(--input-color)] sm:w-[50%]'>
             <option value="" className='p-[var(--button-padding)] rounded-[0.5rem] text-[var(--input-color)] sm:w-[50%]'>Select Sign Language</option>
         </select>
-        <button onClick={uploadRecord} tabIndex={0} className={(status === 'pending'? 'opacity-[0.3]': 'bg-[var(--blue-background)]') + ' p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)] gap-[var(--inline-gap)]'}>Upload <img className='h-[var(vh-icon)]' src={UploadIcon}></img></button>
+        <button onClick={uploadRecord} tabIndex={0} className={'bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)] gap-[var(--inline-gap)]'}>{status==="pending"? <ProcessingLoader /> :"Upload" + <img className='h-[var(vh-icon)]' src={UploadIcon}/>}</button>
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../provider/authProvider'
 import axios from 'axios'
 import StatusPopUp from '../Components/StatusPopUp'
+import ProcessingLoader from '../Components/ProcessingLoader'
 
 const SignIn = () => {
   const [submitStatusPopup, setSubmitStatusPopup] = useState(null);
@@ -87,6 +88,7 @@ const SignIn = () => {
     const validity = validateEntry();
     
     if(validity == 1) {
+      setStatus("pending");
       await axios.post('https://signs-5n09.onrender.com/auth/login',
         data, {     
         headers: {
@@ -101,16 +103,15 @@ const SignIn = () => {
           handleToken(res.data.data.token);
           //alert(res.data.message);
           navigate("/user/translate-text");
-        } else if(res.data.status === false) {
+        } else {
           setStatus("failed");
           setMessage(res.data.message);
-          //alert(res.data.message);
         }
       })
       .catch(err => {
         setStatus("failed");
         console.log(err);
-        setMessage("Something went wrong, pls try again");
+        setMessage(err.response.data.message);
         //alert("Something went wrong, pls try again");
       })
     }
@@ -195,7 +196,7 @@ const SignIn = () => {
             {emptyPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide your password</sub>}
             {invalidPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide password not less than least 8 characters</sub>}
           </div>
-          <input type="submit" tabIndex={0} className='w-[100%] cursor-pointer bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value="Log In" />
+          <button type="submit" tabIndex={0} className='w-[100%] cursor-pointer bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]'>{status==="pending"? <ProcessingLoader /> :"Log In"}</button>
         </form>
       </div>
       {submitStatusPopup? <StatusPopUp status={status} message={message} />: null}

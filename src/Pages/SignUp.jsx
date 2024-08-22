@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../provider/authProvider'
 import axios from 'axios'
 import StatusPopUp from '../Components/StatusPopUp'
+import ProcessingLoader from '../Components/ProcessingLoader'
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -105,7 +106,7 @@ const SignUp = () => {
     const validity = validateEntry();
     if(validity === 1) {
       //alert("off to create your account");
-
+      setStatus("pending")
       await axios.post('https://signs-5n09.onrender.com/auth/signup',
         data, {
         headers: {
@@ -120,16 +121,12 @@ const SignUp = () => {
           handleToken(res.data.data.token);
           //alert(res.data.message);
           navigate("/user/translate-text");
-        } else if(res.data.status === false) {
-          setStatus("failed");
-          setMessage(res.data.message);
-          //alert(res.data.message);
         }
       })
       .catch(err => {
         console.log(err);
         setStatus("failed");
-        setMessage("Something went wrong, pls try again");
+        setMessage(err.response.data.message);
         //alert("Something went wrong, pls try again");
       })
     }
@@ -220,7 +217,7 @@ const SignUp = () => {
               {emptyPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide your password</sub>}
               {invalidPassword && <sub className='leading-[1.2rem] text-red-400'>Pls provide password not less than 8 characters</sub>}
           </div>
-          <input type='submit' tabIndex={0} className='cursor-pointer w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]' value='Sign Up'/>
+          <button type='submit' tabIndex={0} className='cursor-pointer w-[100%] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)]'>{status==="pending"? <ProcessingLoader /> :"Sign Up"}</button>
         </form>
       </div>
       {submitStatusPopup && <StatusPopUp status={status} message={message} />}

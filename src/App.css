@@ -114,6 +114,16 @@ button {
   box-shadow: 1px 1px 7px rgba(47, 54, 118, 0.1);
 }
 
+.processing-animation {
+  animation: processing 1s infinite forwards;
+}
+
+@keyframes processing {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media screen and (min-width: 768px) {
   .CTM {
     box-shadow: 0px 0px 25px rgba(46, 66, 165, 0.25);
