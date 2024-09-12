@@ -154,19 +154,19 @@ const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
 
   return (
     <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
-      <div className='flex flex-row items-end justify-center h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-        <video ref={playerRef} className='h-[100%] w-[100%]'>
+      <div aria-label='video recorder' className='flex flex-row items-end justify-center h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
+        <video id='video-recorder'  aria-label='view box' aria-description='Displays recording or recorded video' ref={playerRef} className='h-[100%] w-[100%]'>
           <source src="" />
         </video>
-        <div className='absolute flex flex-row gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
-          <button onClick={playRecord}>
-            <img className='cursor-pointer' src={PlayIcon}/>
+        <div aria-controls='video-recorder' className='absolute flex flex-row gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
+          <button onClick={playRecord} aria-label='play button' aria-description='play recorded video'>
+            <img className='cursor-pointer' alt='play icon' src={PlayIcon}/>
           </button>
-          <button onClick={startRecording}>
-            <img className='cursor-pointer' src={RecordIcon}/>
+          <button onClick={startRecording} aria-label='record button' aria-description='start recording video'>
+            <img className='cursor-pointer' alt='record icon'  src={RecordIcon}/>
           </button>
-          <button onClick={recording? stopRecording: stopRecord}>
-            <img className='cursor-pointer' src={StopIcon}/>
+          <button onClick={recording? stopRecording: stopRecord} aria-label='stop/pause button'  aria-description='stop recording or pause recorded video'>
+            <img className='cursor-pointer' alt='stop/pause icon' src={StopIcon}/>
           </button>
         </div>
       </div>

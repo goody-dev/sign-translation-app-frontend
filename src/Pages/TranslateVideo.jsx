@@ -142,14 +142,14 @@ const TranslateVideo = () => {
               <img src={ArrowDown}/>
               </div>
             </div>
-            <video ref={playerRef} className='h-[100%] w-[100%]'>
+            <video id='video-player' ref={playerRef} aria-label='view box' aria-description='Displays video to be translated' className='h-[100%] w-[100%]'>
             </video>
-            <div className='absolute flex flex-row self-center gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
-              <button onClick={handlePlay}>
-                <img src={PlayIcon} className='cursor-pointer'/>
+            <div aria-controls='video-player' className='absolute flex flex-row self-center gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
+              <button onClick={handlePlay} aria-description='play video'>
+                <img src={PlayIcon} className='cursor-pointer' alt='play icon'/>
               </button>
-              <button onClick={handlePause}>
-                <img src={StopIcon} className='cursor-pointer'/>
+              <button onClick={handlePause} aria-description='pause video'>
+                <img src={StopIcon} className='cursor-pointer' alt='stop icon'/>
               </button>
             </div>
           </div>

@@ -69,7 +69,7 @@ const ContributeText = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center items-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)] md:h-[calc(100vh-97.19px)]'>
+    <div className='flex flex-col justify-center items-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)] md:h-[calc(100dvh-97.19px)]'>
       <div className='flex flex-col text-center'>
         <h1 className='font-bold text-[2rem]'>Contribute Text</h1>
         <p className='text-[1rem] text-[var(--input-color)]'>Enter a sentence or phrase you wish to contribute to our database</p>

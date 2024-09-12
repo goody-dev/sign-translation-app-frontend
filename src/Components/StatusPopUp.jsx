@@ -5,7 +5,7 @@ import CautionIcon from '../assets/icons/caution-circle.svg'
 
 const StatusPopUp = ({status, message}) => {
   return (
-    <div className={'popup-shadow ' + (status === "info"? "bg-[var(--pending-color)]": status === "success"? "bg-[var(--success-color)]": status === "failed"? "bg-[var(--failed-color)]": status==="pending"? null: null) + ' fixed self-center bottom-[3.2rem] flex flex-row gap-[var(--inline-gap)] p-[var(--popup-padding)] rounded-[5px]'}>
+    <div aria-live='assertive' className={'popup-shadow ' + (status === "info"? "bg-[var(--pending-color)]": status === "success"? "bg-[var(--success-color)]": status === "failed"? "bg-[var(--failed-color)]": status==="pending"? null: null) + ' fixed self-center bottom-[3.2rem] flex flex-row gap-[var(--inline-gap)] p-[var(--popup-padding)] rounded-[5px]'}>
       <img src={status === "info"? CautionIcon: status === "success"? SuccessIcon:status === "failed"? FailedIcon: null}/>
       <p>{message}</p>
     </div>

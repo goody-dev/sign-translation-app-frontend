@@ -3,12 +3,17 @@
   
   --custom-gap: 1.5rem;
   --inline-gap: 1rem;
+  
   --custom-padding: 2rem 5rem;
   --card-padding: 2rem;
   --button-padding: 0.6rem 1.1rem;
+  --tile-padding: 0.6rem;
   --popup-padding: 0.625rem 0.938rem;
+
+  /* Radius */
   --custom-radius: 0.5rem;
   --button-radius: 0.5rem;
+  
   --vh-icon: 0.875rem;
 
   /* Status Colour*/
@@ -23,6 +28,8 @@
   --subheadline-color: #1E1E1E;
   --input-color: #908E8E;
   --feedback-text: #8A8989;
+  --subtext-color: rgba(0, 0, 0, 0.7);
+  --xsubtext-color: rgba(0, 0, 0, 0.5);
 
 
   /* Background colours*/
@@ -39,12 +46,26 @@
 
   /* Unclassified colours */
 
-  --background: #F7F9FF;
+  ---background: #F7F9FF;
+  --background: #292D32;
+  --light-blue-background: #D1D6F1;
+  --dashboard-background: #F1F1F1;
+  ---background: #009A49;
+  --ash-background: #F5F5F5;border: 1.5px solid #1E1E1E;
+  --border: 1.5px solid #1E1E1E;
+  --background: #D9D9D9;
+  --color: #838383;
+  --background: #F2F7FF;
+  --activity-color: #4D4D4D;
+  --dashcard-border: 0.8px solid #E4E5E7;
+  --dashboard-background: linear-gradient(356.64deg, rgba(27, 89, 248, 0.8) 48.49%, rgba(27, 89, 248, 0) 282.14%);
 
   /* Shadow */
   --button-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
   --action-card-shadow: 0px 0px 25px rgba(46, 66, 165, 0.25);
+  --card-shadow: 0px 0px 25px rgba(46, 66, 165, 0.25);
   --popup-shadow: 1px 1px 7px rgba(47, 54, 118, 0.1);
+  --tile-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 .landing {

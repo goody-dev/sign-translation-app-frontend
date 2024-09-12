@@ -1,13 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom"
 import { useAuth } from "../provider/authProvider";
+import Dashboard from "../Dashboard";
 
 
-const ProtectedRoute = () => {
+const AdminRoute = () => {
     const { token } = useAuth();
     if(!token || token === "initial") {
         return <Navigate to="/signin" />
     }
-    return <Outlet/>
+    return <Dashboard />
 }
 
-export default ProtectedRoute
+export default AdminRoute

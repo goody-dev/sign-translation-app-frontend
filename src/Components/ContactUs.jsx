@@ -124,15 +124,15 @@ const ContactUs = () => {
           <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold w-[100%]'>Email</label>
             {/* <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>
               <img src={EnvelopeIcon}/> */}
-            <input autoComplete='off' id='email' type='email' onChange={(event)=>handleEmailChange(event)} value={email} required tabIndex={0} placeholder='Enter your email address' className='email-input w-[100%] p-[var(--button-padding)] pl-[3.2rem] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
+            <input autoComplete='off' id='email' type='email' name='email' onChange={(event)=>handleEmailChange(event)} value={email} required tabIndex={0} placeholder='Enter your email address' className='email-input w-[100%] p-[var(--button-padding)] pl-[3.2rem] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] text-[#908E8E]'></input>
             {/* </div> */}
-            {emptyEmail && <sub className='leading-[1.2rem] text-red-400'>Pls provide your email</sub>}
-            {invalidEmail && <sub className='leading-[1.2rem] text-red-400'>Email is invalid, pls provide a valid email</sub>}
+            {emptyEmail && <sub className='leading-[1.2rem] text-red-400' aria-live='assertive'>Pls provide your email</sub>}
+            {invalidEmail && <sub className='leading-[1.2rem] text-red-400' aria-live='assertive'>Email is invalid, pls provide a valid email</sub>}
           </div>
         <div className='flex flex-col'>
-          <label for='email' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Description</label>
-          <textarea id='email' type='text' onChange={(event) => handleDescriptionChange(event)} required tabIndex={0} value={description} className='bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] p-[var(--button-padding)] h-[7rem] text-[1rem] leading-[2.4rem] text-[#908E8E]'></textarea>
-          {emptyDescription && <sub className='leading-[1.2rem] text-red-400'>Pls provide a description</sub>}
+          <label for='description' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Description</label>
+          <textarea id='description' type='text' name='description' onChange={(event) => handleDescriptionChange(event)} required tabIndex={0} value={description} className='bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] p-[var(--button-padding)] h-[7rem] text-[1rem] leading-[2.4rem] text-[#908E8E]'></textarea>
+          {emptyDescription && <sub className='leading-[1.2rem] text-red-400' aria-live='polite'>Pls provide a description</sub>}
         </div>
         <button type='submit' tabIndex={0} className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold sm:p-[var(--button-padding)] shadow-[var(--button-shadow)]'>{status==="pending"? <ProcessingLoader/>:"Submit"}</button>
       </form>

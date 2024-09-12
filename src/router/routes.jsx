@@ -1,6 +1,6 @@
 import { useAuth } from "../provider/authProvider"
 import { createBrowserRouter, RouterProvider} from "react-router-dom"
-import ProtectedRoute from "./ProtectedRoute"
+import UserRoute from "./user-route"
 import Home from "../Pages/Home"
 import ContributeText from "../Pages/ContributeText"
 import ContributeVideo from "../Pages/ContributeVideo"
@@ -12,10 +12,13 @@ import About from "../Pages/About"
 import Header from "../Components/Header"
 import Layout from "./layout"
 import ValidateEntry from "../Pages/ValidateEntry"
+import AdminRoute from "./admin-route"
+import Report from "../Dashboard/Report"
+import Library from "../Dashboard/Library"
 
 const routesForAuthenticatedUsers = [
     {
-        element: <ProtectedRoute/>,
+        element: <UserRoute/>,
         path:"/user",
         children: [
             {
@@ -32,11 +35,29 @@ const routesForAuthenticatedUsers = [
             },
             {
                 element: <TranslateText/>,
-                path: "/user/translate-text"
+                path: "/user"||"/user/translate-text"
             },
             {
                 element: <TranslateVideo/>,
                 path: "/user/translate-video"
+            }
+        ]
+    },
+    {
+        element: <AdminRoute/>,
+        path: "/admin-dashboard",
+        children: [
+            {
+                element: <Report />,
+                path: "/admin-dashboard/"
+            },
+            {
+                element: <Report />,
+                path: "/admin-dashboard/reports"
+            },
+            {
+                element: <Library />,
+                path: "/admin-dashboard/library"
             }
         ]
     }
