@@ -92,7 +92,10 @@ const Header = () => {
               {showTranslateMenu && <SubMenu menu={translateMenu} />}
             </li>
             <li>
-              <Link to="/user/validate-entry">Validate Entry</Link>
+              <Link to="/user/validate-entry">Validate</Link>
+            </li>
+            <li>
+              <Link to="/admin-dashboard/">Dashboard</Link>
             </li>
             </>: null
             }
