@@ -1,0 +1,14 @@
+{
+    "rewrites": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "sign-translation-app-frontend.vercel.app"
+                }
+            ],
+            "destination": "/sign-translation-app-frontend/:path*"
+        }
+    ]
+}
