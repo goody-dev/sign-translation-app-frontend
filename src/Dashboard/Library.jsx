@@ -65,10 +65,10 @@ const Library = () => {
   return (
     <div className='flex flex-row w-[85%] h-[100%] gap-[2rem]'>
       <div className='flex flex-col w-[calc(50%-1rem)] gap-[1rem]'>
-        <select className='p-[var(--button-padding)] rounded-[1.25rem] w-[20rem] text-[1rem] text-[var(--subtext-color)] font-[500]'>
+        <select className='p-[var(--button-padding)] rounded-[1.25rem] w-[20rem] text-[1rem] text-[var(--subtext-color)] font-[500] border-[#EFF0F6] border-[1px] border-solid shadow-sm'>
             <option>Sort by: Most Recent</option>
         </select>
-        <div className='flex flex-col bg-[var(--white-background)] p-[var(--card-padding)] rounded-[1rem] gap-[var(--custom-gap)]'>
+        <div className='flex flex-col bg-[var(--white-background)] p-[var(--card-padding)] rounded-[1rem] gap-[var(--custom-gap)] border-[#EFF0F6] border-[1px] border-solid shadow-sm'>
             <h2 className='text-[var(--subtext-color)] font-[500]'>Video to Text Translations</h2>
             <div className='flex flex-col text-[0.8rem] gap-[calc(var(--custom-gap)/2)]'>
               <div className='flex flex-row justify-between bg-[var(--faint-blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--xsubtext-color)] font-[500]'>
@@ -95,10 +95,10 @@ const Library = () => {
         </div>
       </div>
       <div className='flex flex-col w-[calc(50%-1rem)] gap-[1rem]'>
-        <select className='p-[var(--button-padding)] rounded-[1.25rem] w-[20rem] text-[1rem] text-[var(--subtext-color)] font-[500]'>
+        <select className='p-[var(--button-padding)] rounded-[1.25rem] w-[20rem] text-[1rem] text-[var(--subtext-color)] font-[500] border-[#EFF0F6] border-[1px] border-solid shadow-sm'>
             <option>Sort by: Most Recent</option>
         </select>
-        <div className='flex flex-col bg-[var(--white-background)] p-[var(--card-padding)] rounded-[1rem] gap-[var(--custom-gap)]'>
+        <div className='flex flex-col bg-[var(--white-background)] p-[var(--card-padding)] rounded-[1rem] gap-[var(--custom-gap)] border-[#EFF0F6] border-[1px] border-solid shadow-sm'>
             <h2 className='text-[var(--subtext-color)] font-[500]'>Text to Video Translations</h2>
             <div className='flex flex-col text-[0.8rem] gap-[calc(var(--custom-gap)/2)]'>
               <div className='flex flex-row justify-between bg-[var(--faint-blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--xsubtext-color)] font-[500]'>

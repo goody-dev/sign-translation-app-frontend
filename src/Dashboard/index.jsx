@@ -11,7 +11,7 @@ const Dashboard = () => {
         <div className="w-[100vw] flex flex-row bg-[var(--ash-background)] md:min-h-[calc(100dvh-97.19px)] md:h-[100%] sm:p-[var(--custom-padding)] gap-[--custom-gap]">
           {url.pathname !== "/admin-dashboard/text-analytics" && <nav className='w-[10%]'>
             <ul className='flex flex-col gap-[calc(var(--custom-gap)/2)]'>
-              <li><Link className={'flex flex-row justify-between p-[var(--button-padding)] rounded-[0.5rem] font-semibold shadow-[var(--button-shadow)]' + (url.pathname === "/admin-dashboard/reports" && " bg-[var(--light-blue-background)]" || url.pathname === "/admin-dashboard" && " bg-[var(--light-blue-background)]")} to={"/admin-dashboard/reports"}><img src={AnalyticsIcon} className='w-[24px] h-[24px]'/>Reports</Link></li>
+              <li><Link className={'flex flex-row justify-between p-[var(--button-padding)] rounded-[0.5rem] font-semibold shadow-[var(--button-shadow)]' + (url.pathname === "/admin-dashboard/reports" && " bg-[var(--light-blue-background)]" || url.pathname === "/admin-dashboard" && " bg-[var(--sidebarbtn-background)]")} to={"/admin-dashboard/reports"}><img src={AnalyticsIcon} className='w-[24px] h-[24px]'/>Reports</Link></li>
               <li><Link className={'flex flex-row justify-between p-[var(--button-padding)] rounded-[0.5rem] font-semibold shadow-[var(--button-shadow)]' + (url.pathname === "/admin-dashboard/library" && " bg-[var(--light-blue-background)]")} to={"/admin-dashboard/library"}><img src={LibraryIcon} className='h-[24px]'/>Library</Link></li>
             </ul>
           </nav>}

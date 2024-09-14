@@ -7,7 +7,6 @@
   --custom-padding: 2rem 5rem;
   --card-padding: 2rem;
   --button-padding: 0.6rem 1.1rem;
-  --tile-padding: 0.6rem;
   --popup-padding: 0.625rem 0.938rem;
 
   /* Radius */
@@ -65,9 +64,19 @@
   --action-card-shadow: 0px 0px 25px rgba(46, 66, 165, 0.25);
   --card-shadow: 0px 0px 25px rgba(46, 66, 165, 0.25);
   --popup-shadow: 1px 1px 7px rgba(47, 54, 118, 0.1);
-  --tile-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-}
+  --tile-shadow: 0px 5px 5px 20px rgba(0, 0, 0, 0.5);
 
+  /* Dashboard */
+  --sidebarbtn-background: #1B81F8;
+  --chart-color: #1B59F8;
+  --graph-gradient: linear-gradient(180deg, #0062FF%2050.74%,%20rgba(255,%20255,%20255,%200.0001)%20100%);
+  --bar-secondary-color: #F2F7FF;
+  --light-blue-background: #D1D6F1;
+  --card-border: 1px solid #EFF0F6;
+  --card-headline: 24px;
+  --card-subtext: 14px;
+  --tile-padding: 0.8rem;
+} 
 .landing {
   background-image: url('./assets/icons/leaf.svg'), url('./assets/icons/leaf.svg'), url('./assets/icons/leaf.svg'),linear-gradient(180deg, #FCFCFF 5%, var(--faint-blue-background) 95%);
   background-position: 20% 60%, 95% 73%, 50% 97%;
