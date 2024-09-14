@@ -15,6 +15,7 @@ import ValidateEntry from "../Pages/ValidateEntry"
 import AdminRoute from "./admin-route"
 import Report from "../Dashboard/Report"
 import Library from "../Dashboard/Library"
+import TextAnalytics from "../Dashboard/TextAnalytics"
 
 const routesForAuthenticatedUsers = [
     {
@@ -58,7 +59,11 @@ const routesForAuthenticatedUsers = [
             {
                 element: <Library />,
                 path: "/admin-dashboard/library"
-            }
+            },
+            {
+                element: <TextAnalytics />,
+                path: "/admin-dashboard/text-analytics"
+            },
         ]
     }
 ]

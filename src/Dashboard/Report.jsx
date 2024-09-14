@@ -1,8 +1,69 @@
 import React from 'react'
 import TransIcon from '../assets/icons/trans-vector.svg'
 import Thumbnail from '../assets/icons/nigeria-icon.svg'
+import AreaChartCard from '../Components/AreaChartCard'
+import BarChartCard from '../Components/BarChartCard'
+
 
 const Report = () => {
+  const activityData = [
+    {month: "JAN", users: 58},
+    {month: "FEB", users: 69},
+    {month: "MAR", users: 72},
+    {month: "APR", users: 84},
+    {month: "MAY", users: 96},
+    {month: "JUN", users: 30},
+    {month: "JUl", users: 168},
+    {month: "AUG", users: 79},
+    {month: "SEP", users: 80},
+    {month: "OCt", users: 29},
+    {month: "NOV", users: 148},
+    {month: "DEC", users: 90}
+
+  ]
+  const ttrData = [
+    {
+      day: "",
+      rating: "15",
+    },
+    {
+      day: "",
+      rating: "10",
+    },
+    {
+      day: "",
+      rating: "30",
+    },
+    {
+      day: "",
+      rating: "24",
+    },
+    {
+      day: "",
+      rating: "34",
+    },
+    {
+      day: "",
+      rating: "20",
+    },
+    {
+      day: "",
+      rating: "30",
+    },
+    {
+      day: "",
+      rating: "64",
+    },
+    {
+      day: "",
+      rating: "84",
+    },
+    {
+      day: "",
+      rating: "64",
+    },
+  ]
+
   return (
     <div className="flex flex-col gap-[var(--custom-gap)] h-[100%] w-[85%]">
       <div id="filter">
@@ -29,23 +90,12 @@ const Report = () => {
               </div>
             </div>
             <div className="flex flex-row gap-[1rem] w-[100%] h-max">
-                <div className="flex flex-col bg-[var(--white-background)] h-[100%] w-[100%] p-[var(--tile-padding)] rounded-[1rem]">
-                    <p  className='text-[14px] text-[var(--subtext-color)] font-[500]'>Top Text Rating</p>
-                    <p className='font-bold text-[1.5rem]'>64%</p>
-                </div>
-                <div className="flex flex-col bg-[var(--white-background)] h-[100%] w-[100%] p-[var(--tile-padding)] rounded-[1rem]">
-                    <p  className='text-[14px] text-[var(--subtext-color)] font-[500]'>Top Video Rating</p>
-                    <p className='font-bold text-[1.5rem]'>86%</p>
-                </div>
-                <div className="flex flex-col bg-[var(--white-background)] h-[100%] w-[100%] p-[var(--tile-padding)] rounded-[1rem]">
-                    <p  className='text-[14px] text-[var(--subtext-color)] font-[500]'>Contributions</p>
-                    <p className='font-bold text-[1.5rem]'>+34%</p>
-                </div>
+                <AreaChartCard title="Top Text Rating" figure="64%" data={ttrData} />
+                <AreaChartCard title="Top Video Rating" figure="86%" data={ttrData} />
+                <AreaChartCard title="Contributions" figure="+34%" data={ttrData} />
             </div>
         </div>
-        <div id="activity" className="w-[calc(50%-1rem)] h-[auto] bg-[var(--white-background)] shadow-lg shadow-[var(--tile-shadow)] p-[var(--tile-padding)] rounded-[1rem]">
-            <p  className='text-[14px] text-[var(--subtext-color)] font-[500]'>Activity</p>
-        </div>
+        <BarChartCard title={"Activity"} data={activityData}/>
         <div id="twvt" className="flex flex-col w-[calc(50%-1rem)] h-auto bg-[var(--white-background)] shadow-[var(--tile-shadow)] p-[var(--tile-padding)] rounded-[1rem] gap-[var(--tile-padding)]">
           <div className="flex flex-row w-[100%] justify-between">
             <p  className='text-[14px] text-[var(--subtext-color)] font-[500]'>Top Weekly Video Translation</p>
