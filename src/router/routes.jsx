@@ -23,6 +23,10 @@ const routesForAuthenticatedUsers = [
         path:"/user",
         children: [
             {
+                element: <TranslateText/>,
+                path: "/user"
+            },
+            {
                 element: <ValidateEntry />,
                 path: "/user/validate-entry"
             },
@@ -36,7 +40,7 @@ const routesForAuthenticatedUsers = [
             },
             {
                 element: <TranslateText/>,
-                path: "/user"||"/user/translate-text"
+                path: "/user/translate-text"
             },
             {
                 element: <TranslateVideo/>,

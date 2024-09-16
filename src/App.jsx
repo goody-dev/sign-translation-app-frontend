@@ -20,15 +20,6 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        {/* <Route path='/' element={<Home/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/signin' element={<SignIn/>} />
-        <Route path='/translate-text' element={<TranslateText/>} />
-        <Route path='/translate-video' element={<TranslateVideo/>} />
-        <Route path='/validate-entry' element={<ValidateEntry/>} />
-        <Route path='/contribute-text' element={<ContributeText/>} />
-        <Route path='/contribute-video' element={<ContributeVideo/>} /> */}
       </Routes>
     </AuthProvider>
   )

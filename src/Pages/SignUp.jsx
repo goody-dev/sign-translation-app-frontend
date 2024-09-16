@@ -125,9 +125,14 @@ const SignUp = () => {
       })
       .catch(err => {
         console.log(err);
+        if(err.response.data.message) {
+          setMessage(err.response.data.message);
+        } else if (err.message === "Network Error") {
+          setMessage(err.message);
+        } else {
+          setMessage("Something went wrong, pls try again");
+        }
         setStatus("failed");
-        setMessage(err.response.data.message);
-        //alert("Something went wrong, pls try again");
       })
     }
   }
