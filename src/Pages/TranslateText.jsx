@@ -4,10 +4,17 @@ import React, { useEffect, useState } from 'react'
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import VideoRecorder from '../Features/VideoRecorder'
 import StatusPopUp from '../Components/StatusPopUp';
+import { useAuth } from '../provider/authProvider';
 
 
 
 const TranslateText = () => {
+  const { token } = useAuth();
+  let config = {
+    headers: {
+      'authorization': `Bearer ${token}`
+    }
+  }
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
   const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
@@ -40,7 +47,7 @@ const TranslateText = () => {
   const [onFirstText, setOnFirstText] = useState(true);
 
   const fetchTexts = async()=> {
-    await axios.get('https://signs-5n09.onrender.com/text/all')
+    await axios.get('https://signs-5n09.onrender.com/text/all', config)
     .then(res => {
       console.log(res.data);
       setGivenTexts(res.data.data);

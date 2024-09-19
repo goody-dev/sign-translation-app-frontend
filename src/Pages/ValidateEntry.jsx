@@ -10,6 +10,12 @@ import ProcessingLoader from '../Components/ProcessingLoader'
 
 const ValidateEntry = () => {
   const { token } = useAuth();
+
+  let config = {
+    headers: {
+      'authorization': `Bearer ${token}`
+    }
+  }
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
   const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
@@ -30,7 +36,7 @@ const ValidateEntry = () => {
   }, [status])
 
   const fetchVideos = async()=> {
-    await axios.get('https://signs-5n09.onrender.com/sign/all')
+    await axios.get('https://signs-5n09.onrender.com/sign/all', config)
     .then(res => {
       console.log(res.data.data);
       setSignTranslations(res.data.data);

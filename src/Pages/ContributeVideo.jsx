@@ -3,6 +3,7 @@ import VideoRecorder from '../Features/VideoRecorder'
 import StatusPopUp from '../Components/StatusPopUp';
 
 const ContributeVideo = () => {
+  
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
   const [submitStatusPopup, setSubmitStatusPopup] = useState(false);

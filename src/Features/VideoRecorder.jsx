@@ -10,6 +10,11 @@ import StatusPopUp from '../Components/StatusPopUp'
 
 const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
   const { token } = useAuth();
+  let config = {
+    headers: {
+      'authorization': `Bearer ${token}`
+    }
+  }
   // const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
   // const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
@@ -125,7 +130,7 @@ const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
         
         //console.log(data);
         setStatus("pending");
-        await axios.post('https://signs-5n09.onrender.com/video', data)
+        await axios.post('https://signs-5n09.onrender.com/video', config, data)
           .then(res => {
             if(res.data.status === true) {
               handlePopInfo("success", res.data.message);

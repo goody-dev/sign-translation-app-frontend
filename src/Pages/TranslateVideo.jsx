@@ -10,6 +10,12 @@ import ProcessingLoader from '../Components/ProcessingLoader'
 
 const TranslateVideo = () => {
   const { token } = useAuth();
+
+  let config = {
+    headers: {
+      'authorization': `Bearer ${token}`
+    }
+  }
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
   const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
@@ -57,7 +63,7 @@ const TranslateVideo = () => {
   }
 
   const fetchVideos = async()=> {
-    await axios.get('https://signs-5n09.onrender.com/video/all')
+    await axios.get('https://signs-5n09.onrender.com/video/all', config)
     .then(res => {
       //console.log(res.data);
       setSignVideos(res.data.data);

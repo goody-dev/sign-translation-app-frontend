@@ -7,6 +7,13 @@ import ProcessingLoader from '../Components/ProcessingLoader';
 
 const ContributeText = () => {
   const { token } = useAuth();
+
+  let config = {
+    headers: {
+      'authorization': `Bearer ${token}`
+    }
+  }
+  
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
   const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
@@ -38,7 +45,7 @@ const ContributeText = () => {
       if(inputText !== "") {
         setStatus("pending");
         try {
-          await axios.post('https://signs-5n09.onrender.com/text', {
+          await axios.post('https://signs-5n09.onrender.com/text', config, {
             text: inputText
           })
           .then(res => {
