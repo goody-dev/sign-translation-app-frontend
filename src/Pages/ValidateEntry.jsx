@@ -128,7 +128,7 @@ const ValidateEntry = () => {
       if(rating && textId && videoId) {
         setStatus("pending");
         try {
-          await axios.post('https://signs-5n09.onrender.com/rate', data)
+          await axios.post('https://signs-5n09.onrender.com/rate', config, data)
           .then(res => {
             if(res.data.status === true) {
               setStatus("success");

@@ -100,7 +100,7 @@ const TranslateVideo = () => {
       if(token && token !== "initial") {
         setStatus("pending");
         try {
-          await axios.post('https://signs-5n09.onrender.com/text', {
+          await axios.post('https://signs-5n09.onrender.com/text', config, {
             videoId: signVideos[videoIndex].id,
             text: inputText
           })
