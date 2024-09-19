@@ -85,7 +85,7 @@ const TranslateText = () => {
           </div>
           <div className='flex flex-row justify-between'>
             <button onClick={showPrevText} className={'bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]' + (onFirstText && " opacity-[0.3]")}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
-            <button onClick={showNextText} className={'underline' + (onLastText && ' opacity-[0.3]')}>Skip</button>
+            <button onClick={showNextText} className={(onLastText && 'text-opacity-[0.3]') + ' underline'}>Skip</button>
             <button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'>End <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
           </div>
         </div>

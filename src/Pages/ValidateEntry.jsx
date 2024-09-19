@@ -199,7 +199,7 @@ const ValidateEntry = () => {
               <button onClick={()=>handleRating(5)} className={(rating === 5? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>5</button>
           </div>
           <div className='flex flex-row gap-[var(--custom-gap)] items-center'>
-            <button onClick={showNextTranslation} className={((onLastTranslation && onLastVideo)  && ' opacity-[0.3]') + ' underline'}>Skip</button>
+            <button onClick={showNextTranslation} className={((onLastTranslation && onLastVideo)  && 'text-opacity-[0.3]') + ' underline'}>Skip</button>
             <button onClick={handleSubmit} className={'bg-[var(--blue-background)] text-[1rem] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>{status==="pending"? <ProcessingLoader/>: <>Submit<img className='h-[var(vh-icon)]' src={ArrowIcon}/></>}</button>
           </div>
         </div>
