@@ -37,6 +37,7 @@ const ValidateEntry = () => {
 
   const fetchVideos = async()=> {
     await axios.get('https://signs-5n09.onrender.com/sign/all', config)
+    await axios.get('https://signs-5n09.onrender.com/sign/all', {withCredentials: true})
     .then(res => {
       console.log(res.data.data);
       setSignTranslations(res.data.data);
