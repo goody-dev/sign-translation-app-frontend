@@ -130,7 +130,7 @@ const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
         
         //console.log(data);
         setStatus("pending");
-        await axios.post('https://signs-5n09.onrender.com/video', config, data)
+        await axios.post('https://signs-5n09.onrender.com/video', data, config)
           .then(res => {
             if(res.data.status === true) {
               handlePopInfo("success", res.data.message);

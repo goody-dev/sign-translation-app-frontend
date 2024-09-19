@@ -12,10 +12,6 @@ import About from "../Pages/About"
 import Header from "../Components/Header"
 import Layout from "./layout"
 import ValidateEntry from "../Pages/ValidateEntry"
-import AdminRoute from "./admin-route"
-import Report from "../Dashboard/Report"
-import Library from "../Dashboard/Library"
-import TextAnalytics from "../Dashboard/TextAnalytics"
 
 const routesForAuthenticatedUsers = [
     {
@@ -48,28 +44,6 @@ const routesForAuthenticatedUsers = [
             }
         ]
     },
-    {
-        element: <AdminRoute/>,
-        path: "/admin-dashboard",
-        children: [
-            {
-                element: <Report />,
-                path: "/admin-dashboard/"
-            },
-            {
-                element: <Report />,
-                path: "/admin-dashboard/reports"
-            },
-            {
-                element: <Library />,
-                path: "/admin-dashboard/library"
-            },
-            {
-                element: <TextAnalytics />,
-                path: "/admin-dashboard/text-analytics"
-            },
-        ]
-    }
 ]
 
 const routesForPublic = [
