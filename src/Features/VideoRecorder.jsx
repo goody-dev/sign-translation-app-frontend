@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import UploadIcon from '../assets/icons/send-square.svg'
-import PlayIcon from '../assets/icons/play-circle.svg'
-import StopIcon from '../assets/icons/stop-circle.svg'
-import RecordIcon from '../assets/icons/record-circle.svg'
+import PlayIcon from '../assets/icons/icons8-play-button.png'
+import StopIcon from '../assets/icons/icons8-pause-button.png'
+import RecordIcon from '../assets/icons/icons8-record.png'
 import axios from 'axios'
 
 import { useAuth } from '../provider/authProvider'
@@ -165,13 +165,13 @@ const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
         </video>
         <div aria-controls='video-recorder' className='absolute flex flex-row gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
           <button onClick={playRecord} aria-label='play button' aria-description='play recorded video'>
-            <img className='cursor-pointer' alt='play icon' src={PlayIcon}/>
+            <img className='cursor-pointer h-[40px]' alt='play icon' src={PlayIcon}/>
           </button>
           <button onClick={startRecording} aria-label='record button' aria-description='start recording video'>
-            <img className='cursor-pointer' alt='record icon'  src={RecordIcon}/>
+            <img className='cursor-pointer h-[40px]' alt='record icon'  src={RecordIcon}/>
           </button>
           <button onClick={recording? stopRecording: stopRecord} aria-label='stop/pause button'  aria-description='stop recording or pause recorded video'>
-            <img className='cursor-pointer' alt='stop/pause icon' src={StopIcon}/>
+            <img className='cursor-pointer h-[40px]' alt='stop/pause icon' src={StopIcon}/>
           </button>
         </div>
       </div>
