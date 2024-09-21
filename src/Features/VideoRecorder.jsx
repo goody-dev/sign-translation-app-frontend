@@ -163,7 +163,7 @@ const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
         <video id='video-recorder'  aria-label='view box' aria-description='Displays recording or recorded video' ref={playerRef} className='h-[100%] w-[100%]'>
           <source src="" />
         </video>
-        <div aria-controls='video-recorder' className='absolute flex flex-row gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
+        <div aria-controls='video-recorder' className='absolute flex flex-row p-[var(--button-padding)] rounded-[var(--button-radius)] gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))] bg-[var(--white-background)]'>
           <button onClick={playRecord} aria-label='play button' aria-description='play recorded video'>
             <img className='cursor-pointer h-[40px]' alt='play icon' src={PlayIcon}/>
           </button>
