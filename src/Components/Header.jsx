@@ -96,14 +96,14 @@ const Header = () => {
             </li>
             </>: null
             }
-            {currentPath === "/" || currentPath === "/signin" || currentPath === "/signup"?
+            {currentPath === "/" || currentPath === "/signin" || currentPath === "/signup" || ["/user", "user/translate-video", "user/contribute-video", "user/translate-text", "user/translate-video", "user/contribute-text"].includes(currentPath)?
               <>
                 <li>
                   {token && token !== "initial"?<button onClick={logout}>Logout</button>:<Link to="/signin">Login</Link>}
                 </li>
-                <li>
+                {(currentPath === "/" || currentPath === "/signin" || currentPath === "/signup") && <li>
                   <Link to="/signup"><button className='bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)]'>Register</button></Link>
-                </li>
+                </li>}
               </>: null
             }
           </ul>

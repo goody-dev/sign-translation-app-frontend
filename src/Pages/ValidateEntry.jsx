@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import PlayIcon from '../assets/icons/play-circle.svg'
-import StopIcon from '../assets/icons/stop-circle.svg'
+import PlayIcon from '../assets/icons/icons8-play-button.png'
+import StopIcon from '../assets/icons/icons8-pause-button.png'
 import ArrowIcon from '../assets/icons/filled-arrow-right.png'
 import ArrowDown from '../assets/icons/filled-arrow-down.png'
 import axios from 'axios'
@@ -175,7 +175,7 @@ const ValidateEntry = () => {
           </div>
           <video id='video-player' aria-label='view box' aria-description='Displays video to be translated' ref={playerRef} className='h-[100%] w-[100%]'>
           </video>
-          <div aria-controls='video-player' className='absolute flex flex-row self-center gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))]'>
+          <div aria-controls='video-player' className='absolute flex flex-row self-center p-[var(--button-padding)] rounded-[var(--button-radius)] gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))] bg-[var(--white-background)]'>
             <button onClick={handlePlay} aria-label='play video button'>
               <img src={PlayIcon} className='cursor-pointer' alt='play icon'/>
             </button>
