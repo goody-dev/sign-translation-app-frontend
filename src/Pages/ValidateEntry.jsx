@@ -159,6 +159,12 @@ const ValidateEntry = () => {
 
   }
 
+  const [signLanguage, setSignLanguage] = useState("NSL");
+
+  const switchSignLanguage = () => {
+    signLanguage==="NSL"? setSignLanguage("ASL"): setSignLanguage("NSL");
+  }
+
   return (
     <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] md:h-[calc(100vh-97.19px)] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)]'>
       <div className='flex flex-col'>
@@ -167,12 +173,12 @@ const ValidateEntry = () => {
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
         <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-          <div className='absolute self-end mb-[50vh] mr-[60px]'>
+          <button onClick={switchSignLanguage} className='absolute self-end mb-[50vh] mr-[60px]'>
             <div className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
-            <p>ASL</p>
+            <p>{signLanguage}</p>
             <img src={ArrowDown}/>
             </div>
-          </div>
+          </button>
           <video id='video-player' aria-label='view box' aria-description='Displays video to be translated' ref={playerRef} className='h-[100%] w-[100%]'>
           </video>
           <div aria-controls='video-player' className='absolute flex flex-row self-center p-[var(--button-padding)] rounded-[var(--button-radius)] gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))] bg-[var(--white-background)]'>
