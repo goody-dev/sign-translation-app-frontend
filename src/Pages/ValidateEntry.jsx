@@ -172,13 +172,13 @@ const ValidateEntry = () => {
         <p className='text-[1rem] text-[var(--input-color)]'>Confirm if the text translation corresponds with the given video</p>
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
-        <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-          <button onClick={switchSignLanguage} className='absolute self-end mb-[50vh] mr-[60px]'>
-            <div className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
-            <p>{signLanguage}</p>
-            <img src={ArrowDown}/>
-            </div>
-          </button>
+        <div className='relative flex flex-col justify-end items-center h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
+          <div className='absolute z-30 top-0 mr-0 shadow-lg'>
+            <button onClick={switchSignLanguage} className='flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)] gap-[calc(var(--custom-gap)/2)]'> 
+              <p>{signLanguage}</p>
+              <img src={ArrowDown}/>
+            </button>
+          </div>
           <video id='video-player' aria-label='view box' aria-description='Displays video to be translated' ref={playerRef} className='h-[100%] w-[100%]'>
           </video>
           <div aria-controls='video-player' className='absolute flex flex-row self-center p-[var(--button-padding)] rounded-[var(--button-radius)] gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))] bg-[var(--white-background)]'>

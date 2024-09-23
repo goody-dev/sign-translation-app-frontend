@@ -33,12 +33,12 @@ const VideoPlayer = ({videoUrl}) => {
 
   return (
   <div className='flex flex-col justify-end items-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-    <button onClick={switchSignLanguage} className='absolute self-end mb-[50vh] mr-[60px]'>
-      <div className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
-      <p>ASL</p>
+    <div className='absolute self-end mb-[50vh] mr-[60px]'>
+      <button onClick={switchSignLanguage} className='absolute flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)]'> 
+      <p>{signLanguage}</p>
       <img src={ArrowDown}/>
-      </div>
-    </button>
+      </button>
+    </div>
     <video id='video-player' ref={playerRef} aria-label='view box' aria-description='Displays video to be translated' className='h-[100%] w-[100%]'>
     </video>
     <div aria-controls='video-player' className='absolute flex flex-row self-center p-[var(--button-padding)] rounded-[var(--button-radius)] gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))] bg-[var(--white-background)]'>
