@@ -21,7 +21,7 @@ const SignUp = () => {
   }
 
   useEffect(()=> {
-    if(status === "success" || "failed") {
+    if(status === "success" || status ==="failed") {
       handleSubmitStatusPopup();
       setTimeout(() => {
         setSubmitStatusPopup(null);

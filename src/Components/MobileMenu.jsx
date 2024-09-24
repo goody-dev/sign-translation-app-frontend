@@ -74,7 +74,7 @@ const MobileMenu = () => {
               {showTranslateMenu && <SubMenu menu={translateMenu} />}
             </li>
             <li>
-              <Link to="/user/validate-entry">Validate Entry</Link>
+              <Link to="/user/validate-entry">Validate</Link>
             </li>
             {url !== "/user" && <>
               <li>

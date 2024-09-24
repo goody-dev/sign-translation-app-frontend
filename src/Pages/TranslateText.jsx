@@ -24,7 +24,7 @@ const TranslateText = () => {
   }
 
   useEffect(()=> {
-    if(status === "success" || "failed" || "info") { 
+    if(status === "success" || status ==="failed" || status ==="info") { 
       handleSubmitStatusPopup();
       setTimeout(() => {
         setSubmitStatusPopup(false);
