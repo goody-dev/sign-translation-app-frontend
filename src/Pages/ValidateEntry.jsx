@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useAuth } from '../provider/authProvider'
 import StatusPopUp from '../Components/StatusPopUp'
 import ProcessingLoader from '../Components/ProcessingLoader'
+import VideoPlayer from '../Features/VideoPlayer'
 
 const ValidateEntry = () => {
   const { token } = useAuth();
@@ -29,8 +30,8 @@ const ValidateEntry = () => {
       handleSubmitStatusPopup();
       setTimeout(() => {
         setSubmitStatusPopup(false);
-        setMessage('');
         setStatus(null);
+        setMessage('');
       }, 5000);
     }
   }, [status])
@@ -38,8 +39,7 @@ const ValidateEntry = () => {
   const fetchVideos = async()=> {
     await axios.get('https://signs-5n09.onrender.com/sign/all', config)
     .then(res => {
-      console.log(res.data.data);
-      setSignTranslations(res.data.data);
+      setSignTranslations(res.data.data.filter(sign => sign.videoUrls?.length > 0));
       setTranslationIndex(0);
       setVideoIndex(0);
     }).catch(err => {
@@ -57,14 +57,14 @@ const ValidateEntry = () => {
   const [onLastTranslation, setOnLastTranslation] = useState(false);
   const [onFirstTranslation, setOnFirstTranslation] = useState(true);
 
-  const [playing, setPlaying] = useState(false);
+  // const [playing, setPlaying] = useState(false);
 
   const [videoIndex, setVideoIndex] = useState(0);
   const [onLastVideo, setOnLastVideo] = useState(false);
   const [onFirstVideo, setOnFirstVideo] = useState(true);
   
   const [rating, setRating] = useState(null);
-  const playerRef = useRef();
+  // const playerRef = useRef();
 
   const signVideos = signTranslations.length? signTranslations[translationIndex]?.videoUrls: [];
   const maxTranslationIndex = signTranslations.length - 1;
@@ -100,23 +100,25 @@ const ValidateEntry = () => {
     }
   }
 
-  useEffect(() => {
-    if(signTranslations.length && signVideos.length) {
-      playerRef.current.src = signVideos[videoIndex]?.videoUrl;
-    }
-  }, [videoIndex, translationIndex, signTranslations, signVideos])
+  // useEffect(() => {
+  //   if(signTranslations.length && signVideos.length) {
+  //     playerRef.current.src = signVideos[videoIndex]?.videoUrl;
+  //   }
+  // }, [videoIndex, translationIndex, signTranslations, signVideos])
 
-  const handlePlay = () => {
-    playerRef.current.play();
-    setPlaying(true);
-  }
-  const handlePause = () => {
-    playerRef.current.pause();
-    setPlaying(false);
-  }
+  // const handlePlay = () => {
+  //   playerRef.current.play();
+  //   setPlaying(true);
+  // }
+  // const handlePause = () => {
+  //   playerRef.current.pause();
+  //   setPlaying(false);
+  // }
+
   const handleRating = (rate) => {
     setRating(rate);
   }
+
   const handleSubmit = async() => {
     const data = {
       "textId": textId.toString(),
@@ -132,21 +134,18 @@ const ValidateEntry = () => {
           .then(res => {
             if(res.data.status === true) {
               setStatus("success");
-              setMessage(res.data.message);
-              //alert(res.data.message);          
+              setMessage(res.data.message);     
               showNextTranslation();
               setRating(null);
             } else if(res.data.status === false) {
               setStatus("failed");
               setMessage(res.data.message);
-              //alert(res.data.message);
             }
           })
         } catch (err) {
           console.log(err);
           setStatus("failed");
           setMessage("Something went wrong, pls try again");
-          //alert("Something went wrong, pls try again");
         }
       } else {
         setStatus("info");
@@ -159,12 +158,6 @@ const ValidateEntry = () => {
 
   }
 
-  const [signLanguage, setSignLanguage] = useState("NSL");
-
-  const switchSignLanguage = () => {
-    signLanguage==="NSL"? setSignLanguage("ASL"): setSignLanguage("NSL");
-  }
-
   return (
     <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] md:h-[calc(100vh-97.19px)] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)]'>
       <div className='flex flex-col'>
@@ -172,30 +165,13 @@ const ValidateEntry = () => {
         <p className='text-[1rem] text-[var(--input-color)]'>Confirm if the text translation corresponds with the given video</p>
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
-        <div className='relative flex flex-col justify-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-          <div className='absolute z-30 top-0 mr-0 shadow-lg'>
-            <button onClick={switchSignLanguage} className='flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)] gap-[calc(var(--custom-gap)/2)]'> 
-              <p>{signLanguage}</p>
-              <img src={ArrowDown}/>
-            </button>
-          </div>
-          <video id='video-player' aria-label='view box' aria-description='Displays video to be translated' ref={playerRef} className='h-[100%] w-[100%]'>
-          </video>
-          <div aria-controls='video-player' className='absolute flex flex-row self-center p-[var(--button-padding)] rounded-[var(--button-radius)] gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))] bg-[var(--white-background)]'>
-            <button onClick={handlePlay} aria-label='play video button'>
-              <img src={PlayIcon} className='cursor-pointer' alt='play icon'/>
-            </button>
-            <button onClick={handlePause} aria-label='pause video button'>
-              <img src={StopIcon} className='cursor-pointer' alt='stop icon'/>
-            </button>
-          </div>
-        </div>
+        <VideoPlayer videoUrl={signVideos[videoIndex]?.videoUrl} />
         <div className='flex flex-col items-center justify-center p-[var(--button-padding)] bg-[var(--white-background)] h-[50vh] w-[100%] sm:w-[100%]'>
           <p className='text-center text-[20px] font-semibold text-wrap'>{signTranslations.length? signTranslations[translationIndex].text: "Loading..."}</p>
         </div>
       </div>
       <div className='flex flex-col items-center w-[100%] gap-[calc(var(custom-gap)/2)]'>
-        <div className='flex flex-col gap-[calc(var(--inline-gap))] sm:flex-row justify-between items-center w-[100%]'>
+        <div className='flex flex-col gap-[calc(var(--custom-gap))] sm:flex-row justify-between items-center w-[100%]'>
           <button onClick={showPrevTranslation} className={((onFirstTranslation && onFirstVideo) && 'opacity-[0.3]') + ' text-[1rem] bg-[var(--blue-background)]  p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-bold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
           <div className='flex flex-row flex-wrap font-semibold justify-center items-center gap-[calc(var(--inline-gap)/2)]'>
               <button onClick={()=>handleRating(1)} className={(rating === 1? 'bg-[var(--blue-background)] text-white':'bg-[var(--white-background)]') + ' cursor-pointer h-[2.8125rem] w-[2.8125rem] text-[1.25rem] rounded-[50%] text-center leading-[1.5rem]'}>1</button>

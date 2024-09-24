@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useAuth } from '../provider/authProvider'
 import StatusPopUp from '../Components/StatusPopUp'
 import ProcessingLoader from '../Components/ProcessingLoader'
+import VideoPlayer from '../Features/VideoPlayer'
 
 const TranslateVideo = () => {
   const { token } = useAuth();
@@ -37,8 +38,8 @@ const TranslateVideo = () => {
 
   const [inputText, setInputText] = useState("");
   const [signVideos, setSignVideos] = useState([]);
-  const [playing, setPlaying] = useState([false]);
-  const playerRef = useRef();
+  // const [playing, setPlaying] = useState([false]);
+  // const playerRef = useRef();
 
   const maxVideoIndex = signVideos.length-1;
   const [videoIndex, setVideoIndex] = useState(0);
@@ -65,7 +66,7 @@ const TranslateVideo = () => {
   const fetchVideos = async()=> {
     await axios.get('https://signs-5n09.onrender.com/video/all', config)
     .then(res => {
-      //console.log(res.data);
+      //console.log(res.data.data);
       setSignVideos(res.data.data);
     }).catch(err => console.log(err));
   }
@@ -74,22 +75,22 @@ const TranslateVideo = () => {
     fetchVideos();
   }, [])
 
-  useEffect(() => {
-    if(signVideos.length) {
-      //console.log(signVideos[videoIndex].videoUrl);
-      playerRef.current.src = signVideos[videoIndex].videoUrl;
-      playing && playerRef.current.pause();
-    }
-  }, [signVideos, videoIndex])
+  // useEffect(() => {
+  //   if(signVideos.length) {
+  //     //console.log(signVideos[videoIndex].videoUrl);
+  //     playerRef.current.src = signVideos[videoIndex].videoUrl;
+  //     playing && playerRef.current.pause();
+  //   }
+  // }, [signVideos, videoIndex])
 
-  const handlePlay = () => {
-    playerRef.current.play();
-    setPlaying(true);
-  }
-  const handlePause = () => {
-    playerRef.current.pause();
-    setPlaying(false);
-  }
+  // const handlePlay = () => {
+  //   playerRef.current.play();
+  //   setPlaying(true);
+  // }
+  // const handlePause = () => {
+  //   playerRef.current.pause();
+  //   setPlaying(false);
+  // }
 
   const handleInputText = (event) => {
     setInputText(event.target.value);
@@ -132,11 +133,11 @@ const TranslateVideo = () => {
     }
   }
 
-  const [signLanguage, setSignLanguage] = useState("NSL");
+  // const [signLanguage, setSignLanguage] = useState("NSL");
 
-  const switchSignLanguage = () => {
-    signLanguage==="NSL"? setSignLanguage("ASL"): setSignLanguage("NSL");
-  }
+  // const switchSignLanguage = () => {
+  //   signLanguage==="NSL"? setSignLanguage("ASL"): setSignLanguage("NSL");
+  // }
 
   return (
     <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)] md:h-[calc(100vh-97.19px)]'>
@@ -146,24 +147,7 @@ const TranslateVideo = () => {
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
         <div className='flex flex-col gap-[var(--custom-gap)] w-[100%] md:w-[50%]'>
-          <div className='relative flex flex-col justify-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
-            <div className='absolute z-30 top-0 mr-0 shadow-lg'>
-              <button onClick={switchSignLanguage} className='flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)] gap-[calc(var(--custom-gap)/2)]'> 
-                <p>{signLanguage}</p>
-                <img src={ArrowDown}/>
-              </button>
-            </div>
-            <video id='video-player' ref={playerRef} aria-label='view box' aria-description='Displays video to be translated' className='h-[100%] w-[100%]'>
-            </video>
-            <div aria-controls='video-player' className='absolute flex flex-row self-center p-[var(--button-padding)] rounded-[var(--button-radius)] gap-[var(--custom-gap)] mb-[calc(2*var(--custom-gap))] bg-[var(--white-background)]'>
-              <button onClick={handlePlay} aria-description='play video'>
-                <img src={PlayIcon} className='cursor-pointer h-[40px]' alt='play icon'/>
-              </button>
-              <button onClick={handlePause} aria-description='pause video'>
-                <img src={StopIcon} className='cursor-pointer h-[40px]' alt='stop icon'/>
-              </button>
-            </div>
-          </div>
+          <VideoPlayer videoUrl={signVideos[videoIndex]?.videoUrl} />
           <div className='flex flex-row justify-between'>
             <button onClick={showPrevVideo} className={(onFirstVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}><img className='rotate-180 h-[var(vh-icon)]' src={ArrowIcon}/>Previous</button>
             <button onClick={showNextVideo} className={(onLastVideo && 'opacity-[0.3] ') + 'text-[1rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[0.5rem] text-[var(--tertiary-color)] font-semibold shadow-[var(--button-shadow)] gap-[var(--inline-gap)] sm:p-[var(--button-padding)]'}>Next <img className='h-[var(vh-icon)]' src={ArrowIcon} /></button>
