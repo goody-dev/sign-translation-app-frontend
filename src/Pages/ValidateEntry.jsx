@@ -172,7 +172,7 @@ const ValidateEntry = () => {
         <p className='text-[1rem] text-[var(--input-color)]'>Confirm if the text translation corresponds with the given video</p>
       </div>
       <div className='flex flex-col gap-[2.5rem] w-[100%] md:flex-row'>
-        <div className='relative flex flex-col justify-end items-center h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
+        <div className='relative flex flex-col justify-end h-[50vh] w-[100%] sm:w-[100%] bg-[var(--black-background)]'>
           <div className='absolute z-30 top-0 mr-0 shadow-lg'>
             <button onClick={switchSignLanguage} className='flex flex-row items-center justify-center bg-[var(--white-background)] p-[var(--button-padding)] gap-[calc(var(--custom-gap)/2)]'> 
               <p>{signLanguage}</p>
