@@ -13,6 +13,19 @@ import Header from "../Components/Header"
 import Layout from "./layout"
 import ValidateEntry from "../Pages/ValidateEntry"
 
+
+// import SignUp from "../Pages/SignUp"
+// import SignIn from "../Pages/SignIn"
+// import About from "../Pages/About"
+// import Header from "../Components/Header"
+// import Layout from "./layout"
+import SignUpAdmin from "../Pages/SignUpAdmin"
+import AdminRoute from "./admin-route"
+import Report from "../Dashboard/Report"
+import Library from "../Dashboard/Library"
+import TextAnalytics from "../Dashboard/TextAnalytics"
+import VideoAnalytics from "../Dashboard/VideoAnalytics"
+
 const routesForAuthenticatedUsers = [
     {
         element: <UserRoute/>,
@@ -44,6 +57,32 @@ const routesForAuthenticatedUsers = [
             }
         ]
     },
+    {
+        element: <AdminRoute/>,
+        path: "/dashboard",
+        children: [
+            {
+                element: <Report />,
+                path: "/dashboard"
+            },
+            {
+                element: <Report />,
+                path: "/dashboard/reports"
+            },
+            {
+                element: <Library />,
+                path: "/dashboard/library"
+            },
+            {
+                element: <VideoAnalytics />,
+                path: "/dashboard/video-analytics/:id"
+            },
+            {
+                element: <TextAnalytics />,
+                path: "/dashboard/text-analytics/:id"
+            },
+        ]
+    }
 ]
 
 const routesForPublic = [
@@ -65,6 +104,10 @@ const routesForNotAuthenticatedUsers = [
     {
         element:<SignIn />,
         path: "/signin"
+    },
+    {
+        element:<SignUpAdmin />,
+        path: "/signup-admin"
     }
 ]
 
@@ -77,8 +120,6 @@ const layoutProvider = [
 ]
 
 const Routes = () => {
-    const { token } = useAuth();
-
     const router = createBrowserRouter([
         ...layoutProvider
     ])
