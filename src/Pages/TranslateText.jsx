@@ -12,7 +12,7 @@ const TranslateText = () => {
   const { token } = useAuth();
   let config = {
     headers: {
-      'authorization': `Bearer ${token}`
+      'authorization': `Bearer ${token.value}`
     }
   }
   const [message, setMessage] = useState('');

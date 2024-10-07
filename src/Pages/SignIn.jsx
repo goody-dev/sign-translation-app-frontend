@@ -100,7 +100,8 @@ const SignIn = () => {
         if(res.data.status === true) {
           setStatus("success");
           setMessage(res.data.message);
-          handleToken(res.data.data.token);
+          console.log(res.data.data.data.userRole)
+          handleToken({value:res.data.data.token, userRole:res.data.data.data.userRole});
           //alert(res.data.message);
           navigate("/user/translate-text");
         } else {

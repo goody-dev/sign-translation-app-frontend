@@ -5,8 +5,8 @@ import Dashboard from "../Dashboard";
 
 const AdminRoute = () => {
     const { token } = useAuth();
-    if(!token || token === "initial") {
-        return <Navigate to="/signin" />
+    if(token === "initial" || (token.userRole && token.userRole !== "ADMIN")) {
+        return <Navigate to="/" />
     }
     return <Dashboard />
 }

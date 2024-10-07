@@ -14,7 +14,7 @@ const ValidateEntry = () => {
 
   let config = {
     headers: {
-      'authorization': `Bearer ${token}`
+      'authorization': `Bearer ${token.value}`
     }
   }
   const [message, setMessage] = useState('');

@@ -65,6 +65,11 @@ const MobileMenu = () => {
             <li>
               <Link to="/about">About</Link>
             </li>
+            {(token?.userRole && token.userRole === "ADMIN") &&
+              <li>
+                <Link to="/dashboard/reports">Dashboard</Link>
+              </li>
+            }
             <li>
               <button onClick={handleContrClick} className='flex flex-row items-center gap-[calc(var(--inline-gap)/2)] leading-[1rem]'>Contribute<img src={ArrowDown} className={'w-[var(--vh-icon)] ' + (showContrMenu && 'rotate-[180deg]')} alt='arrow down icon'/></button>
               {showContrMenu && <SubMenu menu={contributeMenu} />}

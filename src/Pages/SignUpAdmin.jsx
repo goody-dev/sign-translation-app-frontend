@@ -118,7 +118,7 @@ const SignUpAdmin = () => {
         if(res.data.status === true) {
           setStatus("success");
           setMessage(res.data.message);
-          handleToken(res.data.data.token);
+          handleToken({value:res.data.data.token, userRole:res.data.data.responseData.userRole});
           //alert(res.data.message);
           navigate("/user/translate-text");
         }
@@ -195,7 +195,7 @@ const SignUpAdmin = () => {
       </svg>
       <div className='sign-up-bg flex flex-row items-center h-[calc(100vh-72px)] sm:h-[calc(100vh-91.19px)] md:h-[calc(100vh-97.19px)] justify-center w-[100vw] md:w-[50vw] px-[4.75rem]'>
         <form onSubmit={(event)=>handleSubmit(event)} name='Sign Up Form' className='flex flex-col gap-[var(--custom-gap)] bg-[var(--white-background)] p-[var(--card-padding)] px-[1.5rem] rounded-[var(--custom-radius)] w-[100%] min-w-[300px] sm:px-[4.75rem]'>
-          <h1 className='w-[100%] text-center font-bold text-[2rem]' >Let's get started</h1>
+          <h1 className='w-[100%] text-center font-bold text-[2rem]' >Sign up as admin</h1>
           <div className='flex flex-col w-[100%]'>
             <label for='fullname' className='text-[var(--primary-color)] text-[1rem] leading-[2.4rem] font-semibold'>Fullname</label>
             <div className='flex flex-row items-center gap-[0.25rem] w-[100%] bg-[var(--tertiary-background)] rounded-[var(--custom-radius)] px-[1.1rem] pe-0'>

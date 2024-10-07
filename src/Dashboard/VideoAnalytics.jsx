@@ -14,7 +14,7 @@ const VideoAnalytics = () =>  {
   const { token } = useAuth();
   let config = {
     headers: {
-      'authorization': `Bearer ${token}`
+      'authorization': `Bearer ${token.value}`
     }
   }
 

@@ -9,7 +9,7 @@ const Library = () => {
   const { token } = useAuth();
   let config = {
     headers: {
-      'authorization': `Bearer ${token}`
+      'authorization': `Bearer ${token.value}`
     }
   }
 
@@ -100,10 +100,10 @@ const Library = () => {
                   <>
                     <a key={idx} href={`/dashboard/video-analytics/${translation.id}`}>
                       <div className='flex flex-row justify-between'>
-                        <p className='w-[25%] text-center sm:text-left text-[var(--secondary-color)] cursor-pointer'>{translation.id}</p>
-                        <p className='w-[25%] text-center sm:text-left'>{translation.texts? `${translation.texts.length}` : "0"} <span className='hidden :sm:flex'>Translations</span></p>
-                        <p className='w-[25%] text-center sm:text-center'>{translation.texts? `${translation.texts.length}` : "0"} <span className='hidden :sm:flex'>Contributions</span></p>
-                        <p className='w-[25%] text center sm:text-center'>{translation?.texts.reduce((highest, text)=> text.rating > highest.rating? text: highest).rating || "Null"}</p>
+                        <p className='w-[25%] text-center text-[var(--secondary-color)] cursor-pointer'>{translation.id}</p>
+                        <p className='w-[25%] text-center'>{translation.texts? `${translation.texts.length}` : "0"} <span className='hidden'>Translations</span></p>
+                        <p className='w-[25%] text-center'>{translation.texts? `${translation.texts.length}` : "0"} <span className='hidden'>Contributions</span></p>
+                        <p className='w-[25%] text-center'>{(translation.texts?.[0]) && translation?.texts?.reduce((highest, text)=> text.rating > highest.rating? text: highest).rating || "Null"}</p>
                       </div>
                     </a>
                     <hr></hr>
@@ -133,10 +133,10 @@ const Library = () => {
                   <>
                     <a key={idx} href={`/dashboard/text-analytics/${translation.id}`}>
                       <div className='flex flex-row justify-between'>
-                        <p className='w-[25%] text-center sm:text-left text-[var(--secondary-color)] cursor-pointer'>{translation.id}</p>
-                        <p className='w-[25%] text-center sm:text-left'>{translation.videoUrls? `${translation.videoUrls.length}`: "0"} <span className='hidden :sm:flex'>Translations</span></p>
-                        <p className='w-[25%] text-center'>{translation.videoUrls? `${translation.videoUrls.length}`: "0"}  <span className='hidden :sm:flex'>Contributions</span></p>
-                        <p className='w-[25%] text-center'>{translation.videoUrls?.reduce((top, video)=> video.rating > top.rating? video: top).rating || "Null"}</p>
+                        <p className='w-[25%] text-center text-[var(--secondary-color)] cursor-pointer'>{translation.id}</p>
+                        <p className='w-[25%] text-center'>{translation.videoUrls? `${translation.videoUrls.length}`: "0"} <span className='hidden'>Translations</span></p>
+                        <p className='w-[25%] text-center'>{translation.videoUrls? `${translation.videoUrls.length}`: "0"}  <span className='hidden'>Contributions</span></p>
+                        <p className='w-[25%] text-center'>{(translation.videoUrls?.[0]) && translation.videoUrls?.reduce((top, video)=> video.rating > top.rating? video: top).rating || "Null"}</p>
                       </div>
                     </a>
                     <hr></hr>

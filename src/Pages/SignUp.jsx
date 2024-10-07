@@ -118,7 +118,7 @@ const SignUp = () => {
         if(res.data.status === true) {
           setStatus("success");
           setMessage(res.data.message);
-          handleToken(res.data.data.token);
+          handleToken({value:res.data.data.token, userRole:res.data.data.responseData.userRole});
           //alert(res.data.message);
           navigate("/user/translate-text");
         }

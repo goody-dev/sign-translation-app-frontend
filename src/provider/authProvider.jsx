@@ -3,14 +3,14 @@ import { Children, createContext, useContext, useEffect, useMemo, useState} from
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-    const [token, setToken] = useState(localStorage.getItem('token') || "initial");
+    const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')) || "initial");
     const handleToken = (newToken) => {
         setToken(newToken);
     }
 
     useEffect(()=>{
         if (token) {
-            localStorage.setItem('token', token);
+            localStorage.setItem('token', JSON.stringify(token));
         } else if (token === "initial") {
             pass;
         } else {

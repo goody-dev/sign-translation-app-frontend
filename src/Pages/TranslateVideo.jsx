@@ -14,7 +14,7 @@ const TranslateVideo = () => {
 
   let config = {
     headers: {
-      'authorization': `Bearer ${token}`
+      'authorization': `Bearer ${token.value}`
     }
   }
   const [message, setMessage] = useState('');
@@ -38,8 +38,6 @@ const TranslateVideo = () => {
 
   const [inputText, setInputText] = useState("");
   const [signVideos, setSignVideos] = useState([]);
-  // const [playing, setPlaying] = useState([false]);
-  // const playerRef = useRef();
 
   const maxVideoIndex = signVideos.length-1;
   const [videoIndex, setVideoIndex] = useState(0);
@@ -75,22 +73,6 @@ const TranslateVideo = () => {
     fetchVideos();
   }, [])
 
-  // useEffect(() => {
-  //   if(signVideos.length) {
-  //     //console.log(signVideos[videoIndex].videoUrl);
-  //     playerRef.current.src = signVideos[videoIndex].videoUrl;
-  //     playing && playerRef.current.pause();
-  //   }
-  // }, [signVideos, videoIndex])
-
-  // const handlePlay = () => {
-  //   playerRef.current.play();
-  //   setPlaying(true);
-  // }
-  // const handlePause = () => {
-  //   playerRef.current.pause();
-  //   setPlaying(false);
-  // }
 
   const handleInputText = (event) => {
     setInputText(event.target.value);
@@ -133,11 +115,6 @@ const TranslateVideo = () => {
     }
   }
 
-  // const [signLanguage, setSignLanguage] = useState("NSL");
-
-  // const switchSignLanguage = () => {
-  //   signLanguage==="NSL"? setSignLanguage("ASL"): setSignLanguage("NSL");
-  // }
 
   return (
     <div className='flex flex-col justify-center gap-[var(--custom-gap)] bg-[var(--tertiary-background)] w-[100%] max-w-[100vw] py-[3rem] px-[1.5rem] sm:p-[var(--custom-padding)] md:h-[calc(100vh-97.19px)]'>
