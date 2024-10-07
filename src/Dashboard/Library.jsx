@@ -9,7 +9,7 @@ const Library = () => {
   const { token } = useAuth();
   let config = {
     headers: {
-      'authorization': `Bearer ${token.value}`
+      'authorization': `Bearer ${token?.value && token.value}`
     }
   }
 

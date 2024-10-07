@@ -10,7 +10,7 @@ const ContributeText = () => {
 
   let config = {
     headers: {
-      'authorization': `Bearer ${token.value}`
+      'authorization': `Bearer ${token?.value && token.value}`
     }
   }
 

@@ -13,27 +13,11 @@ const VideoRecorder = ({textId, currentText, handlePopInfo}) => {
   const { token } = useAuth();
   let config = {
     headers: {
-      'authorization': `Bearer ${token.value}`
+      'authorization': `Bearer ${token?.value && token.value}`
     }
   }
   // const [message, setMessage] = useState('');
   const [status, setStatus] = useState(null);
-  // const [submitStatusPopup, setSubmitStatusPopup] = useState(false);
-
-  // const handleSubmitStatusPopup = () => {
-  //   setSubmitStatusPopup(true);
-  // }
-
-  // useEffect(()=> {
-  //   if(status === "success" || "failed" || "info") { 
-  //     handleSubmitStatusPopup();
-  //     setTimeout(() => {
-  //       setSubmitStatusPopup(false);
-  //       setMessage('');
-  //       setStatus(null);
-  //     }, 4000);
-  //   }
-  // }, [status])
   
   const [video, setVideo] = useState(null);
 
