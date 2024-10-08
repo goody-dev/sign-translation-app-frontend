@@ -1,13 +1,18 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+  const navigate = useNavigate();
+  const getStarted = () => {
+    navigate("/signup");
+  }
   return (
     <div className='flex flex-col items-start p-[1.5rem] bg-transparent gap-[var(--custom-gap)] sm:flex-row sm:items-center sm:p-[var(--custom-padding)] sm:pt-0'>
       <div className='flex flex-col gap-[2rem] sm:w-[50vw] '>
         <h1 className='text-[2.5rem] font-bold leading-[3rem]'>Unlock the World of <br/>Communication</h1>
         <p className='text-[28px] font-semibold'>Record | Watch | Translate</p>
         <p className='text-[var(--sub-headline-color)] font-normal text-[1.25rem]'>Discover our innovative platform that transforms sign language into text and text into sign language, fostering seamless communication for everyone. Join us in making interactions more inclusive and accessible.</p>
-        <button tabIndex={0} className='text-[1.25rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[var(--button-radius)] text-[var(--tertiary-color)] font-medium sm:w-[max-content] shadow-[var(--button-shadow)]'>Get Started</button>
+        <button onClick={getStarted} tabIndex={0} className='text-[1.25rem] bg-[var(--blue-background)] p-[var(--button-padding)] rounded-[var(--button-radius)] text-[var(--tertiary-color)] font-medium sm:w-[max-content] shadow-[var(--button-shadow)]'>Get Started</button>
       </div>
       <svg className='w-[100%] sm:w-[50%]' viewBox="0 0 624 532" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label='hero image, a male and a female communicating with sign language'>
 <g clip-path="url(#clip0_111_378)">
